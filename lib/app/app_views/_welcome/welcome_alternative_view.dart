@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:pinonline/app/app_views/_cliente/cliente_login_view.dart';
+import 'package:pinonline/app/app_views/_cliente/pagamento/pagamento_view.dart';
 import 'package:pinonline/app/app_views/_entidade/entidade_login_view.dart';
 import 'package:pinonline/app/app_views/_size/size.dart';
 import 'package:get/get.dart';
-import 'package:pinonline/app/app_views/create_session.dart';
+import 'package:pinonline/app/app_views/search_profissional/search_profissional_view.dart';
 import 'package:dotted_border/dotted_border.dart';
 
 class WelcomeAlternativeView extends StatelessWidget {
@@ -225,6 +226,9 @@ class WelcomeAlternativeView extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        Get.to(PagamentoView());
+      },),
       
     );
   }

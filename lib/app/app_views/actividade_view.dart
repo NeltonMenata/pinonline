@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pinonline/app/app_views/create_session.dart';
+import 'package:pinonline/app/app_views/search_profissional/search_profissional_view.dart';
 
 class ActivityView extends StatelessWidget {
   Widget build(BuildContext context) {

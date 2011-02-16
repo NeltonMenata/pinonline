@@ -8,12 +8,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return GetMaterialApp(
+      
       title: 'Pinonline',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        appBarTheme: AppBarTheme(centerTitle: true),
         colorScheme: ColorScheme.light(),
         primaryIconTheme: IconThemeData.fallback(),
-        primarySwatch: Colors.lightBlue,
+        primarySwatch: Colors.green,
       ),
       initialRoute: Routes.STARTAPP,
       getPages: Routes.routes,

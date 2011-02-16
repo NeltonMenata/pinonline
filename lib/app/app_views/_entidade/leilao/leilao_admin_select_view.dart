@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:get/get.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
-import 'package:pinonline/app/app_views/_entidade/leilao/leilao_admin_view.dart';
+import 'leilao_admin_controller.dart';
 import 'package:pinonline/app/app_views/_size/size.dart';
 
 // ignore: must_be_immutable

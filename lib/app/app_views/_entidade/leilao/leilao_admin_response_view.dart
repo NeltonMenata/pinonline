@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
-import 'package:pinonline/app/app_views/_entidade/leilao/leilao_admin_view.dart';
 import 'package:pinonline/app/app_views/_entidade/leilao/leilao_response_entidade_view.dart';
+
+import 'leilao_admin_controller.dart';
 
 class LeilaoAdminResponseView extends StatelessWidget {
  LeilaoAdminController get controller => LeilaoAdminController.controller;
