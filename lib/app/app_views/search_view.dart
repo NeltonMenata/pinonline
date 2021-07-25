@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../app_controller.dart/home_controller.dart';
+import '../app_controller/home_controller.dart';
 import 'app_components/home_components/app_bar_main.dart';
 import 'app_components/home_components/app_bottom_bar.dart';
 
@@ -13,41 +13,43 @@ class SearchView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarSearch(),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SizedBox(
-          height: double.infinity,
-          child: ListView.builder(
-            itemCount: _foundCategoriaCount,
-            itemBuilder: (context, index) => Card(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    color: Colors.blue,
-                    height: 90,
-                    width: 150,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.asset(
-                          "assets/img/imagem.jpg",
-                          fit: BoxFit.cover),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      width: 200,
-                      child: Text(_mainFoundCategoria.elementAt(index).nome,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black54,
-                        fontWeight: FontWeight.bold),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SizedBox(
+            height: double.infinity,
+            child: ListView.builder(
+              itemCount: _foundCategoriaCount,
+              itemBuilder: (context, index) => Card(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      color: Colors.blue,
+                      height: 90,
+                      width: 150,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.asset(
+                            "assets/img/imagem.jpg",
+                            fit: BoxFit.cover),
                       ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        width: 200,
+                        child: Text(_mainFoundCategoria.elementAt(index).nome,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black54,
+                          fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -55,7 +57,7 @@ class SearchView extends StatelessWidget {
       ),
 
       //BOTTOM BAR
-      bottomNavigationBar: bottomAppBar()
+      bottomNavigationBar: bottomAppBarBack()
     );
   }
 }

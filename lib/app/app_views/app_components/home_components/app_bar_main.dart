@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '/app/app_controller/home_controller.dart';
 
 PreferredSizeWidget appBarMain() {
   return AppBar(
@@ -14,8 +16,15 @@ PreferredSizeWidget appBarMain() {
   );
 }
 
+get _to => HomeController.controller;
+
 PreferredSizeWidget appBarSearch() {
   return AppBar(
+    leading: IconButton(icon: Icon(Icons.arrow_back_ios), onPressed: (){
+            Get.back();
+            _to.atualizaHome();
+
+          },),
     centerTitle: true,
     title: Text(
       "Resultado da Pesquisa",
