@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import '/app/app_views/entidade_categoria_view.dart';
+import '/app/app_views/entidade_perfil_view.dart';
 import '../delete_categorie_view.dart';
 import '../save_categories_view.dart';
 import '../search_view.dart';
@@ -12,10 +14,14 @@ class Routes {
     GetPage(name: SEARCH, page: () => SearchView()),
     GetPage(name: SAVE, page: () => SaveCategorieView()),
     GetPage(name: DELETE, page: () => DeleteCategorieView()),
+    GetPage(name: ENTIDADECATEGORIA, page: () => EntidadeCategoriaView()),
+    GetPage(name: ENTIDADEPERFIL, page: () => EntidadePerfilView()),
   ];
   static const STARTAPP = "/";
   static const HOME = "/home";
   static const SEARCH = "/search";
   static const SAVE = "/save";
   static const DELETE = "/delete";
+  static const ENTIDADECATEGORIA = "/entidadecategoria";
+  static const ENTIDADEPERFIL = "/entidadeperfil";
 }

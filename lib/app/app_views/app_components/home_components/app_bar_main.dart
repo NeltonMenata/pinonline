@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+//import '/app/app_views/categoria_view/canalizador_view.dart';
 import '/app/app_controller/home_controller.dart';
+//import '/app/app_views/teste_widgets.dart';
 
 PreferredSizeWidget appBarMain() {
   return AppBar(
     centerTitle: true,
     title: Text("JustBuild"),
     actions: [
+
       Image.asset(
         "assets/img/logo.png",
         width: 70,
-      )
+      
+      ),
+      
     ],
     foregroundColor: Colors.green,
   );

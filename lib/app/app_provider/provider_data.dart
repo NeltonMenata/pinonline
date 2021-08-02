@@ -1,24 +1,51 @@
-import 'package:dio/dio.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import '/app/app_models/categorias_model.dart';
 
 class ProviderData{
-  
-  ProviderData(){
-    buscaDados();
-  }
-  
-  Dio dio = Dio();
+  static Future<List<ParseObject>> getCanalizadorData() async {
+    
+    final canalizadorObjec = ParseObject("Canalizador");
 
-  Future buscaDados() async {
-    try{
-      final response = await dio.get("path");
-      if(response.statusCode == 200){
-        return Categoria.fromJson(response.data);
-      }
-      
-    }catch(e){
-      print(e.toString());
+    QueryBuilder<ParseObject> queryCanalizador = QueryBuilder(canalizadorObjec);
+    final responseCanalizador = await queryCanalizador.query();
+    if(responseCanalizador.success && responseCanalizador.statusCode == 201){
+      return responseCanalizador.result as List<ParseObject>;
+    }else{
+      return [];
     }
+  }
+  static Future<List<ParseObject>> getEntidadeData() async {
+    
+    final entidadeObject = ParseObject("Entidade");
+
+    QueryBuilder<ParseObject> query = QueryBuilder<ParseObject>(entidadeObject);
+    
+    final response = await query.query();
+
+    if(response.results != null && response.success){
+      return response.result as List<ParseObject>; 
+      
+    }else{
+      return [];
+    }
+
+  }
+
+  static Future<List<ParseObject>> getCategoriaData() async {
+    
+    final categoriaObject = ParseObject("Categoria");
+
+    QueryBuilder<ParseObject> query = QueryBuilder<ParseObject>(categoriaObject);
+    
+    final response = await query.query();
+
+    if(response.results != null && response.success){
+      return response.result as List<ParseObject>; 
+      
+    }else{
+      return [];
+    }
+
   }
 
   static List<Categoria> categoriaAll = [

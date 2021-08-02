@@ -1,0 +1,396 @@
+[33mcommit ce35dc4949e102a18f19e0241d23b0635a861364[m[33m ([m[1;36mHEAD -> [m[1;32mteste[m[33m, [m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m
+Author: Nelton Menata <neltonmenataditec@gmail.com>
+Date:   Sun Jul 25 20:14:32 2021 +0100
+
+    Formulario actualizados
+
+[1mdiff --git a/lib/app/app_controller.dart/delete_controller.dart b/lib/app/app_controller/delete_controller.dart[m
+[1msimilarity index 100%[m
+[1mrename from lib/app/app_controller.dart/delete_controller.dart[m
+[1mrename to lib/app/app_controller/delete_controller.dart[m
+[1mdiff --git a/lib/app/app_controller.dart/home_controller.dart b/lib/app/app_controller/home_controller.dart[m
+[1msimilarity index 60%[m
+[1mrename from lib/app/app_controller.dart/home_controller.dart[m
+[1mrename to lib/app/app_controller/home_controller.dart[m
+[1mindex c0d464f..b4d424a 100644[m
+[1m--- a/lib/app/app_controller.dart/home_controller.dart[m
+[1m+++ b/lib/app/app_controller/home_controller.dart[m
+[36m@@ -1,32 +1,28 @@[m
+ import 'package:get/get.dart';[m
+[31m-// ignore: unused_import[m
+[31m-import 'package:pinonline/app/app_provider/provider_data.dart';[m
+[31m-// ignore: unused_import[m
+[32m+[m[32mimport '/app/app_provider/provider_data.dart';[m
+ import '../app_models/categorias_model.dart';[m
+ [m
+ class HomeController extends GetxController {[m
+ [m
+   static HomeController controller = Get.put(HomeController());[m
+   [m
+[31m-  // Cria uma lista privada de categoria e recebe os dados do Provedor![m
+[31m-  List<Categoria> _categoria = ProviderData.categoriaAll;[m
+[31m-[m
+[31m-  // Get que pega os Dados da lista de _categoria privada![m
+[31m-  List<Categoria> get categoriaAll => _categoria;[m
+[32m+[m[32m  atualizaHome(){[m
+[32m+[m[32m    categoria = ProviderData.categoriaAll;[m
+[32m+[m[32m    update();[m
+[32m+[m[32m  }[m
+[32m+[m[32m  var categoria = ProviderData.categoriaAll;[m
+ [m
+   // Get que pega o total de itens dentro da _categoria privada![m
+[31m-  int get totalCategoria => _categoria.length;[m
+[32m+[m[32m  get totalCategoria => categoria.length;[m
+ [m
+   // Cria uma lista vazia para receber posteriormente os itens procurados![m
+   List<Categoria> foundCategoria = [];[m
+ [m
+[31m-  // String get _value => " algo ";[m
+[31m-[m
+   // Função para procurar itens na Categoria e retornar todos encontrados na lista de foundCategoria![m
+   procurar(String value) {[m
+     foundCategoria = [];[m
+     value.toLowerCase();[m
+[31m-    this.categoriaAll.forEach((element) {[m
+[32m+[m[32m    this.categoria.forEach((element) {[m
+       if (element.nome.toLowerCase().contains(value.toLowerCase())) {[m
+         print(element.nome);[m
+         foundCategoria.add(element);[m
+[36m@@ -36,6 +32,4 @@[m [mclass HomeController extends GetxController {[m
+     update();[m
+   }[m
+ [m
+[31m-[m
+[31m-[m
+ }[m
+[1mdiff --git a/lib/app/app_controller.dart/save_controller.dart b/lib/app/app_controller/save_controller.dart[m
+[1msimilarity index 100%[m
+[1mrename from lib/app/app_controller.dart/save_controller.dart[m
+[1mrename to lib/app/app_controller/save_controller.dart[m
+[1mdiff --git a/lib/app/app_views/app_components/home_components/app_bar_main.dart b/lib/app/app_views/app_components/home_components/app_bar_main.dart[m
+[1mindex 9ea5170..67bae27 100644[m
+[1m--- a/lib/app/app_views/app_components/home_components/app_bar_main.dart[m
+[1m+++ b/lib/app/app_views/app_components/home_components/app_bar_main.dart[m
+[36m@@ -1,4 +1,6 @@[m
+ import 'package:flutter/material.dart';[m
+[32m+[m[32mimport 'package:get/get.dart';[m
+[32m+[m[32mimport '/app/app_controller/home_controller.dart';[m
+ [m
+ PreferredSizeWidget appBarMain() {[m
+   return AppBar([m
+[36m@@ -14,8 +16,15 @@[m [mPreferredSizeWidget appBarMain() {[m
+   );[m
+ }[m
+ [m
+[32m+[m[32mget _to => HomeController.controller;[m
+[32m+[m
+ PreferredSizeWidget appBarSearch() {[m
+   return AppBar([m
+[32m+[m[32m    leading: IconButton(icon: Icon(Icons.arrow_back_ios), onPressed: (){[m
+[32m+[m[32m            Get.back();[m
+[32m+[m[32m            _to.atualizaHome();[m
+[32m+[m
+[32m+[m[32m          },),[m
+     centerTitle: true,[m
+     title: Text([m
+       "Resultado da Pesquisa",[m
+[1mdiff --git a/lib/app/app_views/app_components/home_components/app_bottom_bar.dart b/lib/app/app_views/app_components/home_components/app_bottom_bar.dart[m
+[1mindex 30b9687..86c272b 100644[m
+[1m--- a/lib/app/app_views/app_components/home_components/app_bottom_bar.dart[m
+[1m+++ b/lib/app/app_views/app_components/home_components/app_bottom_bar.dart[m
+[36m@@ -1,5 +1,6 @@[m
+ import 'package:flutter/material.dart';[m
+ import 'package:get/get.dart';[m
+[32m+[m[32mimport '/app/app_controller/home_controller.dart';[m
+ import '/app/app_views/app_routes/routes.dart';[m
+ [m
+ int currentPage = 0;[m
+[36m@@ -22,7 +23,7 @@[m [mBottomAppBar bottomAppBar() {[m
+         IconButton([m
+           icon: Icon([m
+             Icons.add_circle_outline_rounded,[m
+[31m-            color: currentPage == 1 ? Colors.blue : Colors.black87,[m
+[32m+[m[32m            color: Colors.black87,[m
+           ),[m
+           onPressed: () {[m
+             currentPage = 1;[m
+[36m@@ -32,7 +33,7 @@[m [mBottomAppBar bottomAppBar() {[m
+         IconButton([m
+           icon: Icon([m
+             Icons.delete,[m
+[31m-            color: currentPage == 2 ? Colors.blue : Colors.black87,[m
+[32m+[m[32m            color: Colors.black87,[m
+           ),[m
+           onPressed: () {[m
+             currentPage = 2;[m
+[36m@@ -43,3 +44,31 @@[m [mBottomAppBar bottomAppBar() {[m
+     ),[m
+   );[m
+ }[m
+[32m+[m
+[32m+[m[32mget _to => HomeController.controller;[m
+[32m+[m
+[32m+[m[32mBottomAppBar bottomAppBarBack() {[m
+[32m+[m
+[32m+[m[41m  [m
+[32m+[m[32m  return BottomAppBar([m
+[32m+[m[32m    child: Row([m
+[32m+[m[32m      mainAxisAlignment: MainAxisAlignment.spaceAround,[m
+[32m+[m[32m      children: [[m
+[32m+[m[32m        IconButton([m
+[32m+[m[32m          icon: Icon([m
+[32m+[m[32m            Icons.home,[m
+[32m+[m[32m            color: Colors.black87,[m
+[32m+[m[32m          ),[m
+[32m+[m[32m          onPressed: () {[m
+[32m+[m[32m            currentPage = 0;[m
+[32m+[m[41m            [m
+[32m+[m[32m            Get.back();[m
+[32m+[m[32m            _to.atualizaHome();[m
+[32m+[m[41m            [m
+[32m+[m[32m          },[m
+[32m+[m[32m        ),[m
+[32m+[m[41m        [m
+[32m+[m[32m      ],[m
+[32m+[m[32m    ),[m
+[32m+[m[32m  );[m
+[32m+[m[32m}[m
+[1mdiff --git a/lib/app/app_views/app_components/save_components/save_form.dart b/lib/app/app_views/app_components/save_components/save_form.dart[m
+[1mindex 87a5680..744310b 100644[m
+[1m--- a/lib/app/app_views/app_components/save_components/save_form.dart[m
+[1m+++ b/lib/app/app_views/app_components/save_components/save_form.dart[m
+[36m@@ -1,9 +1,10 @@[m
+ import 'dart:math';[m
+[31m-[m
+ import 'package:flutter/material.dart';[m
+ import 'package:get/get.dart';[m
+[31m-import 'package:pinonline/app/app_controller.dart/save_controller.dart';[m
+[31m-import 'package:pinonline/app/app_models/categorias_model.dart';[m
+[32m+[m[32mimport '/app/app_controller/save_controller.dart';[m
+[32m+[m[32mimport '/app/app_models/categorias_model.dart';[m
+[32m+[m
+[32m+[m[32mfinal formSave = GlobalKey<FormState>();[m
+ [m
+ // ignore: must_be_immutable[m
+ class FormSave extends StatelessWidget {[m
+[36m@@ -28,12 +29,15 @@[m [mclass FormSave extends StatelessWidget {[m
+               ),[m
+             ),[m
+             Form([m
+[32m+[m[32m              key: formSave,[m
+               child: GetBuilder<SaveController>([m
+                 init: SaveController(),[m
+                 builder: (_) => Column([m
+                   crossAxisAlignment: CrossAxisAlignment.stretch,[m
+                   children: [[m
+                     TextFormField([m
+[32m+[m[32m                      validator: (v) =>[m
+[32m+[m[32m                          v == "" ? "Digite um nome para a Categoria" : null,[m
+                       controller: _saveController.nome,[m
+                       keyboardType: TextInputType.name,[m
+                       decoration: InputDecoration([m
+[36m@@ -45,6 +49,7 @@[m [mclass FormSave extends StatelessWidget {[m
+                       height: 20,[m
+                     ),[m
+                     TextFormField([m
+[32m+[m[32m                      validator: (v) => v == "" ? "Digite uma Descrição" : null,[m
+                       controller: _saveController.desc,[m
+                       keyboardType: TextInputType.name,[m
+                       decoration: InputDecoration([m
+[36m@@ -56,6 +61,8 @@[m [mclass FormSave extends StatelessWidget {[m
+                       height: 20,[m
+                     ),[m
+                     TextFormField([m
+[32m+[m[32m                      validator: (v) =>[m
+[32m+[m[32m                          v == "" ? "Digite a URL da Imagem" : null,[m
+                       controller: _saveController.url,[m
+                       decoration: InputDecoration([m
+                           labelText: 'url da imagem',[m
+[36m@@ -70,12 +77,14 @@[m [mclass FormSave extends StatelessWidget {[m
+                     ),[m
+                     ElevatedButton([m
+                         onPressed: () {[m
+[31m-                          _saveController.saveCategorie(Categoria([m
+[31m-                              nome: _saveController.nome.text,[m
+[31m-                              desc: _saveController.nome.text,[m
+[31m-                              url: _saveController.url.text,[m
+[31m-                              selected: false,[m
+[31m-                              id: Random().nextInt(1 << 32)));[m
+[32m+[m[32m                          if (formSave.currentState!.validate()) {[m
+[32m+[m[32m                            _saveController.saveCategorie(Categoria([m
+[32m+[m[32m                                nome: _saveController.nome.text,[m
+[32m+[m[32m                                desc: _saveController.nome.text,[m
+[32m+[m[32m                                url: _saveController.url.text,[m
+[32m+[m[32m                                selected: false,[m
+[32m+[m[32m                                id: Random().nextInt(1 << 32)));[m
+[32m+[m[32m                          }[m
+                         },[m
+                         child: Text("Salvar Cadastro"))[m
+                   ],[m
+[1mdiff --git a/lib/app/app_views/delete_categorie_view.dart b/lib/app/app_views/delete_categorie_view.dart[m
+[1mindex 98a315d..7f3c394 100644[m
+[1m--- a/lib/app/app_views/delete_categorie_view.dart[m
+[1m+++ b/lib/app/app_views/delete_categorie_view.dart[m
+[36m@@ -1,18 +1,24 @@[m
+ import 'package:flutter/material.dart';[m
+ import 'package:get/get.dart';[m
+[32m+[m[32mimport '/app/app_controller/home_controller.dart';[m
+ import '../app_models/categorias_model.dart';[m
+[31m-import '../app_controller.dart/delete_controller.dart';[m
+[32m+[m[32mimport '../app_controller/delete_controller.dart';[m
+ import 'app_components/home_components/app_bottom_bar.dart';[m
+ [m
+ class DeleteCategorieView extends StatelessWidget {[m
+   List<Categoria> get _dmainCategoria =>[m
+       DeleteController.controller.dcategoriaAll;[m
+   DeleteController get _dmainController => DeleteController.controller;[m
+[31m-[m
+[32m+[m[32m  HomeController get _to => HomeController.controller;[m
+   @override[m
+   Widget build(BuildContext context) {[m
+     return Scaffold([m
+         appBar: AppBar([m
+[32m+[m[32m          leading: IconButton(icon: Icon(Icons.arrow_back_ios), onPressed: (){[m
+[32m+[m[32m            Get.back();[m
+[32m+[m[32m            _to.atualizaHome();[m
+[32m+[m
+[32m+[m[32m          },),[m
+           actions: [[m
+             Align([m
+                 alignment: Alignment.center,[m
+[36m@@ -33,6 +39,12 @@[m [mclass DeleteCategorieView extends StatelessWidget {[m
+                     });[m
+               },[m
+             ),[m
+[32m+[m[32m            Align([m
+[32m+[m[32m                alignment: Alignment.center,[m
+[32m+[m[32m                child: Text([m
+[32m+[m[32m                  "Apagar Selecionado",[m
+[32m+[m[32m                  textAlign: TextAlign.end,[m
+[32m+[m[32m                )),[m
+             IconButton([m
+                 icon: Icon(Icons.delete_rounded),[m
+                 onPressed: () {[m
+[36m@@ -40,110 +52,112 @@[m [mclass DeleteCategorieView extends StatelessWidget {[m
+                 })[m
+           ],[m
+         ),[m
+[31m-        body: Container([m
+[31m-          width: double.infinity,[m
+[31m-          height: double.infinity,[m
+[31m-          decoration: BoxDecoration([m
+[31m-            gradient: LinearGradient([m
+[31m-                begin: Alignment.topLeft,[m
+[31m-                end: Alignment.bottomRight,[m
+[31m-                colors: [Colors.red, Colors.white]),[m
+[31m-          ),[m
+[31m-          child: Padding([m
+[31m-            padding: const EdgeInsets.all(8.0),[m
+[31m-            child: Column([m
+[31m-              children: [[m
+[31m-                Text("Marque as Categorias que pretende apagar",[m
+[31m-                    textAlign: TextAlign.center,[m
+[31m-                    style:[m
+[31m-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),[m
+[31m-                Expanded([m
+[31m-                  child: GetBuilder<DeleteController>([m
+[31m-                    builder: (_) => ListView.separated([m
+[31m-                      separatorBuilder: (context, index) => Divider(),[m
+[31m-                      itemCount: _dmainController.dtotalCategoria,[m
+[31m-                      itemBuilder: (context, index) => Card([m
+[31m-                        elevation: 3,[m
+[31m-                        child: Row([m
+[31m-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,[m
+[31m-                          children: [[m
+[31m-                            Container([m
+[31m-                              height: 100,[m
+[31m-                              width: 200,[m
+[31m-                              child: Column([m
+[31m-                                  mainAxisAlignment:[m
+[31m-                                      MainAxisAlignment.spaceBetween,[m
+[32m+[m[32m        body: Center([m
+[32m+[m[32m          child: Container([m
+[32m+[m[32m            width: double.infinity,[m
+[32m+[m[32m            height: double.infinity,[m
+[32m+[m[32m            decoration: BoxDecoration([m
+[32m+[m[32m              gradient: LinearGradient([m
+[32m+[m[32m                  begin: Alignment.topLeft,[m
+[32m+[m[32m                  end: Alignment.bottomRight,[m
+[32m+[m[32m                  colors: [Colors.red, Colors.white]),[m
+[32m+[m[32m            ),[m
+[32m+[m[32m            child: Padding([m
+[32m+[m[32m              padding: const EdgeInsets.all(8.0),[m
+[32m+[m[32m              child: Column([m
+[32m+[m[32m                children: [[m
+[32m+[m[32m                  Text("Marque as Categorias que pretende apagar",[m
+[32m+[m[32m                      textAlign: TextAlign.center,[m
+[32m+[m[32m                      style:[m
+[32m+[m[32m                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),[m
+[32m+[m[32m                  Expanded([m
+[32m+[m[32m                    child: GetBuilder<DeleteController>([m
+[32m+[m[32m                      builder: (_) => ListView.separated([m
+[32m+[m[32m                        separatorBuilder: (context, index) => Divider(),[m
+[32m+[m[32m                        itemCount: _dmainController.dtotalCategoria,[m
+[32m+[m[32m                        itemBuilder: (context, index) => Card([m
+[32m+[m[32m                          elevation: 3,[m
+[32m+[m[32m                          child: Row([m
+[32m+[m[32m                            mainAxisAlignment: MainAxisAlignment.spaceBetween,[m
+[32m+[m[32m                            children: [[m
+[32m+[m[32m                              Container([m
+[32m+[m[32m                                height: 100,[m
+[32m+[m[32m                                width: 200,[m
+[32m+[m[32m                                child: Column([m
+[32m+[m[32m                                    mainAxisAlignment:[m
+[32m+[m[32m                                        MainAxisAlignment.spaceBetween,[m
+[32m+[m[32m                                    children: [[m
+[32m+[m[32m                                      Expanded([m
+[32m+[m[32m                                        child: Container([m
+[32m+[m[32m                                          height: 90,[m
+[32m+[m[32m                                          decoration: BoxDecoration([m
+[32m+[m[32m                                            color: Colors.red,[m
+[32m+[m[32m                                            borderRadius:[m
+[32m+[m[32m                                                BorderRadius.circular(10),[m
+[32m+[m[32m                                          ),[m
+[32m+[m[32m                                          child: ClipRRect([m
+[32m+[m[32m                                            borderRadius:[m
+[32m+[m[32m                                                BorderRadius.circular(15),[m
+[32m+[m[32m                                            child: Image.asset([m
+[32m+[m[32m                                              "assets/img/imagem.jpg", //_mainCategoria.elementAt(index).url,[m
+[32m+[m[32m                                              fit: BoxFit.cover,[m
+[32m+[m[32m                                            ),[m
+[32m+[m[32m                                          ),[m
+[32m+[m[32m                                        ),[m
+[32m+[m[32m                                      ),[m
+[32m+[m[32m                                      Text([m
+[32m+[m[32m                                        _dmainCategoria.elementAt(index).nome,[m
+[32m+[m[32m                                        style: TextStyle([m
+[32m+[m[32m                                            fontWeight: FontWeight.bold,[m
+[32m+[m[32m                                            color: Colors.blue[54]),[m
+[32m+[m[32m                                      )[m
+[32m+[m[32m                                    ]),[m
+[32m+[m[32m                              ),[m
+[32m+[m[32m                              Expanded([m
+[32m+[m[32m                                child: Row([m
+                                   children: [[m
+                                     Expanded([m
+                                       child: Container([m
+[31m-                                        height: 90,[m
+                                         decoration: BoxDecoration([m
+[31m-                                          color: Colors.red,[m
+[31m-                                          borderRadius:[m
+[31m-                                              BorderRadius.circular(10),[m
+[31m-                                        ),[m
+[31m-                                        child: ClipRRect([m
+[31m-                                          borderRadius:[m
+[31m-                                              BorderRadius.circular(15),[m
+[31m-                                          child: Image.asset([m
+[31m-                                            "assets/img/imagem.jpg", //_mainCategoria.elementAt(index).url,[m
+[31m-                                            fit: BoxFit.cover,[m
+[31m-                                          ),[m
+[31m-                                        ),[m
+[32m+[m[32m                                            color: Colors.amber,[m
+[32m+[m[32m                                            borderRadius:[m
+[32m+[m[32m                                                BorderRadius.circular(10)),[m
+[32m+[m[32m                                        height: 95,[m
+[32m+[m[32m                                        child: Text(_dmainCategoria[m
+[32m+[m[32m                                        

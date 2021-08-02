@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pinonline/app/app_views/banco_de_dados_view.dart';
 import '/app/app_controller/home_controller.dart';
 import '/app/app_views/app_routes/routes.dart';
 
@@ -40,6 +41,16 @@ BottomAppBar bottomAppBar() {
             Get.toNamed(Routes.DELETE);
           },
         ),
+        IconButton(
+          icon: Icon(
+            Icons.data_saver_on_rounded,
+            color: Colors.black87,
+          ),
+          onPressed: () {
+            
+            Get.to(()=>BancoDeDadosView());
+          },
+        ),
       ],
     ),
   );
@@ -48,8 +59,6 @@ BottomAppBar bottomAppBar() {
 get _to => HomeController.controller;
 
 BottomAppBar bottomAppBarBack() {
-
-  
   return BottomAppBar(
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -61,13 +70,11 @@ BottomAppBar bottomAppBarBack() {
           ),
           onPressed: () {
             currentPage = 0;
-            
+
             Get.back();
             _to.atualizaHome();
-            
           },
         ),
-        
       ],
     ),
   );
