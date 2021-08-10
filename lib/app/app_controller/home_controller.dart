@@ -32,4 +32,11 @@ class HomeController extends GetxController {
     update();
   }
 
+
+  // Fim de Citação
+
+
+  // Função que retorna a base de dados com a view em List.builder()
+
+
 }

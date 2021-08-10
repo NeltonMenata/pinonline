@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pinonline/app/app_views/app_routes/routes.dart';
 
-class View extends StatelessWidget {
+class RegistoEmpresaView extends StatelessWidget {
   Widget build(BuildContext context) {
     //final larguraTotal = MediaQuery.of(context).size.width;
     final alturaTotal = MediaQuery.of(context).size.height;
@@ -10,89 +11,82 @@ class View extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.grey,
         title: ListTile(
-            title: Text("Criar Registo"),
-            subtitle: Text("Insira os seus Dados")),
+            title: Text("Dados da Empresa"),
+            subtitle: Text("Insira os Dados de sua entidade")),
       ),
       body: Center(
         child: Container(
           padding: EdgeInsets.only(top: 20, left: 25, right: 25),
           width: double.infinity,
           decoration: BoxDecoration(color: Colors.white),
-          child: ListView(
+          child: Column(
             children: [
               Container(
-                color: Colors.amber,
-                height: (alturaTotal * 0.4) - (alturaTotal * 0.08),
-                child: Column(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(color: Colors.grey,
-                      borderRadius: BorderRadius.circular(70)
-                      ),
-                      child: CircleAvatar(
-                        radius: 60,
-                        child: Image.asset("assets/img/logo.png"),
-                      ),
-                    ),
-                    Text(
-                      "Cadastro",
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                color: Colors.red,
-                height: (alturaTotal * 0.6) - (alturaTotal * 0.08),
+                color: Colors.transparent,
+                height: (alturaTotal * 0.85),
                 child: Form(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        "Nome de Usuário",
+                        "Telefone",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextFormField(
                         keyboardType: TextInputType.name,
                         decoration: InputDecoration(
-                            labelText: 'Nome de Usuario',
+                            labelText: 'Telefone',
                             border: OutlineInputBorder()),
                       ),
                       SizedBox(
                         height: 20,
                       ),
                       Text(
-                        "Email",
+                        "Morada",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
-                            labelText: 'Email', border: OutlineInputBorder()),
+                            labelText: 'Morada', border: OutlineInputBorder()),
                       ),
                       SizedBox(
                         height: 20,
                       ),
-                      Text("Senha",
+                      Text("Cidade",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       TextFormField(
-                        obscuringCharacter: "*",
                         decoration: InputDecoration(
-                            labelText: 'Senha', border: OutlineInputBorder()),
+                            labelText: 'Cidade', border: OutlineInputBorder()),
                       ),
                       SizedBox(
                         height: 20,
                       ),
-                      SizedBox(
-                        height: 10,
+                      Text("Descrição",
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            labelText: 'Descrição',
+                            border: OutlineInputBorder()),
+                      ),
+                      Spacer(                      
                       ),
                       ElevatedButton(
-                          onPressed: () {}, child: Text("Salvar Cadastro"))
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.green)),
+                          onPressed: () {
+                            Get.toNamed(Routes.ACTIVIDADE);
+                          },
+                          child: Text("Salvar Entidade")),
+                      ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.grey)),
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: Text("Ignorar"))
                     ],
                   ),
                 ),

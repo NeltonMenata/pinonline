@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pinonline/app/app_views/app_routes/routes.dart';
 
-class View extends StatelessWidget {
+class CreateUserView extends StatefulWidget {
+  @override
+  _CreateUserViewState createState() => _CreateUserViewState();
+}
+
+class _CreateUserViewState extends State<CreateUserView> {
+  var _mostraSenha = true;
+
   Widget build(BuildContext context) {
     //final larguraTotal = MediaQuery.of(context).size.width;
     final alturaTotal = MediaQuery.of(context).size.height;
@@ -21,15 +29,15 @@ class View extends StatelessWidget {
           child: ListView(
             children: [
               Container(
-                color: Colors.amber,
+                color: Colors.transparent,
                 height: (alturaTotal * 0.4) - (alturaTotal * 0.08),
                 child: Column(
                   children: [
                     Container(
                       padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(color: Colors.grey,
-                      borderRadius: BorderRadius.circular(70)
-                      ),
+                      decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(70)),
                       child: CircleAvatar(
                         radius: 60,
                         child: Image.asset("assets/img/logo.png"),
@@ -47,7 +55,7 @@ class View extends StatelessWidget {
                 ),
               ),
               Container(
-                color: Colors.red,
+                color: Colors.transparent,
                 height: (alturaTotal * 0.6) - (alturaTotal * 0.08),
                 child: Form(
                   child: Column(
@@ -60,7 +68,7 @@ class View extends StatelessWidget {
                       TextFormField(
                         keyboardType: TextInputType.name,
                         decoration: InputDecoration(
-                            labelText: 'Nome de Usuario',
+                            hintText: 'Nome de Usuario',
                             border: OutlineInputBorder()),
                       ),
                       SizedBox(
@@ -73,7 +81,7 @@ class View extends StatelessWidget {
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
-                            labelText: 'Email', border: OutlineInputBorder()),
+                            hintText: 'Email', border: OutlineInputBorder()),
                       ),
                       SizedBox(
                         height: 20,
@@ -82,8 +90,19 @@ class View extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       TextFormField(
                         obscuringCharacter: "*",
+                        obscureText: _mostraSenha,
                         decoration: InputDecoration(
-                            labelText: 'Senha', border: OutlineInputBorder()),
+                          hintText: 'Senha',
+                          border: OutlineInputBorder(),
+                          suffixIcon: IconButton(
+                            icon: Icon(Icons.panorama_fish_eye_outlined),
+                            onPressed: () {
+                              setState(() {
+                                _mostraSenha = !_mostraSenha;
+                              });
+                            },
+                          ),
+                        ),
                       ),
                       SizedBox(
                         height: 20,
@@ -92,7 +111,13 @@ class View extends StatelessWidget {
                         height: 10,
                       ),
                       ElevatedButton(
-                          onPressed: () {}, child: Text("Salvar Cadastro"))
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.green)),
+                          onPressed: () {
+                            Get.toNamed(Routes.REGISTOEMPRESA);
+                          },
+                          child: Text("Salvar Cadastro"))
                     ],
                   ),
                 ),

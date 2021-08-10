@@ -31,7 +31,8 @@ dependencies:
   http:
   dio:
   parse_server_sdk_flutter: 
-  sqlite:
+  sqflite:
+  image_picker:
 
 dev_dependencies:
   flutter_test:
