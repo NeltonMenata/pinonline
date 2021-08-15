@@ -34,7 +34,7 @@ class EntidadeCategoriaView extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    padding: EdgeInsets.only(left: 15, right: 25),
+                    padding: EdgeInsets.only(left: 15, right: 25,),
                     width: MediaQuery.of(context).size.width * 0.9,
                     height: MediaQuery.of(context).size.height * 0.15 * 0.45,
                     decoration: BoxDecoration(
@@ -72,7 +72,7 @@ class EntidadeCategoriaView extends StatelessWidget {
                   ),
                   Spacer(),
                   Container(
-                    padding: EdgeInsets.only(left: 25, right: 25),
+                    padding: EdgeInsets.only(left: 25, right: 25,),
                     height: MediaQuery.of(context).size.height * 0.15 * 0.45,
                     decoration: BoxDecoration(
                         borderRadius:
@@ -93,6 +93,7 @@ class EntidadeCategoriaView extends StatelessWidget {
             ),
             Expanded(
               child: Container(
+                padding: const EdgeInsets.only(top: 15),
                 color: Colors.white,
                 width: double.infinity,
                 child: FutureBuilder<List<ParseObject>>(
@@ -142,8 +143,8 @@ class EntidadeCategoriaView extends StatelessWidget {
                                       child: Column(
                                         children: [
                                           Container(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: 5),
+                                            padding: EdgeInsets.only(
+                                                left: 5, right: 5,),
                                             decoration: BoxDecoration(
                                               border: Border.all(),
                                             ),
@@ -153,10 +154,14 @@ class EntidadeCategoriaView extends StatelessWidget {
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ),
+                                          SizedBox(height: 5,),
                                           Image.network(
                                             entidadeAll
                                                 .elementAt(index)
                                                 .imgPerfilUrl,
+                                                //height: 100,
+                                                width: 100,
+                                                fit: BoxFit.fill,
                                             errorBuilder: (_, __, ___) {
                                               return Image.asset(
                                                   "assets/img/logo.png");

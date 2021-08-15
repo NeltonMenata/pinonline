@@ -19,6 +19,7 @@ class EntidadePerfilView extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Container(
+         
           color: Colors.grey.shade300,
           height: double.infinity,
           width: double.infinity,
@@ -135,13 +136,19 @@ class EntidadePerfilView extends StatelessWidget {
                 ),
                 child: Align(
                     alignment: Alignment.topCenter,
-                    child: CircleAvatar(
-                      radius: 70,
-                      child: Image.network(
-                        selectedEntidade.imgUrl,
-                        errorBuilder: (_, __, ___) {
-                          return Image.asset("assets/img/logo.png");
-                        },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(70),
+                      child: Container(
+                        color: Colors.blueAccent,
+                        child: Image.network(
+                          selectedEntidade.imgUrl,
+                          fit: BoxFit.contain,
+                          height: 140,
+                          width: 140,
+                          errorBuilder: (_, __, ___) {
+                            return Image.asset("assets/img/logo.png");
+                          },
+                        ),
                       ),
                     )),
               ),
