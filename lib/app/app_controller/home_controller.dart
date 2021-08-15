@@ -1,10 +1,13 @@
 import 'package:get/get.dart';
+import 'package:pinonline/app/app_views/app_components/home_components/app_bottom_bar.dart';
 import '/app/app_provider/provider_data.dart';
 import '../app_models/categorias_model.dart';
 
 class HomeController extends GetxController {
 
   static HomeController controller = Get.put(HomeController());
+
+  HomeController(){currentPage = 0;}
   
   atualizaHome(){
     categoria = ProviderData.categoriaAll;
@@ -31,7 +34,6 @@ class HomeController extends GetxController {
     print("Procurando");
     update();
   }
-
 
   // Fim de Citação
 

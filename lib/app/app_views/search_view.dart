@@ -69,6 +69,6 @@ class SearchView extends StatelessWidget {
         ),
 
         //BOTTOM BAR
-        bottomNavigationBar: bottomAppBarBack());
+        bottomNavigationBar: bottomAppBarOthers());
   }
 }

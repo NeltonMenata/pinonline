@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 //import '/app/app_views/categoria_view/canalizador_view.dart';
+// ignore: unused_import
 import '../../teste_widgets.dart';
 import '/app/app_controller/home_controller.dart';
 //import '/app/app_views/teste_widgets.dart';
@@ -16,9 +17,9 @@ PreferredSizeWidget appBarMain() {
         width: 70,
       
       ),
-      IconButton(icon: Icon(Icons.other_houses), onPressed: (){
+      /*IconButton(icon: Icon(Icons.other_houses), onPressed: (){
         Get.to(View());
-      })
+      })*/
       
     ],
     foregroundColor: Colors.green,

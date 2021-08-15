@@ -44,7 +44,7 @@ class _CreateUserViewState extends State<CreateUserView> {
                       ),
                     ),
                     Text(
-                      "Cadastro",
+                      "Conta de Usuário",
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
@@ -117,7 +117,7 @@ class _CreateUserViewState extends State<CreateUserView> {
                           onPressed: () {
                             Get.toNamed(Routes.REGISTOEMPRESA);
                           },
-                          child: Text("Salvar Cadastro"))
+                          child: Text("Salvar Usuário"))
                     ],
                   ),
                 ),

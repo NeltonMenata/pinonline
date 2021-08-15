@@ -4,18 +4,19 @@ import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:pinonline/app/app_models/entidade_model.dart';
 import 'package:pinonline/app/app_provider/provider_data.dart';
 import '../app_controller/entidade_categoria_controller.dart';
+import 'app_components/home_components/app_bottom_bar.dart';
 import 'app_routes/routes.dart';
-
-
 
 // ignore: must_be_immutable
 class EntidadeCategoriaView extends StatelessWidget {
   List<EntidadeModel> get entidadeAll =>
       EntidadeController.entidadeController.entidadeData;
-  
+
   String _valor = "Nome";
   @override
   Widget build(BuildContext context) {
+    final larguraTotal = MediaQuery.of(context).size.width;
+    //final alturaTotal = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         title: Text("Profissionais"),
@@ -87,7 +88,6 @@ class EntidadeCategoriaView extends StatelessWidget {
                       )),
                     ),
                   ),
-                  
                 ],
               ),
             ),
@@ -96,95 +96,190 @@ class EntidadeCategoriaView extends StatelessWidget {
                 color: Colors.white,
                 width: double.infinity,
                 child: FutureBuilder<List<ParseObject>>(
-                    future: ProviderData.getEntidadeData(),
-                    builder: (_, snapshot) {
-                      if (snapshot.hasData) {
-                        return ListView.builder(
-                            itemBuilder: (_, index) {
-                              EntidadeController.entidadeController.entidadeData
-                                  .add(EntidadeModel(
-                                nome:
-                                    snapshot.data!.elementAt(index).get("nome"),
-                                categoria: snapshot.data!
+                  future: ProviderData.getEntidadeData(),
+                  builder: (_, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                          itemBuilder: (_, index) {
+                            EntidadeController.entidadeController.entidadeData
+                                .add(EntidadeModel(
+                              nome: snapshot.data!.elementAt(index).get("nome"),
+                              categoria: snapshot.data!
+                                  .elementAt(index)
+                                  .get("categoria"),
+                              desc: snapshot.data!
+                                  .elementAt(index)
+                                  .get("descricao"),
+                              email:
+                                  snapshot.data!.elementAt(index).get("email"),
+                              contacto: snapshot.data!
+                                  .elementAt(index)
+                                  .get("contacto"),
+                              morada:
+                                  snapshot.data!.elementAt(index).get("morada"),
+                              imgUrl:
+                                  snapshot.data!.elementAt(index).get("imgUrl"),
+                              imgPerfilUrl: snapshot.data!
+                                  .elementAt(index)
+                                  .get("imgPerfilUrl"),
+                              videoUrl: snapshot.data!
+                                  .elementAt(index)
+                                  .get("videoUrl"),
+                            ));
+                            if (Get.arguments.toString().toLowerCase() ==
+                                entidadeAll
                                     .elementAt(index)
-                                    .get("categoria"),
-                                desc: snapshot.data!
-                                    .elementAt(index)
-                                    .get("descricao"),
-                                email: snapshot.data!
-                                    .elementAt(index)
-                                    .get("email"),
-                                contacto: snapshot.data!
-                                    .elementAt(index)
-                                    .get("contacto"),
-                                morada: snapshot.data!
-                                    .elementAt(index)
-                                    .get("morada"),
-                                imgUrl: snapshot.data!
-                                    .elementAt(index)
-                                    .get("imgUrl"),
-                                imgPerfilUrl: snapshot.data!
-                                    .elementAt(index)
-                                    .get("imgPerfilUrl"),
-                                videoUrl: snapshot.data!
-                                    .elementAt(index)
-                                    .get("videoUrl"),
-                              ));
-                              if (Get.arguments.toString().toLowerCase() ==
-                                  entidadeAll
-                                      .elementAt(index)
-                                      .categoria
-                                      .toLowerCase()) {
-                                
-                                return Column(
-                                  children: [
-                                    ListTile(
-                                      onTap: () {
-                                        Get.toNamed(Routes.ENTIDADEPERFIL,
-                                            arguments: "$index");
-                                      },
-                                      leading: CircleAvatar(
-                                        child: Image.network(
-                                          entidadeAll
-                                              .elementAt(index)
-                                              .imgPerfilUrl,
-                                          errorBuilder: (_, __, ___) {
-                                            return Icon(
-                                                Icons.person_outline_sharp);
-                                          },
+                                    .categoria
+                                    .toLowerCase()) {
+                              return Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Container(
+                                      width: larguraTotal * (30 / 100),
+                                      height: larguraTotal * (45 / 100),
+                                      color: Colors.transparent,
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 5),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(),
+                                            ),
+                                            child: Text(
+                                              "Recomendado",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Image.network(
+                                            entidadeAll
+                                                .elementAt(index)
+                                                .imgPerfilUrl,
+                                            errorBuilder: (_, __, ___) {
+                                              return Image.asset(
+                                                  "assets/img/logo.png");
+                                            },
+                                          ),
+                                          Row(
+                                            children: [
+                                              Icon(Icons.star,
+                                                  color: Colors.amber),
+                                              Icon(Icons.star,
+                                                  color: Colors.amber),
+                                              Icon(Icons.star,
+                                                  color: Colors.amber),
+                                              Icon(Icons.star),
+                                              Icon(Icons.star),
+                                            ],
+                                          )
+                                        ],
+                                      )),
+                                  Container(
+                                    color: Colors.transparent,
+                                    width: larguraTotal * (40 / 100),
+                                    height: larguraTotal * (45 / 100),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        ListTile(
+                                          contentPadding: EdgeInsets.zero,
+                                          title:
+                                              Text(entidadeAll.elementAt(index).nome),
+                                          subtitle: Text(entidadeAll.elementAt(index).categoria),
                                         ),
-                                      ),
-                                      title: Text(
-                                          entidadeAll.elementAt(index).nome),
-                                      subtitle: Text(entidadeAll
-                                          .elementAt(index)
-                                          .categoria),
-                                      trailing: Text(
-                                          entidadeAll.elementAt(index).morada),
+                                        Container(
+                                          padding: EdgeInsets.only(
+                                              left: 5, right: 5),
+                                          child: Text("5 visitas"),
+                                          decoration: BoxDecoration(
+                                              border: Border.all()),
+                                        ),
+                                      ],
                                     ),
-                                    Container(
-                                        padding:
-                                            EdgeInsets.symmetric(vertical: 10),
-                                        height: 1,
-                                        color: Colors.grey)
-                                  ],
-                                );
-                              } else {
-                                return Container();
-                              }
-                            },
-                            itemCount: snapshot.data!.length);
-                      } else if (snapshot.hasError) {
-                        return Text("Erro ao conectar");
-                      } else {
-                        return Center(child: CircularProgressIndicator());
-                      }
-                    }),
+                                  ),
+                                  Container(
+                                      color: Colors.transparent,
+                                      width: larguraTotal * (25 / 100),
+                                      height: larguraTotal * (45 / 100),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          ListTile(
+                                            contentPadding: EdgeInsets.zero,
+                                            title: Text("£ 10.000,00"),
+                                            subtitle: Text("£ 12.000,00",
+                                                style: TextStyle(
+                                                    decoration: TextDecoration
+                                                        .lineThrough)),
+                                          ),
+                                          Spacer(),
+                                          ElevatedButton(
+                                            child: Text("Consultar"),
+                                            onPressed: () {
+                                              Get.toNamed(Routes.ENTIDADEPERFIL,
+                                                  arguments: "$index");
+                                            },
+                                          )
+                                        ],
+                                      )),
+                                ],
+                              );
+                              /*
+                              Column(
+                                children: [
+                                  ListTile(
+                                    onTap: () {
+                                      Get.toNamed(Routes.ENTIDADEPERFIL,
+                                          arguments: "$index");
+                                    },
+                                    leading: CircleAvatar(
+                                      child: Image.network(
+                                        entidadeAll
+                                            .elementAt(index)
+                                            .imgPerfilUrl,
+                                        errorBuilder: (_, __, ___) {
+                                          return Icon(
+                                              Icons.person_outline_sharp);
+                                        },
+                                      ),
+                                    ),
+                                    title:
+                                        Text(entidadeAll.elementAt(index).nome),
+                                    subtitle: Text(
+                                        entidadeAll.elementAt(index).categoria),
+                                    trailing: Text(
+                                        entidadeAll.elementAt(index).morada),
+                                  ),
+                                  Container(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 10),
+                                      height: 1,
+                                      color: Colors.grey)
+                                ],
+                              );*/
+
+                            } else {
+                              return Container();
+                            }
+                          },
+                          itemCount: snapshot.data!.length);
+                    } else if (snapshot.hasError) {
+                      return Text("Erro ao conectar");
+                    } else {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                  },
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),
+      bottomNavigationBar: bottomAppBarOthers(),
     );
   }
 }

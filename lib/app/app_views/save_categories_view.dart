@@ -50,6 +50,6 @@ class SaveCategorieView extends StatelessWidget {
                       colors: [Colors.blue, Colors.white])),
               child: FormSave()),
         ),
-        bottomNavigationBar: bottomAppBarBack());
+        bottomNavigationBar: bottomAppBarOthers());
   }
 }

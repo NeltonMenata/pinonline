@@ -158,6 +158,6 @@ class DeleteCategorieView extends StatelessWidget {
             ),
           ),
         ),
-        bottomNavigationBar: bottomAppBarBack());
+        bottomNavigationBar: bottomAppBarOthers());
   }
 }

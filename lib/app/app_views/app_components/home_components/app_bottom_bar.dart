@@ -8,8 +8,133 @@ int currentPage = 0;
 
 BottomAppBar bottomAppBar() {
   return BottomAppBar(
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+    child: Container(
+      padding: EdgeInsets.symmetric(horizontal: 15),
+      color: Colors.green.shade600,
+      height: 80,
+      width: double.infinity,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          IconButton(
+            onPressed: () {
+              currentPage = 0;
+              Get.toNamed(Routes.HOME);
+            },
+            icon: Icon(
+              Icons.home,
+              color: currentPage == 0 ? Colors.black : Colors.white,
+            ),
+            iconSize: 45,
+          ),
+          IconButton(
+            onPressed: () {
+              currentPage = 1;
+              Get.toNamed(Routes.SAVE);
+            },
+            icon: Icon(
+              Icons.book,
+              color: currentPage == 1 ? Colors.black : Colors.white,
+            ),
+            iconSize: 45,
+          ),
+          IconButton(
+            onPressed: () {
+              currentPage = 2;
+              Get.toNamed(Routes.DELETE);
+            },
+            icon: Icon(
+              Icons.notifications,
+              color: currentPage == 2 ? Colors.black : Colors.white,
+            ),
+            iconSize: 45,
+          ),
+          IconButton(
+            onPressed: () {
+              currentPage = 3;
+              Get.to(() => BancoDeDadosView());
+            },
+            icon: Icon(
+              Icons.settings,
+              color: currentPage == 3 ? Colors.black : Colors.white,
+            ),
+            iconSize: 45,
+          ),
+        ],
+      ),
+    ),
+
+  );
+}
+
+BottomAppBar bottomAppBarOthers() {
+  return BottomAppBar(
+    child: Container(
+      padding: EdgeInsets.symmetric(horizontal: 15),
+      color: Colors.green.shade600,
+      height: 80,
+      width: double.infinity,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          IconButton(
+            onPressed: () {
+              currentPage = 0;
+              Get.back();
+              Get.toNamed(Routes.HOME);
+            },
+            icon: Icon(
+              Icons.home,
+              color: currentPage == 0 ? Colors.black : Colors.white,
+            ),
+            iconSize: 45,
+          ),
+          IconButton(
+            onPressed: () {
+              currentPage = 1;
+              Get.back();
+              Get.toNamed(Routes.SAVE);
+            },
+            icon: Icon(
+              Icons.book,
+              color: currentPage == 1 ? Colors.black : Colors.white,
+            ),
+            iconSize: 45,
+          ),
+          IconButton(
+            onPressed: () {
+              currentPage = 2;
+              Get.back();
+              Get.toNamed(Routes.DELETE);
+            },
+            icon: Icon(
+              Icons.notifications,
+              color: currentPage == 2 ? Colors.black : Colors.white,
+            ),
+            iconSize: 45,
+          ),
+          IconButton(
+            onPressed: () {
+              currentPage = 3;
+              Get.back();
+              Get.to(() => BancoDeDadosView());
+            },
+            icon: Icon(
+              Icons.settings,
+              color: currentPage == 3 ? Colors.black : Colors.white,
+            ),
+            iconSize: 45,
+          ),
+        ],
+      ),
+    ),
+
+  );
+}
+
+
+    /*Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         IconButton(
           icon: Icon(
@@ -24,7 +149,7 @@ BottomAppBar bottomAppBar() {
         IconButton(
           icon: Icon(
             Icons.add_circle_outline_rounded,
-            color: Colors.black87,
+            color: currentPage == 0 ? Colors.black : Colors.white,
           ),
           onPressed: () {
             currentPage = 1;
@@ -34,7 +159,7 @@ BottomAppBar bottomAppBar() {
         IconButton(
           icon: Icon(
             Icons.delete,
-            color: Colors.black87,
+            color: currentPage == 0 ? Colors.black : Colors.white,
           ),
           onPressed: () {
             currentPage = 2;
@@ -44,7 +169,7 @@ BottomAppBar bottomAppBar() {
         IconButton(
           icon: Icon(
             Icons.data_saver_on_rounded,
-            color: Colors.black87,
+            color: currentPage == 0 ? Colors.black : Colors.white,
           ),
           onPressed: () {
             
@@ -52,10 +177,49 @@ BottomAppBar bottomAppBar() {
           },
         ),
       ],
-    ),
-  );
-}
+    ),*/
 
+/*
+
+Container(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                color: Colors.green.shade600,
+                height: 80,
+                width: double.infinity,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.home,
+                      color: currentPage == 0 ? Colors.black : Colors.white,),
+                      iconSize: 45,
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.book,
+                      color: currentPage == 0 ? Colors.black : Colors.white,),
+                      iconSize: 45,
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.notifications,
+                      color: currentPage == 0 ? Colors.black : Colors.white,),
+                      iconSize: 45,
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.settings,
+                        color: currentPage == 0 ? Colors.black : Colors.white,
+                      ),
+                      iconSize: 45,
+                    ),
+                  ],
+                ),
+              ),
+
+*/
 get _to => HomeController.controller;
 
 BottomAppBar bottomAppBarBack() {
