@@ -34,7 +34,10 @@ class EntidadeCategoriaView extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    padding: EdgeInsets.only(left: 15, right: 25,),
+                    padding: EdgeInsets.only(
+                      left: 15,
+                      right: 25,
+                    ),
                     width: MediaQuery.of(context).size.width * 0.9,
                     height: MediaQuery.of(context).size.height * 0.15 * 0.45,
                     decoration: BoxDecoration(
@@ -72,7 +75,10 @@ class EntidadeCategoriaView extends StatelessWidget {
                   ),
                   Spacer(),
                   Container(
-                    padding: EdgeInsets.only(left: 25, right: 25,),
+                    padding: EdgeInsets.only(
+                      left: 25,
+                      right: 25,
+                    ),
                     height: MediaQuery.of(context).size.height * 0.15 * 0.45,
                     decoration: BoxDecoration(
                         borderRadius:
@@ -103,30 +109,39 @@ class EntidadeCategoriaView extends StatelessWidget {
                       return ListView.builder(
                           itemBuilder: (_, index) {
                             EntidadeController.entidadeController.entidadeData
-                                .add(EntidadeModel(
-                              nome: snapshot.data!.elementAt(index).get("nome"),
-                              categoria: snapshot.data!
-                                  .elementAt(index)
-                                  .get("categoria"),
-                              desc: snapshot.data!
-                                  .elementAt(index)
-                                  .get("descricao"),
-                              email:
-                                  snapshot.data!.elementAt(index).get("email"),
-                              contacto: snapshot.data!
-                                  .elementAt(index)
-                                  .get("contacto"),
-                              morada:
-                                  snapshot.data!.elementAt(index).get("morada"),
-                              imgUrl:
-                                  snapshot.data!.elementAt(index).get("imgUrl"),
-                              imgPerfilUrl: snapshot.data!
-                                  .elementAt(index)
-                                  .get("imgPerfilUrl"),
-                              videoUrl: snapshot.data!
-                                  .elementAt(index)
-                                  .get("videoUrl"),
-                            ));
+                                .add(
+                              EntidadeModel(
+                                nome:
+                                    snapshot.data!.elementAt(index).get("nome"),
+                                categoria: snapshot.data!
+                                    .elementAt(index)
+                                    .get("categoria"),
+                                desc: snapshot.data!
+                                    .elementAt(index)
+                                    .get("descricao"),
+                                email: snapshot.data!
+                                    .elementAt(index)
+                                    .get("email"),
+                                contacto: snapshot.data!
+                                    .elementAt(index)
+                                    .get("contacto"),
+                                morada: snapshot.data!
+                                    .elementAt(index)
+                                    .get("morada"),
+                                imgUrl: snapshot.data!
+                                    .elementAt(index)
+                                    .get("imgUrl"),
+                                imgPerfilUrl: snapshot.data!
+                                    .elementAt(index)
+                                    .get("imgPerfilUrl"),
+                                videoUrl: snapshot.data!
+                                    .elementAt(index)
+                                    .get("videoUrl"),
+                                objectId: snapshot.data!
+                                    .elementAt(index)
+                                    .get("objectId"),
+                              ),
+                            );
                             if (Get.arguments.toString().toLowerCase() ==
                                 entidadeAll
                                     .elementAt(index)
@@ -144,7 +159,9 @@ class EntidadeCategoriaView extends StatelessWidget {
                                         children: [
                                           Container(
                                             padding: EdgeInsets.only(
-                                                left: 5, right: 5,),
+                                              left: 5,
+                                              right: 5,
+                                            ),
                                             decoration: BoxDecoration(
                                               border: Border.all(),
                                             ),
@@ -154,14 +171,16 @@ class EntidadeCategoriaView extends StatelessWidget {
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ),
-                                          SizedBox(height: 5,),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
                                           Image.network(
                                             entidadeAll
                                                 .elementAt(index)
                                                 .imgPerfilUrl,
-                                                //height: 100,
-                                                width: 100,
-                                                fit: BoxFit.fill,
+                                            //height: 100,
+                                            width: 100,
+                                            fit: BoxFit.fill,
                                             errorBuilder: (_, __, ___) {
                                               return Image.asset(
                                                   "assets/img/logo.png");
@@ -191,9 +210,12 @@ class EntidadeCategoriaView extends StatelessWidget {
                                       children: [
                                         ListTile(
                                           contentPadding: EdgeInsets.zero,
-                                          title:
-                                              Text(entidadeAll.elementAt(index).nome),
-                                          subtitle: Text(entidadeAll.elementAt(index).categoria),
+                                          title: Text(entidadeAll
+                                              .elementAt(index)
+                                              .nome),
+                                          subtitle: Text(entidadeAll
+                                              .elementAt(index)
+                                              .categoria),
                                         ),
                                         Container(
                                           padding: EdgeInsets.only(

@@ -34,11 +34,11 @@ class ProviderData{
   static Future<List<ParseObject>> getCategoriaData() async {
     
     final categoriaObject = ParseObject("Categoria");
-
-    QueryBuilder<ParseObject> query = QueryBuilder<ParseObject>(categoriaObject);
+    
+    var query = QueryBuilder<ParseObject>(categoriaObject);
     
     final response = await query.query();
-
+    
     if(response.results != null && response.success){
       return response.result as List<ParseObject>; 
       

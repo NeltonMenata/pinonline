@@ -5,18 +5,18 @@ import 'package:get/get.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   final keyApplicationId = "OsiPUlfwC4Av3KtTAlxO5HssYxdeH9g8OrgSBxGu";
   final keyClientKey = "uDLx5YOIKES5TUXuzTUt8WAM4jgwOq5QjF3wAiIP";
   final keyParseServerUrl = "https://parseapi.back4app.com";
-  
-  await Parse().initialize(keyApplicationId, keyParseServerUrl, clientKey: keyClientKey, autoSendSessionId: true);
+
+  await Parse().initialize(keyApplicationId, keyParseServerUrl,
+      clientKey: keyClientKey, autoSendSessionId: true);
 
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(

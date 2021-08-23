@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pinonline/app/app_views/app_routes/routes.dart';
 
 class LoginView extends StatefulWidget {
   @override
@@ -109,7 +108,7 @@ class _LoginViewState extends State<LoginView> {
                                     backgroundColor: MaterialStateProperty.all(
                                         Colors.green)),
                                 onPressed: () {
-                                  Get.toNamed(Routes.HOME);
+                                  
                                 },
                                 child: Text("Entrar")),
                           ),
@@ -121,14 +120,6 @@ class _LoginViewState extends State<LoginView> {
                                         MaterialStateProperty.all(Colors.grey)),
                                 onPressed: () {},
                                 child: Text("Recuperar Senha")),
-                          ),
-                          SizedBox(
-                            width: double.infinity,
-                            child: TextButton(
-                                onPressed: () {
-                                  Get.toNamed(Routes.CREATEUSER);
-                                },
-                                child: Text("Criar Conta na Pinonline", style: TextStyle(color: Colors.blue))),
                           ),
                           SizedBox(
                             height: 30,

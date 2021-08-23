@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
 import 'package:pinonline/app/app_views/actividade_view.dart';
 import 'package:pinonline/app/app_views/create_user_view.dart';
+import 'package:pinonline/app/app_views/login_view.dart';
 import 'package:pinonline/app/app_views/registo_empresa_view.dart';
+import '../welcome_view.dart';
 import '/app/app_views/entidade_categoria_view.dart';
 import '/app/app_views/entidade_perfil_view.dart';
 import '../delete_categorie_view.dart';
@@ -23,6 +25,8 @@ class Routes {
     GetPage(name: CREATEUSER, page: () => CreateUserView()),
     GetPage(name: ACTIVIDADE, page: () => ActivityView()),
     GetPage(name: REGISTOEMPRESA, page: () => RegistoEmpresaView()),
+    GetPage(name: WELCOME, page: () => WelcomeView()),
+    GetPage(name: LOGIN, page: () => LoginView()),
   ];
   
   static const STARTAPP = "/";
@@ -35,5 +39,8 @@ class Routes {
   static const CREATEUSER = "/createuser";
   static const ACTIVIDADE = "/actividade";
   static const REGISTOEMPRESA = "/registoempresa";
+  static const WELCOME = "/welcome";
+  static const LOGIN = "/login";
+  
 
 }
