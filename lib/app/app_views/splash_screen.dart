@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_splash_screen/easy_splash_screen.dart';
-import 'package:pinonline/app/app_views/login_view.dart';
+import 'package:pinonline/app/app_views/_welcome/welcome_alternative_view.dart';
+// ignore: unused_import
 import 'package:pinonline/app/app_views/welcome_view.dart';
 
 class SplashScreenPage extends StatelessWidget {
@@ -10,7 +11,7 @@ class SplashScreenPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return EasySplashScreen(
       logo: Image.asset("assets/img/logo.png"),
-      navigator: WelcomeView(),
+      navigator: WelcomeAlternativeView(), //  WelcomeView(),
       durationInSeconds: 3,
       showLoader: true,
       loaderColor: Colors.lightGreen,

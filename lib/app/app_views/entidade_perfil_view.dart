@@ -4,6 +4,7 @@ import 'package:pinonline/app/app_controller/entidade_categoria_controller.dart'
 import 'package:pinonline/app/app_models/entidade_model.dart';
 
 import 'app_components/home_components/app_bottom_bar.dart';
+import 'app_routes/routes.dart';
 
 // ignore: must_be_immutable
 class EntidadePerfilView extends StatelessWidget {
@@ -191,7 +192,10 @@ class EntidadePerfilView extends StatelessWidget {
                             )
                           ],
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.toNamed(Routes.ORCAMENTO);
+                          
+                        },
                       )
                     ],
                   ),

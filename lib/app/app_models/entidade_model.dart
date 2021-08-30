@@ -1,5 +1,6 @@
 class EntidadeModel {
   final String nome;
+  final String senha;
   final String categoria;
   final String morada;
   final String contacto;
@@ -12,6 +13,7 @@ class EntidadeModel {
 
   EntidadeModel(
       {required this.nome,
+      required this.senha,
       required this.categoria,
       required this.morada,
       required this.contacto,
@@ -25,21 +27,22 @@ class EntidadeModel {
   static List<EntidadeModel> allEntidades() {
     return [
       EntidadeModel(
-          nome:"Adao Pedro",
-          categoria:"Canalizador",
-          morada:"Malanje",
-          contacto:"+244 912 557 358",
-          email:"adaopedro@gmail.com",
-          desc:"Funcionário de Primeira",
+          nome: "Adao Pedro",
+          categoria: "Canalizador",
+          morada: "Malanje",
+          contacto: "+244 912 557 358",
+          email: "adaopedro@gmail.com",
+          desc: "Funcionário de Primeira",
           imgUrl: "imgUrl",
           videoUrl: "videoUrl",
           imgPerfilUrl: "imgPerfilUrl",
+          senha: "1",
           objectId: "23flksjlk3"),
-
       EntidadeModel(
           nome: "Joao Miguel",
           categoria: "Electricista",
           morada: "Benguela",
+          senha: "1",
           contacto: "+244 912 557 358",
           email: "joaomiguel@gmail.com",
           desc: "Funcionário de Segunda",
@@ -47,11 +50,11 @@ class EntidadeModel {
           videoUrl: "videoUrl",
           imgPerfilUrl: "imgPerfilUrl",
           objectId: "kjdfla1243"),
-
       EntidadeModel(
           nome: "Antonio Manuel",
           categoria: "Pedreiro",
-         morada: "Namibe",
+          senha: "1",
+          morada: "Namibe",
           contacto: "+244 912 557 358",
           email: "antoniomanuel@gmail.com",
           desc: "Funcionário de Terceira",
@@ -59,11 +62,11 @@ class EntidadeModel {
           videoUrl: "videoUrl",
           imgPerfilUrl: "imgPerfilUrl",
           objectId: "fak34dlf"),
-
       EntidadeModel(
           nome: "Jose Afonso",
           categoria: "Pintor",
           morada: "Moxico",
+          senha: "1",
           contacto: "+244 912 557 358",
           email: "joseafonso@gmail.com",
           desc: "Funcionário de Quarta",
@@ -71,11 +74,11 @@ class EntidadeModel {
           videoUrl: "videoUrl",
           imgPerfilUrl: "imgPerfilUrl",
           objectId: "dflk34sdf"),
-
       EntidadeModel(
           nome: "Carlos Cassoma",
           categoria: "Programador",
           morada: "Lunda-Sul",
+          senha: "1",
           contacto: "+244 912 557 358",
           email: "carloscassoma@gmail.com",
           desc: "Funcionário de Quinta",
@@ -83,10 +86,10 @@ class EntidadeModel {
           videoUrl: "videoUrl",
           imgPerfilUrl: "imgPerfilUrl",
           objectId: "dflk2343"),
-
       EntidadeModel(
           nome: "Nelton Menata",
           categoria: "Programador",
+          senha: "1",
           morada: "Luanda",
           contacto: "+244 912 557 358",
           email: "neltonmenataditec@gmail.com",
@@ -99,6 +102,7 @@ class EntidadeModel {
           nome: "Vanilson Alberto",
           categoria: "Estucador",
           morada: "Zaire",
+          senha: "1",
           contacto: "+244 912 557 358",
           email: "vanilsonalberto@gmail.com",
           desc: "Funcionário de Setima",
@@ -107,16 +111,18 @@ class EntidadeModel {
           imgPerfilUrl: "imgPerfilUrl",
           objectId: "dfj23rfd"),
       EntidadeModel(
-          nome: "Mavinga Santos",
-          categoria: "Carpinteiro",
-          morada: "Cabinda",
-          contacto: "+244 912 557 358",
-          email: "mavingasantos@gmail.com",
-          desc: "Funcionário de Oitava",
-          imgUrl: "imgUrl",
-          videoUrl: "videoUrl",
-          imgPerfilUrl: "imgPerfilUrl",
-          objectId: "df32rdf3",),
+        nome: "Mavinga Santos",
+        categoria: "Carpinteiro",
+        morada: "Cabinda",
+        senha: "1",
+        contacto: "+244 912 557 358",
+        email: "mavingasantos@gmail.com",
+        desc: "Funcionário de Oitava",
+        imgUrl: "imgUrl",
+        videoUrl: "videoUrl",
+        imgPerfilUrl: "imgPerfilUrl",
+        objectId: "df32rdf3",
+      ),
     ];
   }
 }

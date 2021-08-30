@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
+import 'package:pinonline/app/app_views/_welcome/welcome_alternative_view.dart';
 import 'package:pinonline/app/app_views/actividade_view.dart';
 import 'package:pinonline/app/app_views/create_user_view.dart';
 import 'package:pinonline/app/app_views/login_view.dart';
+import 'package:pinonline/app/app_views/_orcamento/orcamento_view.dart';
 import 'package:pinonline/app/app_views/registo_empresa_view.dart';
 import '../welcome_view.dart';
 import '/app/app_views/entidade_categoria_view.dart';
@@ -13,7 +15,6 @@ import '../home_view.dart';
 import '../splash_screen.dart';
 
 class Routes {
-  
   static var routes = [
     GetPage(name: STARTAPP, page: () => SplashScreenPage()),
     GetPage(name: HOME, page: () => HomeView()),
@@ -27,8 +28,13 @@ class Routes {
     GetPage(name: REGISTOEMPRESA, page: () => RegistoEmpresaView()),
     GetPage(name: WELCOME, page: () => WelcomeView()),
     GetPage(name: LOGIN, page: () => LoginView()),
+    GetPage(name: ORCAMENTO, page: () => OrcamentoView()),
+
+    // ROTAS DA APP ALTERNATIVA
+
+    GetPage(name: WELCOME_, page: () => WelcomeAlternativeView()),
   ];
-  
+
   static const STARTAPP = "/";
   static const HOME = "/home";
   static const SEARCH = "/search";
@@ -41,6 +47,9 @@ class Routes {
   static const REGISTOEMPRESA = "/registoempresa";
   static const WELCOME = "/welcome";
   static const LOGIN = "/login";
-  
+  static const ORCAMENTO = "/orcamento";
 
+  // VARIAVEIRS DE ROTAS DA APP ALTERNATIVE
+
+  static const WELCOME_ = "/welcome_";
 }

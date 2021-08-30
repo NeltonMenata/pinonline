@@ -7,21 +7,23 @@ class WelcomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     var _larguraTotal = MediaQuery.of(context).size.width;
     var _containerMain = _larguraTotal * 0.92;
+    var _alturaTotal = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: ListView(children: [
-              SizedBox(height: 20),
+              SizedBox(height: _alturaTotal < 600 ? 15 : 20),
               CircleAvatar(
-                  radius: 65, child: Image.asset("assets/img/logo.png")),
-              SizedBox(height: 20),
+                  radius: _alturaTotal < 600 ? 50 : 65,
+                  child: Image.asset("assets/img/logo.png")),
+              SizedBox(height: _alturaTotal < 600 ? 15 : 20),
               Text(
                 "Bem-Vindo a JustBuild",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: _alturaTotal < 600 ? 20 : 25,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -30,16 +32,16 @@ class WelcomeView extends StatelessWidget {
                 "Escolhe uma das opções para o seu devido tratamento!",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: _alturaTotal < 600 ? 12 : 16,
                   color: Colors.black54,
                   //fontWeight: FontWeight.bold,
                 ),
               ),
               SizedBox(
-                height: 40,
+                height: _alturaTotal * 0.05,
               ),
               Container(
-                height: 90,
+                height: _alturaTotal * 0.1,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.black12,
@@ -63,10 +65,16 @@ class WelcomeView extends StatelessWidget {
                       child: ListTile(
                         title: Text(
                           "Quer iniciar uma Obra nova",
-                          maxLines: 2,
+                          style: TextStyle(
+                            //fontSize: _alturaTotal < 600 ? 14 : 17,
+                          ),
+                          maxLines: 1,
                         ),
                         subtitle: Text(
                           "Inicia a sua Obra nova com a JustBuild a escolha número 1!",
+                          style: TextStyle(
+                            //fontSize: _alturaTotal < 600 ? 12 : 14,
+                          ),
                           maxLines: 2,
                         ),
                         onTap: () {
@@ -77,9 +85,9 @@ class WelcomeView extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 15),
+              SizedBox(height: _alturaTotal * 0.01),
               Container(
-                height: 90,
+                height: _alturaTotal * 0.1,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.black12,
@@ -103,10 +111,17 @@ class WelcomeView extends StatelessWidget {
                       child: ListTile(
                         title: Text(
                           "Quer passar a Gestão da sua Obra para nós",
-                          maxLines: 2,
+                          style: TextStyle(
+                            //fontSize: _alturaTotal < 600 ? 14 : 17,
+                          ),
+                          maxLines: 1,
                         ),
                         subtitle: Text(
                           "Com a JustBuild tens a tua Obra executada com prazo acordado!",
+                          style: TextStyle(
+                            //fontSize: _alturaTotal < 600 ? 12 : 14,
+                          ),
+                          
                           maxLines: 2,
                         ),
                         onTap: () {
@@ -117,9 +132,9 @@ class WelcomeView extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 15),
+              SizedBox(height: _alturaTotal * 0.01),
               Container(
-                height: 90,
+                height: _alturaTotal * 0.1,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.black12,
@@ -143,10 +158,16 @@ class WelcomeView extends StatelessWidget {
                       child: ListTile(
                         title: Text(
                           "Quer ver os Profissionais perto de você",
-                          maxLines: 2,
+                          style: TextStyle(
+                            //fontSize: _alturaTotal < 600 ? 14 : 17,
+                          ),
+                          maxLines: 1,
                         ),
                         subtitle: Text(
                           "Encontre Profissionais de qualidade para sua obra!",
+                          style: TextStyle(
+                            //fontSize: _alturaTotal < 600 ? 12 : 14,
+                          ),
                           maxLines: 2,
                         ),
                         onTap: () {
@@ -157,9 +178,9 @@ class WelcomeView extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 15),
+              SizedBox(height: _alturaTotal * 0.01),
               Container(
-                height: 90,
+                height: _alturaTotal * 0.1,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.black12,
@@ -183,10 +204,16 @@ class WelcomeView extends StatelessWidget {
                       child: ListTile(
                         title: Text(
                           "Quer ser nosso parceiro Profissional",
-                          maxLines: 2,
+                          style: TextStyle(
+                            //fontSize: _alturaTotal < 600 ? 14 : 17,
+                          ),
+                          maxLines: 1,
                         ),
                         subtitle: Text(
                           "Seja um parceiro profissional da JustBuild e aproveite o maior número de clientes no mercado!",
+                          style: TextStyle(
+                            //fontSize: _alturaTotal < 600 ? 12 : 14,
+                          ),
                           maxLines: 2,
                         ),
                         onTap: () {
@@ -197,7 +224,7 @@ class WelcomeView extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: _alturaTotal * 0.04),
               Text("Entre em contacto connosco!")
             ]),
           ),

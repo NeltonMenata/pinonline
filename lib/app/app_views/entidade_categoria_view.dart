@@ -116,6 +116,9 @@ class EntidadeCategoriaView extends StatelessWidget {
                                 categoria: snapshot.data!
                                     .elementAt(index)
                                     .get("categoria"),
+                                senha: snapshot.data!
+                                    .elementAt(index)
+                                    .get("senha"),
                                 desc: snapshot.data!
                                     .elementAt(index)
                                     .get("descricao"),
@@ -154,7 +157,7 @@ class EntidadeCategoriaView extends StatelessWidget {
                                   Container(
                                       width: larguraTotal * (30 / 100),
                                       height: larguraTotal * (45 / 100),
-                                      color: Colors.transparent,
+                                      color: Colors.blue,
                                       child: Column(
                                         children: [
                                           Container(
@@ -178,7 +181,7 @@ class EntidadeCategoriaView extends StatelessWidget {
                                             entidadeAll
                                                 .elementAt(index)
                                                 .imgPerfilUrl,
-                                            //height: 100,
+                                            height: 100,
                                             width: 100,
                                             fit: BoxFit.fill,
                                             errorBuilder: (_, __, ___) {
