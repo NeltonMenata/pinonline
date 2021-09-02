@@ -4,12 +4,14 @@ class ClienteModel {
   final String email;
   final String morada;
   final String contacto;
+  final String img;
   final String desc;
   final String objectId;
   
   ClienteModel(
       {required this.nome,
       required this.senha,
+      required this.img,
       required this.email,
       required this.morada,
       required this.contacto,

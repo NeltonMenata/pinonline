@@ -4,6 +4,7 @@ import 'app/app_views/app_routes/routes.dart';
 import 'package:get/get.dart';
 
 void main() async {
+  
   WidgetsFlutterBinding.ensureInitialized();
 
   final keyApplicationId = "OsiPUlfwC4Av3KtTAlxO5HssYxdeH9g8OrgSBxGu";

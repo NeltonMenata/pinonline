@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinonline/app/app_controller/_cliente/cliente_login_controller.dart';
+import 'package:pinonline/app/app_views/_cliente/cliente_dashboard_view.dart';
+import 'package:pinonline/app/app_views/_cliente/cliente_login_view.dart';
 import 'package:pinonline/app/app_views/_size/size.dart';
 import 'package:pinonline/app/app_views/app_routes/routes.dart';
 
 import 'cliente_obra_nova_view.dart';
 
 class ClienteWelcomeView extends StatelessWidget {
-  const ClienteWelcomeView({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-
     var cliente = ClienteLoginController.controller.cliente[0];
     return Scaffold(
       body: SafeArea(
@@ -28,10 +27,11 @@ class ClienteWelcomeView extends StatelessWidget {
                     backgroundColor: Colors.blue[300],
                     radius:
                         larguraPor(15, context), //_alturaTotal < 600 ? 50 : 65,
-                    child: Image.asset("assets/img/logo.png",
-                        width: double.infinity,
-                        height: double.infinity,
-                        ),
+                    child: Image.asset(
+                      "assets/img/logo.png",
+                      width: double.infinity,
+                      height: double.infinity,
+                    ),
                   ),
                   SizedBox(height: alturaPor(100, context) < 600 ? 15 : 20),
                   Text(
@@ -98,7 +98,7 @@ class ClienteWelcomeView extends StatelessWidget {
                                   maxLines: 2,
                                 ),
                                 onTap: () {
-                                  Get.toNamed(Routes.LOGIN);
+                                  Get.to(ClienteDashBoardView());
                                 },
                               ),
                             ),
@@ -247,6 +247,13 @@ class ClienteWelcomeView extends StatelessWidget {
                     ],
                   ),
                 ),
+              ),
+              TextButton(
+                onPressed: () {
+
+                  Get.offAll(ClienteLoginView());
+                },
+                child: Text("Terminar Sessão"),
               ),
             ],
           ),

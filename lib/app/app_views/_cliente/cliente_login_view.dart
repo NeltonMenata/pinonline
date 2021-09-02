@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinonline/app/app_controller/_cliente/cliente_login_controller.dart';
-import 'package:pinonline/app/app_views/_cliente/cliente_welcome_view.dart';
 import 'package:pinonline/app/app_views/_size/size.dart';
+import 'package:pinonline/app/app_views/_welcome/welcome_alternative_view.dart';
 
 // ignore: must_be_immutable
 class ClienteLoginView extends StatelessWidget {
-
-  var _email = TextEditingController();
-  var _senha = TextEditingController();
-    
   @override
   Widget build(BuildContext context) {
+    var controller = ClienteLoginController.controller;
 
-     var controller = ClienteLoginController.controller;
-    
-    
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -73,7 +67,7 @@ class ClienteLoginView extends StatelessWidget {
                             ),
                           ),
                           TextFormField(
-                            controller: _email,
+                            controller: controller.email,
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
                                 hintText: 'Email',
@@ -88,7 +82,7 @@ class ClienteLoginView extends StatelessWidget {
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                           ),
                           TextFormField(
-                            controller: _senha,
+                            controller: controller.senha,
                             obscuringCharacter: "*",
                             obscureText: true,
                             decoration: InputDecoration(
@@ -108,20 +102,11 @@ class ClienteLoginView extends StatelessWidget {
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
-                              style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all(Colors.green)),
-                              child: Text("Entrar"),
-                              onPressed: () {
-                                if(controller.clienteLogin(_email.text, _senha.text)=="1"){
-                                  Get.to(ClienteWelcomeView());
-                                }else{
-                                  _email.text = "";
-                                  _senha.text = "";
-                                }
-                                
-                              },
-                            ),
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                        Colors.green)),
+                                child: Text("Entrar"),
+                                onPressed: controller.startLogin),
                           ),
                           SizedBox(
                             width: double.infinity,
@@ -187,7 +172,9 @@ class ClienteLoginView extends StatelessWidget {
                                         fontSize: 18))
                               ],
                             ),
-                          )
+                          ),
+            
+                          TextButton(child: Text("Voltar"), onPressed:(){Get.offAll(WelcomeAlternativeView());}),
                         ],
                       ),
                     ),

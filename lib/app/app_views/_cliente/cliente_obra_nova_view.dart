@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinonline/app/app_controller/_cliente/cliente_login_controller.dart';
-import 'package:pinonline/app/app_models/orcamento_model.dart';
+import 'package:pinonline/app/app_controller/_cliente/cliente_obra_nova_controller.dart';
 import 'package:pinonline/app/app_views/_size/size.dart';
-import 'package:pinonline/app/app_views/_orcamento/orcamento_view.dart';
 
 // ignore: must_be_immutable
 class ClienteObraNovaView extends StatelessWidget {
-  var _descOrcamento = TextEditingController();
+  final _controller = ClienteObraNovaController.controller;
+  final _controllerLogin = ClienteLoginController.controller;
   @override
   Widget build(BuildContext context) {
-    var _controller = ClienteLoginController.controller;
     return SafeArea(
       child: Scaffold(
         body: Center(
@@ -27,12 +26,12 @@ class ClienteObraNovaView extends StatelessWidget {
                     ),
                     ListTile(
                       title: Text("Nome do Cliente"),
-                      subtitle: Text(_controller.cliente[0].nome),
+                      subtitle: Text(_controllerLogin.cliente[0].nome),
                       leading: Icon(Icons.person),
                     ),
                     ListTile(
                       title: Text("Email"),
-                      subtitle: Text(_controller.cliente[0].email),
+                      subtitle: Text(_controllerLogin.cliente[0].email),
                       leading: Icon(Icons.email),
                     ),
                   ],
@@ -57,7 +56,7 @@ class ClienteObraNovaView extends StatelessWidget {
                               subtitle: Text("Descreva a sua obra"),
                             ),
                             TextFormField(
-                              controller: _descOrcamento,
+                              controller: _controller.descOrcamento,
                               maxLines: 4,
                               decoration: InputDecoration(
                                 hintText: "Descreva a sua obra aqui",
@@ -72,23 +71,21 @@ class ClienteObraNovaView extends StatelessWidget {
                 ),
               ),
               Container(
-                  child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ElevatedButton(onPressed: () {}, child: Text("Cancelar")),
-                  ElevatedButton(
-                      onPressed: () async {
-                        await Get.to(OrcamentoView(),
-                            arguments: OrcamentoModel(
-                                cliente: _controller.cliente[0],
-                                done: false,
-                                desc: _descOrcamento.text,
-                                objectId: "objectId"));
-                      },
-                      child: Text("Continuar")),
-                ],
-              )),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        child: Text("Voltar")),
+                    ElevatedButton(
+                        onPressed: _controller.continuar,
+                        child: Text("Continuar")),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

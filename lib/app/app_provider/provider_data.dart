@@ -107,12 +107,14 @@ class ProviderData {
 
   static List<ObraModel> obraLista = [];
 
+  // Banco de Dados de Clientes no Sistema
   static List<ClienteModel> clienteLista = [
     ClienteModel(
       nome: "Casacon",
       email: "casacon@gmail.com",
       contacto: "+244",
       morada: "Luanda",
+      img: "",
       senha: "casacon",
       desc: "",
       objectId: "",
@@ -121,6 +123,7 @@ class ProviderData {
       nome: "Kero",
       email: "kero@gmail.com",
       contacto: "+244",
+      img: "",
       morada: "Malanje",
       senha: "kero",
       desc: "",
@@ -132,6 +135,7 @@ class ProviderData {
       contacto: "+244",
       morada: "Lobito",
       senha: "angomart",
+      img: "",
       desc: "",
       objectId: "",
     ),
@@ -142,12 +146,14 @@ class ProviderData {
       morada: "Combatentes",
       senha: "ncr",
       desc: "",
+      img: "",
       objectId: "",
     ),
     ClienteModel(
       nome: "Ende",
       email: "ende@gmail.com",
       contacto: "+244",
+      img: "",
       morada: "São Paulo",
       senha: "ende",
       desc: "",
@@ -159,10 +165,13 @@ class ProviderData {
       contacto: "+244",
       morada: "Kwanza Norte",
       senha: "epal",
+      img: "",
       desc: "",
       objectId: "",
     ),
   ];
+
+  //Banco de dados das entidades prestadoras de Serviço
   static List<EntidadeModel> entidadeLista = [
     EntidadeModel(
       nome: "ApiHit",
