@@ -12,6 +12,8 @@ class OrcamentoController extends GetxController {
 
   static final List<OrcamentoModel> orcamento = [];
 
+  //Função que escolhe a Entidade de Prestação de Serviço
+  // e adiciona está entidade junto do orçamento na variavel static do Controller ObraSaveController
   void changeEntidade(int _index) {
     
     Get.to(ObraSaveView());
@@ -22,8 +24,6 @@ class OrcamentoController extends GetxController {
     ObraSaveController.obra.add(ObraModel(
       orcamento: orcamento[0],
       entidade: entidade[_index],
-      clienteDone: false,
-      entidadeDone: false,
     ));
     
     print(entidade[_index].nome);

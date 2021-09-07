@@ -15,8 +15,9 @@ class ObraSaveController extends GetxController {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text("Enviar pedido de Obra"),
-            content: Text("Quer voltar na página de Boas-Vindas?"),
+            title: Text("Pedido de Obra"),
+            content: Text(
+                "Quer voltar para página de Boas-Vindas?"),
             actions: [
               TextButton(
                   child: Text("Sim"),
@@ -24,9 +25,12 @@ class ObraSaveController extends GetxController {
                     ProviderData.obraLista.add(obra[0]);
                     Get.offAll(ClienteWelcomeView());
                   }),
-              TextButton(child: Text("Não"), onPressed: () {
-                Get.offAll(ClienteObraNovaView());
-              }),
+              TextButton(
+                  child: Text("Não"),
+                  onPressed: () {
+                    ProviderData.obraLista.add(obra[0]);
+                    Get.offAll(ClienteObraNovaView());
+                  }),
             ],
           );
         });

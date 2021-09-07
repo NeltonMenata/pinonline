@@ -5,8 +5,8 @@ class ObraModel {
   final EntidadeModel entidade;
   final OrcamentoModel orcamento;
 
-  bool clienteDone;
-  bool entidadeDone;
+  bool _clienteDone = false;
+  bool _entidadeDone = false;
 
   var _valorPago = 0.0;
   var _valorInicial = 0.0;
@@ -15,14 +15,22 @@ class ObraModel {
   ObraModel({
     required this.orcamento,
     required this.entidade,
-    required this.clienteDone,
-    required this.entidadeDone,
   });
 
-  pagarObra(double valor) {
+  void pagarObra(double valor) {
     _valorPago = _valorPago + valor;
   }
 
+  void clienteDoneYes(){
+    _clienteDone = true;
+  }
+  void entidadeDoneYes(){
+    _entidadeDone = true;
+  }
   get valorInicial => _valorInicial;
   get dataInicial => _dataInicial;
+
+  bool get clienteDone => _clienteDone;
+  bool get entidadeDone => _entidadeDone;
+
 }

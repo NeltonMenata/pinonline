@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinonline/app/app_controller/_cliente/cliente_login_controller.dart';
-import 'package:pinonline/app/app_views/_cliente/cliente_dashboard_view.dart';
+import 'package:pinonline/app/app_views/_cliente/cliente_dashboard/cliente_dashboard_view.dart';
 import 'package:pinonline/app/app_views/_cliente/cliente_login_view.dart';
 import 'package:pinonline/app/app_views/_size/size.dart';
 import 'package:pinonline/app/app_views/app_routes/routes.dart';
