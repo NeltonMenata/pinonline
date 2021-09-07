@@ -13,7 +13,7 @@ class ClientePedidoEnviado extends StatelessWidget {
         " Cliente Done: ${_controller.clientePedidoEnviado[0].clienteDone} \nEntidade Done: ${_controller.clientePedidoEnviado[0].entidadeDone}");
     return Center(
       child: Container(
-        color: Colors.green,
+        color: Colors.orange,
         child: ListView.builder(
             itemCount: _controller.clientePedidoEnviado.length,
             itemBuilder: (context, index) {
@@ -36,7 +36,7 @@ class ClientePedidoEnviado extends StatelessWidget {
       ),
     );
   }
-  
+
 void _delete(BuildContext context) {
   showDialog(
       context: context,
