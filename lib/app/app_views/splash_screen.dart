@@ -10,7 +10,7 @@ class SplashScreenPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EasySplashScreen(
-      logo: Image.asset("assets/img/logo.png"),
+      logo: Image.asset("assets/img/logo1.png"),
       navigator: WelcomeAlternativeView(), //  WelcomeView(),
       durationInSeconds: 3,
       showLoader: true,

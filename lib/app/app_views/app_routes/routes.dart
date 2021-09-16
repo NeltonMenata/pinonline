@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 import 'package:pinonline/app/app_views/_welcome/welcome_alternative_view.dart';
 import 'package:pinonline/app/app_views/actividade_view.dart';
-import 'package:pinonline/app/app_views/create_user_view.dart';
+import 'package:pinonline/app/app_views/_cliente/cliente_novo/create_user_view.dart';
 import 'package:pinonline/app/app_views/login_view.dart';
 import 'package:pinonline/app/app_views/_orcamento/orcamento_view.dart';
-import 'package:pinonline/app/app_views/registo_empresa_view.dart';
+import 'package:pinonline/app/app_views/_cliente/cliente_novo/registo_empresa_view.dart';
 import '../welcome_view.dart';
 import '/app/app_views/entidade_categoria_view.dart';
 import '/app/app_views/entidade_perfil_view.dart';

@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pinonline/app/app_views/app_routes/routes.dart';
+import 'package:pinonline/app/app_models/cliente_model.dart';
+import 'package:pinonline/app/app_models/user_new_model.dart';
+import 'package:pinonline/app/app_provider/provider_data.dart';
+import 'package:pinonline/app/app_views/_cliente/cliente_login_view.dart';
 
+// ignore: must_be_immutable
 class RegistoEmpresaView extends StatelessWidget {
+  
+  var _telefone = TextEditingController();
+  var _morada = TextEditingController();
+  var _cidade = TextEditingController();
+  var _desc = TextEditingController();
+  var _form = GlobalKey<FormState>();
+
   Widget build(BuildContext context) {
+    final UserNew userNew = Get.arguments;
     //final larguraTotal = MediaQuery.of(context).size.width;
     final alturaTotal = MediaQuery.of(context).size.height;
     //final controller = Get.put(AnimationController(largura: largura * 0.9, altura: altura * 0.8));
@@ -19,12 +31,13 @@ class RegistoEmpresaView extends StatelessWidget {
           padding: EdgeInsets.only(top: 20, left: 25, right: 25),
           width: double.infinity,
           decoration: BoxDecoration(color: Colors.white),
-          child: Column(
+          child: ListView(
             children: [
               Container(
                 color: Colors.transparent,
                 height: (alturaTotal * 0.85),
                 child: Form(
+                  key: _form,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -33,9 +46,10 @@ class RegistoEmpresaView extends StatelessWidget {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextFormField(
+                        controller: _telefone,
                         keyboardType: TextInputType.name,
                         decoration: InputDecoration(
-                            labelText: 'Telefone',
+                            hintText: 'Telefone',
                             border: OutlineInputBorder()),
                       ),
                       SizedBox(
@@ -46,9 +60,10 @@ class RegistoEmpresaView extends StatelessWidget {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextFormField(
+                        controller: _morada,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
-                            labelText: 'Morada', border: OutlineInputBorder()),
+                            hintText: 'Morada', border: OutlineInputBorder()),
                       ),
                       SizedBox(
                         height: 20,
@@ -56,8 +71,9 @@ class RegistoEmpresaView extends StatelessWidget {
                       Text("Cidade",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       TextFormField(
+                        controller: _cidade,
                         decoration: InputDecoration(
-                            labelText: 'Cidade', border: OutlineInputBorder()),
+                            hintText: 'Cidade', border: OutlineInputBorder()),
                       ),
                       SizedBox(
                         height: 20,
@@ -65,18 +81,46 @@ class RegistoEmpresaView extends StatelessWidget {
                       Text("Descrição",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       TextFormField(
+                        controller: _desc,
                         decoration: InputDecoration(
-                            labelText: 'Descrição',
+                            hintText: 'Descrição',
                             border: OutlineInputBorder()),
                       ),
-                      Spacer(                      
-                      ),
+                      Spacer(),
                       ElevatedButton(
                           style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.green)),
-                          onPressed: () {
-                            Get.toNamed(Routes.ACTIVIDADE);
+                          onPressed: ()async {
+                            if (_form.currentState!.validate()) {
+                              final UserNewFull userNewFull = UserNewFull(
+                                  userNew,
+                                  telefone: _telefone.text,
+                                  morada: _morada.text,
+                                  cidade: _cidade.text,
+                                  desc: _desc.text);
+
+                              ProviderData.clienteLista.add(ClienteModel(
+                                nome: userNewFull.userNew.nome,
+                                email: userNewFull.userNew.email,
+                                senha: userNewFull.userNew.senha,
+                                desc: userNewFull.desc,
+                                contacto: userNewFull.telefone,
+                                morada: userNewFull.morada,
+                                objectId: "objectId",
+                                img: "Imagem Perfil"
+                              ));
+
+                              await showDialog(context: context, builder: (context){
+                                return AlertDialog(
+                                  title: Text("JustBuild"),
+                                  content: Text("Sucess Save User"),
+                                  actions: [TextButton(onPressed: (){Navigator.pop(context);}, child: Text("OK"))],
+                                );
+                              });
+                            }
+                            
+                            Get.offAll(ClienteLoginView());
                           },
                           child: Text("Salvar Entidade")),
                       ElevatedButton(

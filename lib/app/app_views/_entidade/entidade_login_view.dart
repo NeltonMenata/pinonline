@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pinonline/app/app_controller/_cliente/cliente_login_controller.dart';
+import 'package:pinonline/app/app_controller/_entidade/entidade_login_controller.dart';
+import 'package:pinonline/app/app_views/_entidade/entidade_welcome_view.dart';
 import 'package:pinonline/app/app_views/_size/size.dart';
 import 'package:pinonline/app/app_views/_welcome/welcome_alternative_view.dart';
-import 'package:pinonline/app/app_views/app_routes/routes.dart';
 
 // ignore: must_be_immutable
-class ClienteLoginView extends StatelessWidget {
+class EntidadeLoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var controller = ClienteLoginController.controller;
+    var controller = EntidadeLoginController.controller;
     var _alturaTotal = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
@@ -99,7 +99,9 @@ class ClienteLoginView extends StatelessWidget {
                                           MaterialStateProperty.all(
                                               Colors.green)),
                                   child: Text("Iniciar Sessão"),
-                                  onPressed: controller.startLogin),
+                                  onPressed: (){
+                                      Get.to(EntidadeWelcomeView());
+                                  }),
                             ),
                             SizedBox(
                               width: double.infinity,
@@ -111,14 +113,8 @@ class ClienteLoginView extends StatelessWidget {
                                   onPressed: () {},
                                   child: Text("Recuperar Senha")),
                             ),
-                            TextButton(
-                              onPressed: () {
-                                Get.toNamed(Routes.CREATEUSER);
-                              },
-                              child: Text("Não tem conta? Clique aqui para criar uma."),
-                            ),
                             SizedBox(
-                              height: larguraPor(0.8, context),
+                              height: 25,
                             ),
                             Container(
                               //alignment: Alignment.center,
@@ -192,135 +188,3 @@ class ClienteLoginView extends StatelessWidget {
     );
   }
 }
-
-/*
-
-Container(
-                  color: Colors.transparent,
-                  height: alturaPor(50, context),
-                  child: SingleChildScrollView(
-                    child: Form(
-                      child: Column(
-                        children: [
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "Email",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          TextFormField(
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: InputDecoration(
-                                hintText: 'Email',
-                                border: OutlineInputBorder()),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text("Senha",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                          ),
-                          TextFormField(
-                            obscuringCharacter: "*",
-                            obscureText: _mostraSenha,
-                            decoration: InputDecoration(
-                                suffixIcon: IconButton(
-                                  icon: Icon(Icons.panorama_fish_eye_rounded),
-                                  onPressed: () {
-                                  },
-                                ),
-                                hintText: 'Senha',
-                                border: OutlineInputBorder()),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                                style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                        Colors.green)),
-                                onPressed: () {
-                                  
-                                },
-                                child: Text("Entrar")),
-                          ),
-                          SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                                style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all(Colors.grey)),
-                                onPressed: () {},
-                                child: Text("Recuperar Senha")),
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Container(
-                            //alignment: Alignment.center,
-                            width: larguraPor(70, context),
-                            padding: EdgeInsets.symmetric(horizontal: 15),
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.transparent,
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(color: Colors.grey),
-                            ),
-                            child: Row(
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.settings),
-                                  onPressed: () {},
-                                ),
-                                Spacer(),
-                                Text("Login with Google",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.grey,
-                                        fontSize: 18))
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            //alignment: Alignment.center,
-                            width: larguraPor(70, context),
-                            padding: EdgeInsets.symmetric(horizontal: 15),
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.transparent,
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(color: Colors.grey),
-                            ),
-                            child: Row(
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.settings),
-                                  onPressed: () {},
-                                ),
-                                Spacer(),
-                                Text("Login with Facebook",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.grey,
-                                        fontSize: 18))
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-
-*/
