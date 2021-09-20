@@ -142,7 +142,7 @@ class EntidadePerfilView extends StatelessWidget {
                       child: Container(
                         color: Colors.blueAccent,
                         child: Image.network(
-                          selectedEntidade.imgUrl,
+                          selectedEntidade.img,
                           fit: BoxFit.contain,
                           height: 140,
                           width: 140,
@@ -258,7 +258,7 @@ class EntidadePerfilView extends StatelessWidget {
                             ),
                           ),
                           child: Image.network(
-                            selectedEntidade.imgUrl,
+                            selectedEntidade.img,
                             fit: BoxFit.fitHeight,
                             errorBuilder: (_, __, ___) {
                               return Text(

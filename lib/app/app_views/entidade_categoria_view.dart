@@ -131,15 +131,9 @@ class EntidadeCategoriaView extends StatelessWidget {
                                 morada: snapshot.data!
                                     .elementAt(index)
                                     .get("morada"),
-                                imgUrl: snapshot.data!
+                                img: snapshot.data!
                                     .elementAt(index)
-                                    .get("imgUrl"),
-                                imgPerfilUrl: snapshot.data!
-                                    .elementAt(index)
-                                    .get("imgPerfilUrl"),
-                                videoUrl: snapshot.data!
-                                    .elementAt(index)
-                                    .get("videoUrl"),
+                                    .get("img"),
                                 objectId: snapshot.data!
                                     .elementAt(index)
                                     .get("objectId"),
@@ -180,7 +174,7 @@ class EntidadeCategoriaView extends StatelessWidget {
                                           Image.network(
                                             entidadeAll
                                                 .elementAt(index)
-                                                .imgPerfilUrl,
+                                                .img,
                                             height: 100,
                                             width: 100,
                                             fit: BoxFit.fill,
@@ -270,7 +264,7 @@ class EntidadeCategoriaView extends StatelessWidget {
                                       child: Image.network(
                                         entidadeAll
                                             .elementAt(index)
-                                            .imgPerfilUrl,
+                                            .,
                                         errorBuilder: (_, __, ___) {
                                           return Icon(
                                               Icons.person_outline_sharp);

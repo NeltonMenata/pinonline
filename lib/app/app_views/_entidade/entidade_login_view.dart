@@ -4,6 +4,7 @@ import 'package:pinonline/app/app_controller/_entidade/entidade_login_controller
 import 'package:pinonline/app/app_views/_entidade/entidade_welcome_view.dart';
 import 'package:pinonline/app/app_views/_size/size.dart';
 import 'package:pinonline/app/app_views/_welcome/welcome_alternative_view.dart';
+import 'package:pinonline/app/app_views/app_routes/routes.dart';
 
 // ignore: must_be_immutable
 class EntidadeLoginView extends StatelessWidget {
@@ -116,7 +117,7 @@ class EntidadeLoginView extends StatelessWidget {
                             ),
                             TextButton(
                               onPressed: () {
-                                //Get.toNamed(Routes.CREATEUSER);
+                                Get.toNamed(Routes.CREATEENTIDADE);
                               },
                               child: Text("Não tem conta? Clique aqui para criar uma."),
                             ),

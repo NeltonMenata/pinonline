@@ -56,7 +56,7 @@ class OrcamentoView extends StatelessWidget {
                                     Image.network(
                                       _controller.entidade
                                           .elementAt(index)
-                                          .imgPerfilUrl,
+                                          .img,
                                       height: 100,
                                       width: 100,
                                       fit: BoxFit.fill,

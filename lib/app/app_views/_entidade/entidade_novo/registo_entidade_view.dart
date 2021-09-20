@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pinonline/app/app_controller/_cliente/cliente_novo/create_user_controller.dart';
-import 'package:pinonline/app/app_models/cliente_model.dart';
-import 'package:pinonline/app/app_provider/provider_data.dart';
-import 'package:pinonline/app/app_views/_cliente/cliente_login_view.dart';
+import 'package:pinonline/app/app_controller/_entidade/entidade_novo/create_entidade_controller.dart';
 
 // ignore: must_be_immutable
-class RegistoEmpresaView extends StatelessWidget {
-  
+class RegistoEntidadeView extends StatelessWidget {
   Widget build(BuildContext context) {
     //final larguraTotal = MediaQuery.of(context).size.width;
     final alturaTotal = MediaQuery.of(context).size.height;
@@ -30,7 +26,7 @@ class RegistoEmpresaView extends StatelessWidget {
                 color: Colors.transparent,
                 height: (alturaTotal * 0.85),
                 child: Form(
-                  key: CreateUserController.controller.formRegisto,
+                  key: CreateEntidadeController.controller.formRegisto,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -39,11 +35,11 @@ class RegistoEmpresaView extends StatelessWidget {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextFormField(
-                        controller: CreateUserController.controller.telefone,
+                        controller:
+                            CreateEntidadeController.controller.telefone,
                         keyboardType: TextInputType.name,
                         decoration: InputDecoration(
-                            hintText: 'Telefone',
-                            border: OutlineInputBorder()),
+                            hintText: 'Telefone', border: OutlineInputBorder()),
                       ),
                       SizedBox(
                         height: 20,
@@ -53,7 +49,7 @@ class RegistoEmpresaView extends StatelessWidget {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextFormField(
-                        controller: CreateUserController.controller.morada,
+                        controller: CreateEntidadeController.controller.morada,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                             hintText: 'Morada', border: OutlineInputBorder()),
@@ -64,7 +60,7 @@ class RegistoEmpresaView extends StatelessWidget {
                       Text("Cidade",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       TextFormField(
-                        controller: CreateUserController.controller.cidade,
+                        controller: CreateEntidadeController.controller.cidade,
                         decoration: InputDecoration(
                             hintText: 'Cidade', border: OutlineInputBorder()),
                       ),
@@ -74,7 +70,7 @@ class RegistoEmpresaView extends StatelessWidget {
                       Text("Descrição",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       TextFormField(
-                        controller: CreateUserController.controller.desc,
+                        controller: CreateEntidadeController.controller.desc,
                         decoration: InputDecoration(
                             hintText: 'Descrição',
                             border: OutlineInputBorder()),
@@ -84,31 +80,7 @@ class RegistoEmpresaView extends StatelessWidget {
                           style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.green)),
-                          onPressed: ()async {
-                            if (CreateUserController.controller.formRegisto.currentState!.validate()) {
-                              
-                              ProviderData.clienteLista.add(ClienteModel(
-                                nome: CreateUserController.controller.nome.text,
-                                email: CreateUserController.controller.email.text,
-                                senha: CreateUserController.controller.senha.text,
-                                desc: CreateUserController.controller.desc.text,
-                                contacto: CreateUserController.controller.telefone.text,
-                                morada: CreateUserController.controller.morada.text,
-                                objectId: "objectId",
-                                img: "Imagem Perfil"
-                              ));
-
-                              await showDialog(context: context, builder: (context){
-                                return AlertDialog(
-                                  title: Text("JustBuild"),
-                                  content: Text("Sucess Save User"),
-                                  actions: [TextButton(onPressed: (){Navigator.pop(context);}, child: Text("OK"))],
-                                );
-                              });
-                            }
-                            
-                            Get.offAll(ClienteLoginView());
-                          },
+                          onPressed: ()=>CreateEntidadeController.controller.saveEntidade(context),
                           child: Text("Salvar Entidade")),
                       ElevatedButton(
                           style: ButtonStyle(
@@ -127,48 +99,5 @@ class RegistoEmpresaView extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class AnimationController extends GetxController {
-  AnimationController({required this.largura, required this.altura});
-  var largura = 0.0;
-  var altura = 0.0;
-  bool troca = false;
-  List<Color> cores = [
-    Colors.orange,
-    Colors.red,
-    Colors.blue,
-    Colors.black,
-    Colors.yellow,
-    Colors.pink,
-    Colors.brown,
-    Colors.grey,
-  ];
-  onTap() {
-    if (troca) {
-      largura += 15;
-      altura += 15;
-
-      update();
-    } else {
-      largura -= 15;
-      altura -= 15;
-
-      update();
-    }
-    troca = !troca;
-    Future.delayed(Duration(seconds: 2), () {
-      onTap();
-    });
-  }
-
-  onDoubleTap() {
-    if (troca == true) {
-      largura -= 10;
-      altura -= 10;
-      update();
-    }
-    troca = false;
   }
 }

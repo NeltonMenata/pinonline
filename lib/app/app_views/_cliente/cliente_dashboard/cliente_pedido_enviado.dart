@@ -28,7 +28,7 @@ class ClientePedidoEnviado extends StatelessWidget {
                 entMorada:
                     _controller.clientePedidoEnviado[index].entidade.morada,
                 cliDesc: _controller.clientePedidoEnviado[index].orcamento.desc,
-                entImg: _controller.clientePedidoEnviado[index].entidade.imgUrl,
+                entImg: _controller.clientePedidoEnviado[index].entidade.img,
                 context: context,
                 deletar: () => _delete(context),
               );

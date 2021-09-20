@@ -160,7 +160,7 @@ class ObraSaveView extends StatelessWidget {
                         child: Container(
                           color: Colors.blueAccent,
                           child: Image.network(
-                            ObraSaveController.obra[0].entidade.imgUrl,
+                            ObraSaveController.obra[0].entidade.img,
                             fit: BoxFit.contain,
                             height: 140,
                             width: 140,

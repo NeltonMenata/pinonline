@@ -181,9 +181,9 @@ class ProviderData {
       desc: "",
       objectId: "",
       categoria: "Construção",
-      imgPerfilUrl: "",
-      imgUrl: "",
-      videoUrl: "",
+      
+      img: "",
+      
     ),
     EntidadeModel(
       nome: "Teixeira Duarte",
@@ -194,9 +194,9 @@ class ProviderData {
       desc: "",
       objectId: "",
       categoria: "Pedreiro",
-      imgPerfilUrl: "",
-      imgUrl: "",
-      videoUrl: "",
+      
+      img: "",
+      
     ),
     EntidadeModel(
       nome: "Nelton Menata",
@@ -207,9 +207,9 @@ class ProviderData {
       desc: "",
       objectId: "",
       categoria: "Programador",
-      imgPerfilUrl: "",
-      imgUrl: "",
-      videoUrl: "",
+      
+      img: "",
+      
     ),
     EntidadeModel(
       nome: "Eduardo Miguel",
@@ -220,9 +220,9 @@ class ProviderData {
       desc: "",
       objectId: "",
       categoria: "Pedreiro",
-      imgPerfilUrl: "",
-      imgUrl: "",
-      videoUrl: "",
+      
+      img: "",
+      
     ),
   ];
 }

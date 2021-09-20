@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
+import 'package:pinonline/app/app_views/_entidade/entidade_novo/create_entidade_view.dart';
+import 'package:pinonline/app/app_views/_entidade/entidade_novo/registo_entidade_view.dart';
 import 'package:pinonline/app/app_views/_welcome/welcome_alternative_view.dart';
 import 'package:pinonline/app/app_views/actividade_view.dart';
 import 'package:pinonline/app/app_views/_cliente/cliente_novo/create_user_view.dart';
 import 'package:pinonline/app/app_views/login_view.dart';
 import 'package:pinonline/app/app_views/_orcamento/orcamento_view.dart';
-import 'package:pinonline/app/app_views/_cliente/cliente_novo/registo_empresa_view.dart';
+import 'package:pinonline/app/app_views/_cliente/cliente_novo/registo_user_view.dart';
 import '../welcome_view.dart';
 import '/app/app_views/entidade_categoria_view.dart';
 import '/app/app_views/entidade_perfil_view.dart';
@@ -24,8 +26,10 @@ class Routes {
     GetPage(name: ENTIDADECATEGORIA, page: () => EntidadeCategoriaView()),
     GetPage(name: ENTIDADEPERFIL, page: () => EntidadePerfilView()),
     GetPage(name: CREATEUSER, page: () => CreateUserView()),
+    GetPage(name: CREATEENTIDADE, page: () => CreateEntidadeView()),
     GetPage(name: ACTIVIDADE, page: () => ActivityView()),
-    GetPage(name: REGISTOEMPRESA, page: () => RegistoEmpresaView()),
+    GetPage(name: REGISTOUSER, page: () => RegistoUserView()),
+    GetPage(name: REGISTOENTIDADE, page: () => RegistoEntidadeView()),
     GetPage(name: WELCOME, page: () => WelcomeView()),
     GetPage(name: LOGIN, page: () => LoginView()),
     GetPage(name: ORCAMENTO, page: () => OrcamentoView()),
@@ -43,8 +47,10 @@ class Routes {
   static const ENTIDADECATEGORIA = "/entidadecategoria";
   static const ENTIDADEPERFIL = "/entidadeperfil";
   static const CREATEUSER = "/createuser";
+  static const CREATEENTIDADE = "/createentidade";
   static const ACTIVIDADE = "/actividade";
-  static const REGISTOEMPRESA = "/registoempresa";
+  static const REGISTOUSER = "/registouser";
+  static const REGISTOENTIDADE = "/registoentidade";
   static const WELCOME = "/welcome";
   static const LOGIN = "/login";
   static const ORCAMENTO = "/orcamento";
