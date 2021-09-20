@@ -13,7 +13,7 @@ PreferredSizeWidget appBarMain() {
     actions: [
 
       Image.asset(
-        "assets/img/logo.png",
+        "assets/img/logo1.png",
         width: 70,
       
       ),
@@ -42,7 +42,7 @@ PreferredSizeWidget appBarSearch() {
     ),
     actions: [
       Image.asset(
-        "assets/img/logo.png",
+        "assets/img/logo1.png",
         width: 70,
       )
     ],

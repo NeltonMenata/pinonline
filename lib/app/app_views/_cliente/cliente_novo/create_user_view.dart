@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pinonline/app/app_controller/_cliente/cliente_novo/create_user_controller.dart';
 import 'package:pinonline/app/app_function_global/function_global.dart';
-import 'package:pinonline/app/app_models/user_new_model.dart';
 import 'package:pinonline/app/app_views/app_routes/routes.dart';
 
 class CreateUserView extends StatefulWidget {
@@ -10,11 +10,6 @@ class CreateUserView extends StatefulWidget {
 }
 
 class _CreateUserViewState extends State<CreateUserView> {
-  var _mostraSenha = true;
-  var _form = GlobalKey<FormState>();
-  var _nome = TextEditingController();
-  var _senha = TextEditingController();
-  var _email = TextEditingController();
   Widget build(BuildContext context) {
     //final larguraTotal = MediaQuery.of(context).size.width;
     final alturaTotal = MediaQuery.of(context).size.height;
@@ -43,9 +38,34 @@ class _CreateUserViewState extends State<CreateUserView> {
                       decoration: BoxDecoration(
                           color: Colors.grey,
                           borderRadius: BorderRadius.circular(70)),
-                      child: CircleAvatar(
-                        radius: 60,
-                        child: Image.asset("assets/img/logo1.png"),
+                      child: GestureDetector(
+                        onTap: () {
+                          CreateUserController.controller.getImage();
+                        },
+                        child: GetBuilder<CreateUserController>(
+                          init: CreateUserController(),
+                          builder: (_) => CircleAvatar(
+                              radius: 60,
+
+                              // ignore: unnecessary_null_comparison
+                              child: CreateUserController
+                                      .controller.imageSelected
+                                  ? ClipRRect(
+                                    borderRadius: BorderRadius.all(Radius.circular(100)),
+                                    child: Image.file(
+                                        CreateUserController.controller.image!,width: double.infinity,height: double.infinity,),
+                                  )
+                                  : Center(
+                                      child: Text(
+                                        "Selecione a Imagem",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16.0,
+                                        ),
+                                      ),
+                                    )),
+                        ),
                       ),
                     ),
                     Text(
@@ -63,7 +83,7 @@ class _CreateUserViewState extends State<CreateUserView> {
                 color: Colors.transparent,
                 height: (alturaTotal * 0.6) - (alturaTotal * 0.08),
                 child: Form(
-                  key: _form,
+                  key: CreateUserController.controller.form,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -72,7 +92,7 @@ class _CreateUserViewState extends State<CreateUserView> {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextFormField(
-                        controller: _nome,
+                        controller: CreateUserController.controller.nome,
                         keyboardType: TextInputType.name,
                         validator: (v) {
                           if (v == "" || v == null) {
@@ -93,7 +113,7 @@ class _CreateUserViewState extends State<CreateUserView> {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextFormField(
-                        controller: _email,
+                        controller: CreateUserController.controller.email,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                             hintText: 'Email', border: OutlineInputBorder()),
@@ -104,9 +124,10 @@ class _CreateUserViewState extends State<CreateUserView> {
                       Text("Senha",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       TextFormField(
-                        controller: _senha,
+                        controller: CreateUserController.controller.senha,
                         obscuringCharacter: "*",
-                        obscureText: _mostraSenha,
+                        obscureText:
+                            CreateUserController.controller.mostraSenha,
                         validator: (v) {
                           if (!containLetter(v)) {
                             return "Senha deve conter letra!";
@@ -121,11 +142,8 @@ class _CreateUserViewState extends State<CreateUserView> {
                           border: OutlineInputBorder(),
                           suffixIcon: IconButton(
                             icon: Icon(Icons.panorama_fish_eye_outlined),
-                            onPressed: () {
-                              setState(() {
-                                _mostraSenha = !_mostraSenha;
-                              });
-                            },
+                            onPressed: CreateUserController
+                                .controller.toggleMostraSenha,
                           ),
                         ),
                       ),
@@ -140,14 +158,11 @@ class _CreateUserViewState extends State<CreateUserView> {
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.green)),
                           onPressed: () {
-                            if (_form.currentState!.validate()) {
+                            if (CreateUserController
+                                .controller.form.currentState!
+                                .validate()) {
                               Get.toNamed(
                                 Routes.REGISTOEMPRESA,
-                                arguments: UserNew(
-                                  _nome.text,
-                                  _email.text,
-                                  _senha.text,
-                                ),
                               );
                             }
                           },

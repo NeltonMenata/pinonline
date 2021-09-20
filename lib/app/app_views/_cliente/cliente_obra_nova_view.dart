@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pinonline/app/app_controller/_cliente/cliente_login_controller.dart';
 import 'package:pinonline/app/app_controller/_cliente/cliente_obra_nova_controller.dart';
 import 'package:pinonline/app/app_views/_size/size.dart';
+import 'package:pinonline/app/app_views/app_components/home_components/app_bottom_bar.dart';
 
 // ignore: must_be_immutable
 class ClienteObraNovaView extends StatelessWidget {
@@ -89,6 +90,7 @@ class ClienteObraNovaView extends StatelessWidget {
             ],
           ),
         ),
+        bottomNavigationBar: bottomAppBar(),
       ),
     );
   }

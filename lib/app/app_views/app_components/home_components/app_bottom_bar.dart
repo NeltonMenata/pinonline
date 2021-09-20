@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pinonline/app/app_views/banco_de_dados_view.dart';
 import '/app/app_controller/home_controller.dart';
 import '/app/app_views/app_routes/routes.dart';
 
@@ -29,9 +28,7 @@ BottomAppBar bottomAppBar() {
           ),
           IconButton(
             onPressed: () {
-              currentPage = 1;
-              Get.toNamed(Routes.SAVE);
-            },
+              currentPage = 1;},
             icon: Icon(
               Icons.book,
               color: currentPage == 1 ? Colors.black : Colors.white,
@@ -41,7 +38,6 @@ BottomAppBar bottomAppBar() {
           IconButton(
             onPressed: () {
               currentPage = 2;
-              Get.toNamed(Routes.DELETE);
             },
             icon: Icon(
               Icons.notifications,
@@ -52,7 +48,6 @@ BottomAppBar bottomAppBar() {
           IconButton(
             onPressed: () {
               currentPage = 3;
-              Get.to(() => BancoDeDadosView());
             },
             icon: Icon(
               Icons.settings,
@@ -92,8 +87,6 @@ BottomAppBar bottomAppBarOthers() {
           IconButton(
             onPressed: () {
               currentPage = 1;
-              Get.back();
-              Get.toNamed(Routes.SAVE);
             },
             icon: Icon(
               Icons.book,
@@ -104,8 +97,6 @@ BottomAppBar bottomAppBarOthers() {
           IconButton(
             onPressed: () {
               currentPage = 2;
-              Get.back();
-              Get.toNamed(Routes.DELETE);
             },
             icon: Icon(
               Icons.notifications,
@@ -116,8 +107,6 @@ BottomAppBar bottomAppBarOthers() {
           IconButton(
             onPressed: () {
               currentPage = 3;
-              Get.back();
-              Get.to(() => BancoDeDadosView());
             },
             icon: Icon(
               Icons.settings,

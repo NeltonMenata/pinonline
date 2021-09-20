@@ -102,6 +102,7 @@ class HomeView extends StatelessWidget {
                                       .elementAt(index)
                                       .get("urlImage")
                                       .toString()));
+                                      
                               return Column(
                                 children: [
                                   Row(

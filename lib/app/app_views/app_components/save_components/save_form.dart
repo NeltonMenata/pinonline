@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '/app/app_controller/save_controller.dart';
 import '/app/app_models/categorias_model.dart';
 
-final formSave = GlobalKey<FormState>();
+  final formSave = GlobalKey<FormState>();
 
 // ignore: must_be_immutable
 class FormSave extends StatelessWidget {

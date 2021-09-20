@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '_size/size.dart';
+
 class CreateSessionView extends StatefulWidget {
   @override
   _CreateSessionViewState createState() => _CreateSessionViewState();
@@ -10,7 +12,6 @@ class _CreateSessionViewState extends State<CreateSessionView> {
   @override
   Widget build(BuildContext context) {
     final larguraTotal = MediaQuery.of(context).size.width;
-    final alturaTotal = MediaQuery.of(context).size.height;
 
     return Scaffold(
       appBar: AppBar(
@@ -31,16 +32,117 @@ class _CreateSessionViewState extends State<CreateSessionView> {
               Container(
                 alignment: Alignment.topLeft,
                 padding: EdgeInsets.symmetric(vertical: 20),
-                child: Text(
-                  "Registar Actividades",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: Row(
+                  children: [
+                    Text(
+                      "Encontre Profissionais certificados",
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Scaffold(
+                                backgroundColor: Colors.transparent,
+                                resizeToAvoidBottomInset: true,
+                                body: SingleChildScrollView(
+                                  child: Container(
+                                    height: alturaPor(100, context),
+                                    child: ListView(
+                                      scrollDirection: Axis.horizontal,
+                                        physics: const NeverScrollableScrollPhysics(),
+                                      reverse: true,
+                                      children: [
+                                        GestureDetector(
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: Container(
+                                              color: Colors.transparent,
+                                              width: larguraPor(35, context),
+                                              height: double.infinity,
+                                            )),
+                                        Align(
+                                          child: Container(
+                                            padding: const EdgeInsets.only(
+                                                left: 35, right: 10),
+                                            width: larguraPor(70, context),
+                                            height: alturaPor(75, context),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.horizontal(
+                                                        right:
+                                                            Radius.circular(3500)),
+                                                color: Colors.grey.shade400),
+                                            child: Center(
+                                              child: SingleChildScrollView(
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                      "O que precisas?",
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontWeight: FontWeight.bold,
+                                                          fontStyle: FontStyle.normal),
+                                                    ),
+                                                    Container(
+                                                      height: 50,
+                                                      width: double.infinity,
+                                                      child: TextField(
+                                                        decoration: InputDecoration(
+                                                            border:
+                                                                OutlineInputBorder()),
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      "Onde?",
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontWeight: FontWeight.bold,
+                                                          fontStyle: FontStyle.normal),
+                                                    ),
+                                                    Container(
+                                                      height: 50,
+                                                      width: double.infinity,
+                                                      child: TextField(
+                                                        decoration: InputDecoration(
+                                                            border:
+                                                                OutlineInputBorder()),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: double.infinity,
+                                                      child: ElevatedButton(
+                                                          onPressed: () {},
+                                                          child: Text("Pesquisar")),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            });
+                      },
+                      icon: Icon(Icons.search),
+                    ),
+                  ],
                 ),
               ),
               Container(
-                height: alturaTotal * 0.4,
+                color: Colors.white24,
+                height: alturaPor(60, context),
                 child: ListView.separated(
                   itemCount: 3,
                   itemBuilder: (_, index) => Row(
@@ -59,7 +161,10 @@ class _CreateSessionViewState extends State<CreateSessionView> {
                         ),
                         child: Column(
                           children: [
-                            Icon(Icons.settings),
+                            Icon(
+                              Icons.build_rounded,
+                              size: 45,
+                            ),
                             Spacer(),
                             Text("Configuração!")
                           ],
@@ -75,7 +180,7 @@ class _CreateSessionViewState extends State<CreateSessionView> {
                         ),
                         child: Column(
                           children: [
-                            Icon(Icons.settings),
+                            Icon(Icons.build_rounded, size: 45),
                             Spacer(),
                             Text("Configuração!")
                           ],
@@ -91,7 +196,10 @@ class _CreateSessionViewState extends State<CreateSessionView> {
                         ),
                         child: Column(
                           children: [
-                            Icon(Icons.settings),
+                            Icon(
+                              Icons.build_rounded,
+                              size: 45,
+                            ),
                             Spacer(),
                             Text("Configuração!")
                           ],
@@ -110,145 +218,50 @@ class _CreateSessionViewState extends State<CreateSessionView> {
                 color: Colors.black54,
               ),
               Expanded(
-                child: Container(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: (){},
-                      onHorizontalDragStart: (_) {
-                        setState(() {
-                          currentIndex = 1;
-                        });
-                      },
-                      child: Visibility(
-                        visible: currentIndex == 0 ? true : false,
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: larguraTotal * 0.4,
-                          width: larguraTotal * 0.6,
-                          decoration: BoxDecoration(
-                              color: Colors.red,
-                              borderRadius: BorderRadius.circular(15)),
-                          child: Text(
-                            "Primeiro Conteudo",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5,
+                  separatorBuilder: (c, i) => SizedBox(width: 20),
+                  itemBuilder: (c, i) => Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        height: larguraPor(40, context),
+                        width: larguraPor(30, context),
+                        decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                padding: const EdgeInsets.all(8),
+                                height: double.infinity,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(15),
+                                  ),
+                                ),
+                                child: Text("Imagem"),
+                              ),
+                            ),
+                            Text(
+                              "Primeiro Conteudo",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                    GestureDetector(
-                      onTap: (){},
-                      onHorizontalDragStart: (_) {
-                        setState(() {
-                          currentIndex = 2;
-                        });
-                      },
-                      child: Visibility(
-                        visible: currentIndex == 1 ? true : false,
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: larguraTotal * 0.4,
-                          width: larguraTotal * 0.6,
-                          decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(15)),
-                          child: Text(
-                            "Segundo Conteudo",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: (){},
-                      onHorizontalDragEnd: (_) {
-                        setState(() {
-                          currentIndex = 0;
-                        });
-                      },
-                      child: Visibility(
-                        visible: currentIndex == 2 ? true : false,
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: larguraTotal * 0.4,
-                          width: larguraTotal * 0.6,
-                          decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius: BorderRadius.circular(15)),
-                          child: Text(
-                            "Terceiro Conteudo",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                )),
+                    ],
+                  ),
+                ),
               ),
-              Container(
-                  height: 50,
-                  color: Colors.black87,
-                  child: Row(children: [
-                    Spacer(),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          currentIndex = 0;
-                        });
-                      },
-                      child: Container(
-                        height: 10,
-                        width: 10,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(40),
-                            color:
-                                currentIndex == 0 ? Colors.blue : Colors.grey),
-                      ),
-                    ),
-                    SizedBox(width: 20),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          currentIndex = 1;
-                        });
-                      },
-                      child: Container(
-                        height: 10,
-                        width: 10,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(40),
-                            color:
-                                currentIndex == 1 ? Colors.blue : Colors.grey),
-                      ),
-                    ),
-                    SizedBox(width: 20),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          currentIndex = 2;
-                        });
-                      },
-                      child: Container(
-                        height: 10,
-                        width: 10,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(40),
-                            color:
-                                currentIndex == 2 ? Colors.blue : Colors.grey),
-                      ),
-                    ),
-                    Spacer(),
-                  ]))
             ],
           ),
         ),

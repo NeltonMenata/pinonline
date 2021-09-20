@@ -15,7 +15,7 @@ class EntidadeWelcomeView extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 10),
                 color: Colors.green[500],
                 width: double.infinity,
-                height: alturaPor(15, context),
+                height: alturaPor(10, context),
                 child: Column(children: [Text("DashBoard Profissional")]),
               ),
               Expanded(
@@ -76,7 +76,7 @@ class EntidadeWelcomeView extends StatelessWidget {
                                     foregroundColor: MaterialStateProperty.all(
                                         Colors.black87)),
                                 onPressed: () {},
-                                child: Text("Obras em Curso")),
+                                child: Text("Obras em Curso",textAlign: TextAlign.center)),
                           ),
                           Container(
                             width: larguraPor(35, context),
@@ -90,43 +90,7 @@ class EntidadeWelcomeView extends StatelessWidget {
                                     foregroundColor: MaterialStateProperty.all(
                                         Colors.black87)),
                                 onPressed: () {},
-                                child: Text("Financeiro")),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            width: larguraPor(35, context),
-                            height: larguraPor(35, context),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.grey,
-                            ),
-                            child: TextButton(
-                                style: ButtonStyle(
-                                    foregroundColor: MaterialStateProperty.all(
-                                        Colors.black87)),
-                                onPressed: () {},
-                                child: Text("Logisticas e Materias")),
-                          ),
-                          Container(
-                            width: larguraPor(35, context),
-                            height: larguraPor(35, context),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Colors.grey,
-                            ),
-                            child: TextButton(
-                                style: ButtonStyle(
-                                    foregroundColor: MaterialStateProperty.all(
-                                        Colors.black87)),
-                                onPressed: () {},
-                                child: Text("Recursos Humanos")),
+                                child: Text("Financeiro",textAlign: TextAlign.center)),
                           ),
                         ],
                       ),
@@ -148,7 +112,43 @@ class EntidadeWelcomeView extends StatelessWidget {
                                     foregroundColor: MaterialStateProperty.all(
                                         Colors.black87)),
                                 onPressed: () {},
-                                child: Text("Promova a sua Empresa")),
+                                child: Text("Logisticas e Materias",textAlign: TextAlign.center)),
+                          ),
+                          Container(
+                            width: larguraPor(35, context),
+                            height: larguraPor(35, context),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.grey,
+                            ),
+                            child: TextButton(
+                                style: ButtonStyle(
+                                    foregroundColor: MaterialStateProperty.all(
+                                        Colors.black87)),
+                                onPressed: () {},
+                                child: Text("Recursos Humanos",textAlign: TextAlign.center)),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                            width: larguraPor(35, context),
+                            height: larguraPor(35, context),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.grey,
+                            ),
+                            child: TextButton(
+                                style: ButtonStyle(
+                                    foregroundColor: MaterialStateProperty.all(
+                                        Colors.black87)),
+                                onPressed: () {},
+                                child: Text("Promova a sua Empresa", textAlign: TextAlign.center)),
                           ),
                           Container(
                             width: larguraPor(35, context),

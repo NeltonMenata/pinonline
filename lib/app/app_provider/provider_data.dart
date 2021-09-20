@@ -18,12 +18,11 @@ class ProviderData {
   }
 
   static Future<List<ParseObject>> getEntidadeData() async {
-    final entidadeObject = ParseObject("Entidade");
+    final entidadeObject = ParseObject("Entidade"); // Como uma tabela no MySQL
 
     QueryBuilder<ParseObject> query = QueryBuilder<ParseObject>(entidadeObject);
 
     final response = await query.query();
-
     if (response.results != null && response.success) {
       return response.result as List<ParseObject>;
     } else {
@@ -35,7 +34,7 @@ class ProviderData {
     final categoriaObject = ParseObject("Categoria");
 
     var query = QueryBuilder<ParseObject>(categoriaObject);
-
+    
     final response = await query.query();
 
     if (response.results != null && response.success) {

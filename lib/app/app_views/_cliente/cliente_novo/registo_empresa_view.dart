@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pinonline/app/app_controller/_cliente/cliente_novo/create_user_controller.dart';
 import 'package:pinonline/app/app_models/cliente_model.dart';
-import 'package:pinonline/app/app_models/user_new_model.dart';
 import 'package:pinonline/app/app_provider/provider_data.dart';
 import 'package:pinonline/app/app_views/_cliente/cliente_login_view.dart';
 
 // ignore: must_be_immutable
 class RegistoEmpresaView extends StatelessWidget {
   
-  var _telefone = TextEditingController();
-  var _morada = TextEditingController();
-  var _cidade = TextEditingController();
-  var _desc = TextEditingController();
-  var _form = GlobalKey<FormState>();
-
   Widget build(BuildContext context) {
-    final UserNew userNew = Get.arguments;
     //final larguraTotal = MediaQuery.of(context).size.width;
     final alturaTotal = MediaQuery.of(context).size.height;
     //final controller = Get.put(AnimationController(largura: largura * 0.9, altura: altura * 0.8));
@@ -37,7 +30,7 @@ class RegistoEmpresaView extends StatelessWidget {
                 color: Colors.transparent,
                 height: (alturaTotal * 0.85),
                 child: Form(
-                  key: _form,
+                  key: CreateUserController.controller.formRegisto,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -46,7 +39,7 @@ class RegistoEmpresaView extends StatelessWidget {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextFormField(
-                        controller: _telefone,
+                        controller: CreateUserController.controller.telefone,
                         keyboardType: TextInputType.name,
                         decoration: InputDecoration(
                             hintText: 'Telefone',
@@ -60,7 +53,7 @@ class RegistoEmpresaView extends StatelessWidget {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextFormField(
-                        controller: _morada,
+                        controller: CreateUserController.controller.morada,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                             hintText: 'Morada', border: OutlineInputBorder()),
@@ -71,7 +64,7 @@ class RegistoEmpresaView extends StatelessWidget {
                       Text("Cidade",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       TextFormField(
-                        controller: _cidade,
+                        controller: CreateUserController.controller.cidade,
                         decoration: InputDecoration(
                             hintText: 'Cidade', border: OutlineInputBorder()),
                       ),
@@ -81,7 +74,7 @@ class RegistoEmpresaView extends StatelessWidget {
                       Text("Descrição",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       TextFormField(
-                        controller: _desc,
+                        controller: CreateUserController.controller.desc,
                         decoration: InputDecoration(
                             hintText: 'Descrição',
                             border: OutlineInputBorder()),
@@ -92,21 +85,15 @@ class RegistoEmpresaView extends StatelessWidget {
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.green)),
                           onPressed: ()async {
-                            if (_form.currentState!.validate()) {
-                              final UserNewFull userNewFull = UserNewFull(
-                                  userNew,
-                                  telefone: _telefone.text,
-                                  morada: _morada.text,
-                                  cidade: _cidade.text,
-                                  desc: _desc.text);
-
+                            if (CreateUserController.controller.formRegisto.currentState!.validate()) {
+                              
                               ProviderData.clienteLista.add(ClienteModel(
-                                nome: userNewFull.userNew.nome,
-                                email: userNewFull.userNew.email,
-                                senha: userNewFull.userNew.senha,
-                                desc: userNewFull.desc,
-                                contacto: userNewFull.telefone,
-                                morada: userNewFull.morada,
+                                nome: CreateUserController.controller.nome.text,
+                                email: CreateUserController.controller.email.text,
+                                senha: CreateUserController.controller.senha.text,
+                                desc: CreateUserController.controller.desc.text,
+                                contacto: CreateUserController.controller.telefone.text,
+                                morada: CreateUserController.controller.morada.text,
                                 objectId: "objectId",
                                 img: "Imagem Perfil"
                               ));

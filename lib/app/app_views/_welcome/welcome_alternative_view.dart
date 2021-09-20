@@ -3,7 +3,7 @@ import 'package:pinonline/app/app_views/_cliente/cliente_login_view.dart';
 import 'package:pinonline/app/app_views/_entidade/entidade_login_view.dart';
 import 'package:pinonline/app/app_views/_size/size.dart';
 import 'package:get/get.dart';
-import 'package:pinonline/app/app_views/app_routes/routes.dart';
+import 'package:pinonline/app/app_views/create_session.dart';
 
 class WelcomeAlternativeView extends StatelessWidget {
   @override
@@ -145,7 +145,7 @@ class WelcomeAlternativeView extends StatelessWidget {
                           Icon(Icons.search_rounded),
                           TextButton(
                             onPressed: () {
-                              
+                              Get.to(CreateSessionView());
                             },
                             child: Text(
                               "Encontre aqui o seu Profissional",

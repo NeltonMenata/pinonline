@@ -103,6 +103,7 @@ class EntidadeLoginView extends StatelessWidget {
                                       Get.to(EntidadeWelcomeView());
                                   }),
                             ),
+                            SizedBox(height: 10),
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
@@ -112,6 +113,12 @@ class EntidadeLoginView extends StatelessWidget {
                                               Colors.grey)),
                                   onPressed: () {},
                                   child: Text("Recuperar Senha")),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                //Get.toNamed(Routes.CREATEUSER);
+                              },
+                              child: Text("Não tem conta? Clique aqui para criar uma."),
                             ),
                             SizedBox(
                               height: 25,

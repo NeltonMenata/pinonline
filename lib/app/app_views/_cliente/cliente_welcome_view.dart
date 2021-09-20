@@ -4,6 +4,7 @@ import 'package:pinonline/app/app_controller/_cliente/cliente_login_controller.d
 import 'package:pinonline/app/app_views/_cliente/cliente_dashboard/cliente_dashboard_view.dart';
 import 'package:pinonline/app/app_views/_cliente/cliente_login_view.dart';
 import 'package:pinonline/app/app_views/_size/size.dart';
+import 'package:pinonline/app/app_views/app_components/home_components/app_bottom_bar.dart';
 
 import 'cliente_obra_nova_view.dart';
 
@@ -173,6 +174,7 @@ class ClienteWelcomeView extends StatelessWidget {
             ),
           ),
         ),
+        bottomNavigationBar: bottomAppBar(),
       ),
     );
   }

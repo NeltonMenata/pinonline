@@ -101,6 +101,7 @@ class ClienteLoginView extends StatelessWidget {
                                   child: Text("Iniciar Sessão"),
                                   onPressed: controller.startLogin),
                             ),
+                            SizedBox(height: 10),
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
