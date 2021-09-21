@@ -27,10 +27,17 @@ class ClienteObraNovaView extends StatelessWidget {
                       child: CircleAvatar(
                         backgroundColor: Colors.green,
                           radius: larguraPor(15, context),
-                          child: Image.network(
-                            _controllerLogin.cliente[0].img,
-                            width: double.infinity,
-                            height: double.infinity,
+                          child: Stack(
+                            children: [
+                              Center(
+                                child: CircularProgressIndicator()
+                              ),
+                              Image.network(
+                                _controllerLogin.cliente[0].img,
+                                width: double.infinity,
+                                height: double.infinity,
+                              ),
+                            ],
                           )),
                     ),
                     ListTile(
