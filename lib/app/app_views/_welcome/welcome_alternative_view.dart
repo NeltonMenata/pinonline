@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:pinonline/app/app_views/_cliente/cliente_login_view.dart';
 import 'package:pinonline/app/app_views/_entidade/entidade_login_view.dart';
 import 'package:pinonline/app/app_views/_size/size.dart';
@@ -26,14 +27,49 @@ class WelcomeAlternativeView extends StatelessWidget {
                       height: alturaPor(20, context),
                       child: Image.asset("assets/img/logo1.png")),
                   Spacer(),
-                  Text(
-                    "Seja bem-vindo a sua plataforma",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: _alturaTotal < 600 ? 16 : 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.green.shade800,
-                        fontFamily: "Times New Roman"),
+                  GestureDetector(
+                    onTap:() async {
+                      final entidade = ParseObject("Entidade");
+                      final query = QueryBuilder(entidade)..whereEqualTo("nome", "Nelton Menata");
+                      
+                      final response = await query.query();
+                      print(response.result[0]["img"]["url"]);
+                      final response1 = await entidade.getObject("UCieaBIVL0");
+                      entidade.objectId ="UCieaBIVL0";
+                      entidade.set("nome", "Manuel dos Santos");
+                      await entidade.save();
+                      print(response1.result);
+
+                      print(response1.result["nome"]);
+                      /*
+                      final cliente = ParseObject("Cliente")
+                      ..objectId = "TmRzlQT2F8"
+                      ..set("nome", "Nelton Menata");
+                      
+                      
+                      await cliente.save();
+                        cliente.objectId = "7vnWyivY8z";
+                        await cliente.delete();*/
+                      /*
+                      ..set("nome", "Malua Menata")
+                      ..set("morada", "Zango 3")
+                      ..set("contacto", "946409964")
+                      ..set("email","maluamenata@gmail.com")
+                      ;
+
+                      final ParseResponse response = await cliente.save();
+                      print(response.results![0].objectId);
+                      */
+                    },
+                    child: Text(
+                      "Seja bem-vindo a sua plataforma",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: _alturaTotal < 600 ? 16 : 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green.shade800,
+                          fontFamily: "Times New Roman"),
+                    ),
                   ),
                 ]),
               ),

@@ -23,8 +23,13 @@ class ClienteObraNovaView extends StatelessWidget {
                 child: Column(
                   children: [
                     CircleAvatar(
-                      radius: larguraPor(15, context),
-                    ),
+                      backgroundColor: Colors.green,
+                        radius: larguraPor(15, context),
+                        child: Image.network(
+                          _controllerLogin.cliente[0].img,
+                          width: double.infinity,
+                          height: double.infinity,
+                        )),
                     ListTile(
                       title: Text("Nome do Cliente"),
                       subtitle: Text(_controllerLogin.cliente[0].nome),

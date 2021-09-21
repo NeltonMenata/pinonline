@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+import 'package:pinonline/app/app_back4app/back4app.dart';
 import 'app/app_views/app_routes/routes.dart';
 import 'package:get/get.dart';
 
-void main() async {
+void main(){
   
-  WidgetsFlutterBinding.ensureInitialized();
-
-  final keyApplicationId = "OsiPUlfwC4Av3KtTAlxO5HssYxdeH9g8OrgSBxGu";
-  final keyClientKey = "uDLx5YOIKES5TUXuzTUt8WAM4jgwOq5QjF3wAiIP";
-  final keyParseServerUrl = "https://parseapi.back4app.com";
-
-  await Parse().initialize(keyApplicationId, keyParseServerUrl,
-      clientKey: keyClientKey, autoSendSessionId: true);
-
+  Back4app.initialize();
   runApp(MyApp());
+  
 }
 
 class MyApp extends StatelessWidget {

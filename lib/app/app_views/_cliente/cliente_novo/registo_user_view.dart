@@ -77,11 +77,18 @@ class RegistoUserView extends StatelessWidget {
                             border: OutlineInputBorder()),
                       ),
                       Spacer(),
+                      Obx((){
+                        return Visibility(
+                          visible: CreateUserController.controller.isSave.value,
+                          child: Center(child: CircularProgressIndicator(),),);}
+                      ),
+                      Spacer(),
                       ElevatedButton(
                           style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.green)),
-                          onPressed: ()=>CreateUserController.controller.saveUser(context),
+                          onPressed: ()=>
+                              CreateUserController.controller.saveUser(context),
                           child: Text("Salvar Entidade")),
                       ElevatedButton(
                           style: ButtonStyle(
@@ -90,11 +97,13 @@ class RegistoUserView extends StatelessWidget {
                           onPressed: () {
                             Get.back();
                           },
-                          child: Text("Ignorar"))
+                          child: Text("Ignorar")),
+                          
                     ],
                   ),
                 ),
               ),
+              
             ],
           ),
         ),

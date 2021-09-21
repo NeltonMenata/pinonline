@@ -44,26 +44,43 @@ class _CreateEntidadeViewState extends State<CreateEntidadeView> {
                         child: GetBuilder<CreateEntidadeController>(
                           init: CreateEntidadeController(),
                           builder: (_) => CircleAvatar(
-                              radius: 60,
+                            radius: 60,
 
-                              // ignore: unnecessary_null_comparison
-                              child: CreateEntidadeController
-                                      .controller.imageSelected
-                                  ? ClipRRect(
-                                    borderRadius: BorderRadius.all(Radius.circular(100)),
+                            // ignore: unnecessary_null_comparison
+                            child: CreateEntidadeController
+                                    .controller.imageSelected
+                                ? ClipRRect(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(100)),
                                     child: Image.file(
-                                        CreateEntidadeController.controller.image!,width: double.infinity,height: double.infinity,),
+                                      CreateEntidadeController
+                                          .controller.image!,
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                    ),
                                   )
-                                  : Center(
-                                      child: Text(
-                                        "Selecione a Imagem",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16.0,
+                                : Center(
+                                    child: Stack(children: [
+                                      Center(
+                                        child: Text(
+                                          "Selecione a Imagem",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16.0,
+                                          ),
                                         ),
                                       ),
-                                    )),
+                                      Align(
+                                        alignment: Alignment.bottomRight,
+                                        child: CircleAvatar(
+                                          backgroundColor: Colors.green,
+                                          child: Icon(Icons.camera_alt_rounded),
+                                        ),
+                                      ),
+                                    ]),
+                                  ),
+                          ),
                         ),
                       ),
                     ),
@@ -156,7 +173,8 @@ class _CreateEntidadeViewState extends State<CreateEntidadeView> {
                           style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.green)),
-                          onPressed: ()=> CreateEntidadeController.controller.saveEntidadeName(),
+                          onPressed: () => CreateEntidadeController.controller
+                              .saveEntidadeName(),
                           child: Text("Salvar Usuário"))
                     ],
                   ),
@@ -169,4 +187,3 @@ class _CreateEntidadeViewState extends State<CreateEntidadeView> {
     );
   }
 }
-

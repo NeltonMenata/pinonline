@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:pinonline/app/app_models/cliente_model.dart';
-import 'package:pinonline/app/app_provider/provider_data.dart';
 import 'package:pinonline/app/app_views/_cliente/cliente_welcome_view.dart';
 
 class ClienteLoginController extends GetxController {
@@ -17,7 +17,9 @@ class ClienteLoginController extends GetxController {
 // Função que procura o usuário no sistema
 // e retorna String "1" se encontra e String "0"
 // se não encontra o usuário
-  String clienteLogin(String _email, String _senha) {
+  Future<String> clienteLogin(String _email, String _senha) async {
+    
+    /*
     var clienteLista = ProviderData.clienteLista;
 
     clienteLista.forEach((element) {
@@ -26,14 +28,35 @@ class ClienteLoginController extends GetxController {
         cliente.add(element);
       }
     });
+    */
 
+    final clienteLogin = ParseObject("Cliente");
+    final query = QueryBuilder(clienteLogin);
+    query..whereEqualTo("email", _email)..whereEqualTo("senha", _senha);
+    final response = await query.query();
+    if(response.success && response.result != null){
+      cliente.add(
+        ClienteModel(
+          nome: response.result[0]["nome"],
+          email: response.result[0]["email"],
+          contacto: response.result[0]["contacto"],
+          desc: response.result[0]["descricao"],
+          morada: response.result[0]["morada"],
+          img: response.result[0]["img"]["url"],
+          senha: response.result[0]["senha"],
+          objectId: response.result[0]["objectId"],
+        )
+      );
+    }
     return cliente.length == 1 ? "1" : "0";
+
+    
   }
 
 // Função que faz login do Usuário e chama a Tela
 // de Bem-Vindo se o usuário for encontrado no sistema!
-  void startLogin() {
-    if (controller.clienteLogin(email.text, senha.text) == "1") {
+  void startLogin() async {
+    if ("1" == await controller.clienteLogin(email.text, senha.text)) {
       Get.to(ClienteWelcomeView());
       email.text = "";
       senha.text = "";
