@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pinonline/app/app_views/_cliente/cliente_login_view.dart';
+import 'package:pinonline/app/app_controller/_entidade/entidade_login_controller.dart';
+import 'package:pinonline/app/app_models/entidade_model.dart';
+import 'package:pinonline/app/app_views/_entidade/entidade_login_view.dart';
 import 'package:pinonline/app/app_views/_size/size.dart';
 
 class EntidadeWelcomeView extends StatelessWidget {
+  EntidadeLoginController get controller => EntidadeLoginController.controller;
+  EntidadeModel get entidade => EntidadeLoginController.controller.entidade[0];
   @override
   Widget build(BuildContext context) {
+    
+    
+    
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -16,7 +23,7 @@ class EntidadeWelcomeView extends StatelessWidget {
                 color: Colors.green[500],
                 width: double.infinity,
                 height: alturaPor(10, context),
-                child: Column(children: [Text("DashBoard Profissional")]),
+                child: Column(children: [Text("DashBoard Profissional: ${entidade.nome}")]),
               ),
               Expanded(
                 child: Container(
@@ -173,7 +180,8 @@ class EntidadeWelcomeView extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Get.offAll(ClienteLoginView());
+                  controller.clearLogin();
+                  Get.offAll(EntidadeLoginView());
                 },
                 child: Text("Terminar Sessão"),
               ),

@@ -4,6 +4,8 @@ import 'package:pinonline/app/app_controller/_entidade/entidade_novo/create_enti
 
 // ignore: must_be_immutable
 class RegistoEntidadeView extends StatelessWidget {
+  CreateEntidadeController get _controller =>
+      CreateEntidadeController.controller;
   Widget build(BuildContext context) {
     //final larguraTotal = MediaQuery.of(context).size.width;
     final alturaTotal = MediaQuery.of(context).size.height;
@@ -26,7 +28,7 @@ class RegistoEntidadeView extends StatelessWidget {
                 color: Colors.transparent,
                 height: (alturaTotal * 0.85),
                 child: Form(
-                  key: CreateEntidadeController.controller.formRegisto,
+                  key: _controller.formRegisto,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -35,8 +37,7 @@ class RegistoEntidadeView extends StatelessWidget {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextFormField(
-                        controller:
-                            CreateEntidadeController.controller.telefone,
+                        controller: _controller.telefone,
                         keyboardType: TextInputType.name,
                         decoration: InputDecoration(
                             hintText: 'Telefone', border: OutlineInputBorder()),
@@ -49,7 +50,7 @@ class RegistoEntidadeView extends StatelessWidget {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextFormField(
-                        controller: CreateEntidadeController.controller.morada,
+                        controller: _controller.morada,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                             hintText: 'Morada', border: OutlineInputBorder()),
@@ -57,10 +58,23 @@ class RegistoEntidadeView extends StatelessWidget {
                       SizedBox(
                         height: 20,
                       ),
+                      Text(
+                        "Categoria",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      TextFormField(
+                        controller: _controller.categoria,
+                        keyboardType: TextInputType.name,
+                        decoration: InputDecoration(
+                            hintText: 'Categoria', border: OutlineInputBorder()),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
                       Text("Cidade",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       TextFormField(
-                        controller: CreateEntidadeController.controller.cidade,
+                        controller: _controller.cidade,
                         decoration: InputDecoration(
                             hintText: 'Cidade', border: OutlineInputBorder()),
                       ),
@@ -70,17 +84,27 @@ class RegistoEntidadeView extends StatelessWidget {
                       Text("Descrição",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       TextFormField(
-                        controller: CreateEntidadeController.controller.desc,
+                        controller: _controller.desc,
                         decoration: InputDecoration(
                             hintText: 'Descrição',
                             border: OutlineInputBorder()),
                       ),
                       Spacer(),
+                      Obx(() {
+                        return Visibility(
+                          visible: _controller.isSave.value,
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      }),
+                      Spacer(),
                       ElevatedButton(
                           style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.green)),
-                          onPressed: ()=>CreateEntidadeController.controller.saveEntidade(context),
+                          onPressed: () => _controller
+                              .saveEntidade(context),
                           child: Text("Salvar Entidade")),
                       ElevatedButton(
                           style: ButtonStyle(

@@ -4,7 +4,7 @@ import 'package:pinonline/app/app_controller/_cliente/cliente_novo/create_user_c
 
 // ignore: must_be_immutable
 class RegistoUserView extends StatelessWidget {
-  
+  CreateUserController get _controller => CreateUserController.controller;
   Widget build(BuildContext context) {
     //final larguraTotal = MediaQuery.of(context).size.width;
     final alturaTotal = MediaQuery.of(context).size.height;
@@ -27,7 +27,7 @@ class RegistoUserView extends StatelessWidget {
                 color: Colors.transparent,
                 height: (alturaTotal * 0.85),
                 child: Form(
-                  key: CreateUserController.controller.formRegisto,
+                  key: _controller.formRegisto,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -36,7 +36,7 @@ class RegistoUserView extends StatelessWidget {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextFormField(
-                        controller: CreateUserController.controller.telefone,
+                        controller: _controller.telefone,
                         keyboardType: TextInputType.name,
                         decoration: InputDecoration(
                             hintText: 'Telefone',
@@ -50,7 +50,7 @@ class RegistoUserView extends StatelessWidget {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextFormField(
-                        controller: CreateUserController.controller.morada,
+                        controller: _controller.morada,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                             hintText: 'Morada', border: OutlineInputBorder()),
@@ -61,7 +61,7 @@ class RegistoUserView extends StatelessWidget {
                       Text("Cidade",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       TextFormField(
-                        controller: CreateUserController.controller.cidade,
+                        controller: _controller.cidade,
                         decoration: InputDecoration(
                             hintText: 'Cidade', border: OutlineInputBorder()),
                       ),
@@ -71,7 +71,7 @@ class RegistoUserView extends StatelessWidget {
                       Text("Descrição",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       TextFormField(
-                        controller: CreateUserController.controller.desc,
+                        controller: _controller.desc,
                         decoration: InputDecoration(
                             hintText: 'Descrição',
                             border: OutlineInputBorder()),
@@ -79,7 +79,7 @@ class RegistoUserView extends StatelessWidget {
                       Spacer(),
                       Obx((){
                         return Visibility(
-                          visible: CreateUserController.controller.isSave.value,
+                          visible: _controller.isSave.value,
                           child: Center(child: CircularProgressIndicator(),),);}
                       ),
                       Spacer(),
@@ -88,7 +88,7 @@ class RegistoUserView extends StatelessWidget {
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.green)),
                           onPressed: ()=>
-                              CreateUserController.controller.saveUser(context),
+                              _controller.saveUser(context),
                           child: Text("Salvar Entidade")),
                       ElevatedButton(
                           style: ButtonStyle(

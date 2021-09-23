@@ -133,9 +133,15 @@ class ClienteLoginView extends StatelessWidget {
                               ),
                               child: Row(
                                 children: [
-                                  IconButton(
-                                    icon: Icon(Icons.settings),
-                                    onPressed: () {},
+                                  SizedBox(
+                                    height: 36,
+                                    width: 36,
+                                    child: Image.asset(
+                                      "assets/img/logo_google.jpg",
+                                      height: double.infinity,
+                                      width: double.infinity,
+                                      fit: BoxFit.fill,
+                                    ),
                                   ),
                                   Spacer(),
                                   Text("Login with Google",
@@ -161,9 +167,15 @@ class ClienteLoginView extends StatelessWidget {
                               ),
                               child: Row(
                                 children: [
-                                  IconButton(
-                                    icon: Icon(Icons.settings),
-                                    onPressed: () {},
+                                  SizedBox(
+                                    height: 36,
+                                    width: 36,
+                                    child: Image.asset(
+                                      "assets/img/logo_facebook.png",
+                                      height: double.infinity,
+                                      width: double.infinity,
+                                      fit: BoxFit.fill,
+                                    ),
                                   ),
                                   Spacer(),
                                   Text("Login with Facebook",
@@ -193,135 +205,3 @@ class ClienteLoginView extends StatelessWidget {
     );
   }
 }
-
-/*
-
-Container(
-                  color: Colors.transparent,
-                  height: alturaPor(50, context),
-                  child: SingleChildScrollView(
-                    child: Form(
-                      child: Column(
-                        children: [
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              "Email",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          TextFormField(
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: InputDecoration(
-                                hintText: 'Email',
-                                border: OutlineInputBorder()),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text("Senha",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                          ),
-                          TextFormField(
-                            obscuringCharacter: "*",
-                            obscureText: _mostraSenha,
-                            decoration: InputDecoration(
-                                suffixIcon: IconButton(
-                                  icon: Icon(Icons.panorama_fish_eye_rounded),
-                                  onPressed: () {
-                                  },
-                                ),
-                                hintText: 'Senha',
-                                border: OutlineInputBorder()),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                                style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                        Colors.green)),
-                                onPressed: () {
-                                  
-                                },
-                                child: Text("Entrar")),
-                          ),
-                          SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                                style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all(Colors.grey)),
-                                onPressed: () {},
-                                child: Text("Recuperar Senha")),
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Container(
-                            //alignment: Alignment.center,
-                            width: larguraPor(70, context),
-                            padding: EdgeInsets.symmetric(horizontal: 15),
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.transparent,
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(color: Colors.grey),
-                            ),
-                            child: Row(
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.settings),
-                                  onPressed: () {},
-                                ),
-                                Spacer(),
-                                Text("Login with Google",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.grey,
-                                        fontSize: 18))
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            //alignment: Alignment.center,
-                            width: larguraPor(70, context),
-                            padding: EdgeInsets.symmetric(horizontal: 15),
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.transparent,
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(color: Colors.grey),
-                            ),
-                            child: Row(
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.settings),
-                                  onPressed: () {},
-                                ),
-                                Spacer(),
-                                Text("Login with Facebook",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.grey,
-                                        fontSize: 18))
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-
-*/

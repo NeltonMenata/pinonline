@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:pinonline/app/app_models/cliente_model.dart';
-import 'package:pinonline/app/app_provider/provider_data.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+import 'package:pinonline/app/app_models/entidade_model.dart';
 import 'package:pinonline/app/app_views/_entidade/entidade_welcome_view.dart';
 
 class EntidadeLoginController extends GetxController {
@@ -12,32 +12,41 @@ class EntidadeLoginController extends GetxController {
   var senha = TextEditingController();
 
 // Lista com a finalidade de retorna apenas 1 usuário!
-  final List<ClienteModel> cliente = [];
+  final List<EntidadeModel> entidade = [];
 
 // Função que procura o usuário no sistema
 // e retorna String "1" se encontra e String "0"
 // se não encontra o usuário
-  String clienteLogin(String _email, String _senha) {
-    var clienteLista = ProviderData.clienteLista;
-
-    clienteLista.forEach((element) {
-      if (element.email == _email && element.senha == _senha) {
-        cliente.clear();
-        cliente.add(element);
-      }
-    });
-
-    return cliente.length == 1 ? "1" : "0";
+  Future<String> entidadeLogin(String _email, String _senha) async {
+    final entidadeLogin = ParseObject("Entidade");
+    final query = QueryBuilder(entidadeLogin);
+    query
+    ..whereEqualTo("email", _email)
+    ..whereEqualTo("senha", _senha);
+    final response = await query.query();
+    if (response.success && response.result != null) {
+      entidade.add(EntidadeModel(
+        nome: response.result[0]["nome"].toString(),
+        email: response.result[0]["email"].toString(),
+        contacto: response.result[0]["contacto"].toString(),
+        categoria: response.result[0]["categoria"].toString(),
+        desc: response.result[0]["descricao"].toString(),
+        morada: response.result[0]["morada"].toString(),
+        img: response.result[0]["img"]["url"].toString(),
+        senha: response.result[0]["senha"].toString(),
+        objectId: response.result[0]["objectId"].toString(),
+      ));
+    }
+    return entidade.length == 1 ? "1" : "0";
   }
 
 // Função que faz login do Usuário e chama a Tela
 // de Bem-Vindo se o usuário for encontrado no sistema!
-  void startLogin() {
-    if (controller.clienteLogin(email.text, senha.text) == "1") {
+  void startLogin() async {
+    if ("1" == await controller.entidadeLogin(email.text, senha.text)) {
       Get.to(EntidadeWelcomeView());
       email.text = "";
       senha.text = "";
-
     } else {
       email.text = "";
       senha.text = "";
@@ -45,7 +54,7 @@ class EntidadeLoginController extends GetxController {
   }
 
   //Função que limpa o login feito
-void clearLogin(){
-  cliente.clear();
-}
+  void clearLogin() {
+    entidade.clear();
+  }
 }

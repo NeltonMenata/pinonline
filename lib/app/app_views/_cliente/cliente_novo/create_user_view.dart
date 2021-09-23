@@ -9,7 +9,10 @@ class CreateUserView extends StatefulWidget {
 }
 
 class _CreateUserViewState extends State<CreateUserView> {
+  CreateUserController get _controller => CreateUserController.controller;
+  
   Widget build(BuildContext context) {
+    
     //final larguraTotal = MediaQuery.of(context).size.width;
     final alturaTotal = MediaQuery.of(context).size.height;
     //final controller = Get.put(AnimationController(largura: largura * 0.9, altura: altura * 0.8));
@@ -39,7 +42,7 @@ class _CreateUserViewState extends State<CreateUserView> {
                           borderRadius: BorderRadius.circular(70)),
                       child: GestureDetector(
                         onTap: () {
-                          CreateUserController.controller.getImage();
+                          _controller.getImage();
                         },
                         child: GetBuilder<CreateUserController>(
                           init: CreateUserController(),
@@ -47,12 +50,18 @@ class _CreateUserViewState extends State<CreateUserView> {
                               radius: 60,
 
                               // ignore: unnecessary_null_comparison
-                              child: CreateUserController
-                                      .controller.imageSelected
+                              child: _controller.imageSelected
                                   ? ClipRRect(
                                     borderRadius: BorderRadius.all(Radius.circular(100)),
-                                    child: Image.file(
-                                        CreateUserController.controller.image!,width: double.infinity,height: double.infinity,),
+                                    child: Stack(
+                                      children: [
+                                        Center(
+                                          child: CircularProgressIndicator()
+                                        ),
+                                        Image.file(
+                                            _controller.image!,width: double.infinity,height: double.infinity,),
+                                      ],
+                                    ),
                                   )
                                   : Center(
                                       child: Text(
@@ -82,7 +91,7 @@ class _CreateUserViewState extends State<CreateUserView> {
                 color: Colors.transparent,
                 height: (alturaTotal * 0.6) - (alturaTotal * 0.08),
                 child: Form(
-                  key: CreateUserController.controller.form,
+                  key: _controller.form,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -91,7 +100,7 @@ class _CreateUserViewState extends State<CreateUserView> {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextFormField(
-                        controller: CreateUserController.controller.nome,
+                        controller: _controller.nome,
                         keyboardType: TextInputType.name,
                         validator: (v) {
                           if (v == "" || v == null) {
@@ -112,7 +121,7 @@ class _CreateUserViewState extends State<CreateUserView> {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextFormField(
-                        controller: CreateUserController.controller.email,
+                        controller: _controller.email,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                             hintText: 'Email', border: OutlineInputBorder()),
@@ -123,10 +132,10 @@ class _CreateUserViewState extends State<CreateUserView> {
                       Text("Senha",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       TextFormField(
-                        controller: CreateUserController.controller.senha,
+                        controller: _controller.senha,
                         obscuringCharacter: "*",
                         obscureText:
-                            CreateUserController.controller.mostraSenha,
+                            _controller.mostraSenha,
                         validator: (v) {
                           if (!containLetter(v)) {
                             return "Senha deve conter letra!";
@@ -141,8 +150,7 @@ class _CreateUserViewState extends State<CreateUserView> {
                           border: OutlineInputBorder(),
                           suffixIcon: IconButton(
                             icon: Icon(Icons.panorama_fish_eye_outlined),
-                            onPressed: CreateUserController
-                                .controller.toggleMostraSenha,
+                            onPressed: _controller.toggleMostraSenha,
                           ),
                         ),
                       ),
@@ -156,7 +164,7 @@ class _CreateUserViewState extends State<CreateUserView> {
                           style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.green)),
-                          onPressed: () => CreateUserController.controller.saveUserName(),
+                          onPressed: () => _controller.saveUserName(),
                           child: Text("Salvar Usuário"))
                     ],
                   ),
@@ -167,48 +175,5 @@ class _CreateUserViewState extends State<CreateUserView> {
         ),
       ),
     );
-  }
-}
-
-class AnimationController extends GetxController {
-  AnimationController({required this.largura, required this.altura});
-  var largura = 0.0;
-  var altura = 0.0;
-  bool troca = false;
-  List<Color> cores = [
-    Colors.orange,
-    Colors.red,
-    Colors.blue,
-    Colors.black,
-    Colors.yellow,
-    Colors.pink,
-    Colors.brown,
-    Colors.grey,
-  ];
-  onTap() {
-    if (troca) {
-      largura += 15;
-      altura += 15;
-
-      update();
-    } else {
-      largura -= 15;
-      altura -= 15;
-
-      update();
-    }
-    troca = !troca;
-    Future.delayed(Duration(seconds: 2), () {
-      onTap();
-    });
-  }
-
-  onDoubleTap() {
-    if (troca == true) {
-      largura -= 10;
-      altura -= 10;
-      update();
-    }
-    troca = false;
   }
 }

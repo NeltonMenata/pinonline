@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
-import 'package:pinonline/app/app_models/cliente_model.dart';
-import 'package:pinonline/app/app_provider/provider_data.dart';
 import 'package:pinonline/app/app_views/_cliente/cliente_login_view.dart';
 import 'package:pinonline/app/app_views/app_routes/routes.dart';
 
@@ -43,16 +41,6 @@ class CreateUserController extends GetxController {
 
   Future<void> saveUser(BuildContext context) async {
     if (formRegisto.currentState!.validate()) {
-      ProviderData.clienteLista.add(ClienteModel(
-          nome: CreateUserController.controller.nome.text,
-          email: CreateUserController.controller.email.text,
-          senha: CreateUserController.controller.senha.text,
-          desc: CreateUserController.controller.desc.text,
-          contacto: CreateUserController.controller.telefone.text,
-          morada: CreateUserController.controller.morada.text,
-          objectId: "objectId",
-          img: "Imagem Perfil"));
-
       try {
         isSave.value = true;
         final clienteNovo = ParseObject("Cliente");
@@ -63,58 +51,55 @@ class CreateUserController extends GetxController {
         if (response.result != null) {
           print(response.result);
           Get.snackbar("Conta Nova", "Usuário já existe, faça o login!");
-        }else{
+        } else {
           clienteNovo
-            ..set("nome", CreateUserController.controller.nome.text)
-            ..set("morada",CreateUserController.controller.morada.text)
-            ..set("contacto", CreateUserController.controller.telefone.text)
-            ..set("email",CreateUserController.controller.email.text)
-            ..set("descricao", CreateUserController.controller.desc.text)
-            ..set("senha", CreateUserController.controller.senha.text);
-            
-        ParseFileBase parseFile;
-        parseFile = ParseFile(image);
-        await parseFile.save();
-        clienteNovo.set("img", parseFile);
-        await clienteNovo.save();
-        isSave.value = false;
-        await showDialog(
-          context: context,
-          builder: (context) {
-            mostraSenha = false;
+            ..set("nome", controller.nome.text)
+            ..set("morada", controller.morada.text)
+            ..set("contacto", controller.telefone.text)
+            ..set("email", controller.email.text)
+            ..set("descricao", controller.desc.text)
+            ..set("senha", controller.senha.text);
 
-            return AlertDialog(
-              title: Text("JustBuild"),
-              content: Text("Usuário salvo com sucesso!"),
-              actions: [
-                TextButton(
-                    onPressed: () {
-                      imageSelected = false;
-                      Navigator.pop(context);
-                    },
-                    child: Text("OK"))
-              ],
-            );
-          });
-          CreateUserController.controller.nome.text = "";
-          CreateUserController.controller.morada.text = "";
-          CreateUserController.controller.telefone.text = "";
-          CreateUserController.controller.email.text = "";
-          CreateUserController.controller.desc.text = "";
-          CreateUserController.controller.cidade.text = "";
-          CreateUserController.controller.senha.text = "";
+          ParseFileBase parseFile;
+          parseFile = ParseFile(image);
+          await parseFile.save();
+          clienteNovo.set("img", parseFile);
+          await clienteNovo.save();
+          isSave.value = false;
+          await showDialog(
+              context: context,
+              builder: (context) {
+                mostraSenha = false;
+
+                return AlertDialog(
+                  title: Text("JustBuild"),
+                  content: Text("Usuário salvo com sucesso!"),
+                  actions: [
+                    TextButton(
+                        onPressed: () {
+                          imageSelected = false;
+                          Navigator.pop(context);
+                        },
+                        child: Text("OK"))
+                  ],
+                );
+              });
+          
+          controller.nome.text = "";
+          controller.morada.text = "";
+          controller.telefone.text = "";
+          controller.email.text = "";
+          controller.desc.text = "";
+          controller.cidade.text = "";
+          controller.senha.text = "";
 
           Get.offAll(ClienteLoginView());
         }
       } catch (error) {
-        Get.snackbar("Erro", "Usuário não salvo: $error \nVerifique a sua conexão com a internet");
-        
+        Get.snackbar("Erro",
+            "Usuário não salvo: $error \nVerifique a sua conexão com a internet");
       }
-
-      
     }
-
-    
   }
 
   void saveUserName() {

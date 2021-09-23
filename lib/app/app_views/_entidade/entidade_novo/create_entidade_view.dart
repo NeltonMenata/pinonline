@@ -9,10 +9,11 @@ class CreateEntidadeView extends StatefulWidget {
 }
 
 class _CreateEntidadeViewState extends State<CreateEntidadeView> {
+  CreateEntidadeController get _controller => CreateEntidadeController.controller;
   Widget build(BuildContext context) {
-    //final larguraTotal = MediaQuery.of(context).size.width;
+    
     final alturaTotal = MediaQuery.of(context).size.height;
-    //final controller = Get.put(AnimationController(largura: largura * 0.9, altura: altura * 0.8));
+    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey,
@@ -39,7 +40,7 @@ class _CreateEntidadeViewState extends State<CreateEntidadeView> {
                           borderRadius: BorderRadius.circular(70)),
                       child: GestureDetector(
                         onTap: () {
-                          CreateEntidadeController.controller.getImage();
+                          _controller.getImage();
                         },
                         child: GetBuilder<CreateEntidadeController>(
                           init: CreateEntidadeController(),
@@ -47,16 +48,21 @@ class _CreateEntidadeViewState extends State<CreateEntidadeView> {
                             radius: 60,
 
                             // ignore: unnecessary_null_comparison
-                            child: CreateEntidadeController
-                                    .controller.imageSelected
+                            child: _controller.imageSelected
                                 ? ClipRRect(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(100)),
-                                    child: Image.file(
-                                      CreateEntidadeController
-                                          .controller.image!,
-                                      width: double.infinity,
-                                      height: double.infinity,
+                                    child: Stack(
+                                      children: [
+                                        Center(
+                                          child: CircularProgressIndicator()
+                                        ),
+                                        Image.file(
+                                          _controller.image!,
+                                          width: double.infinity,
+                                          height: double.infinity,
+                                        ),
+                                      ],
                                     ),
                                   )
                                 : Center(
@@ -99,7 +105,7 @@ class _CreateEntidadeViewState extends State<CreateEntidadeView> {
                 color: Colors.transparent,
                 height: (alturaTotal * 0.6) - (alturaTotal * 0.08),
                 child: Form(
-                  key: CreateEntidadeController.controller.form,
+                  key: _controller.form,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -108,7 +114,7 @@ class _CreateEntidadeViewState extends State<CreateEntidadeView> {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextFormField(
-                        controller: CreateEntidadeController.controller.nome,
+                        controller: _controller.nome,
                         keyboardType: TextInputType.name,
                         validator: (v) {
                           if (v == "" || v == null) {
@@ -129,7 +135,7 @@ class _CreateEntidadeViewState extends State<CreateEntidadeView> {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       TextFormField(
-                        controller: CreateEntidadeController.controller.email,
+                        controller: _controller.email,
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                             hintText: 'Email', border: OutlineInputBorder()),
@@ -140,10 +146,10 @@ class _CreateEntidadeViewState extends State<CreateEntidadeView> {
                       Text("Senha",
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       TextFormField(
-                        controller: CreateEntidadeController.controller.senha,
+                        controller: _controller.senha,
                         obscuringCharacter: "*",
                         obscureText:
-                            CreateEntidadeController.controller.mostraSenha,
+                            _controller.mostraSenha,
                         validator: (v) {
                           if (!containLetter(v)) {
                             return "Senha deve conter letra!";
@@ -158,8 +164,7 @@ class _CreateEntidadeViewState extends State<CreateEntidadeView> {
                           border: OutlineInputBorder(),
                           suffixIcon: IconButton(
                             icon: Icon(Icons.panorama_fish_eye_outlined),
-                            onPressed: CreateEntidadeController
-                                .controller.toggleMostraSenha,
+                            onPressed: _controller.toggleMostraSenha,
                           ),
                         ),
                       ),
@@ -173,7 +178,7 @@ class _CreateEntidadeViewState extends State<CreateEntidadeView> {
                           style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.green)),
-                          onPressed: () => CreateEntidadeController.controller
+                          onPressed: () => _controller
                               .saveEntidadeName(),
                           child: Text("Salvar Usuário"))
                     ],

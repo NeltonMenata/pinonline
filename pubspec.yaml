@@ -54,6 +54,8 @@ flutter:
     - assets/img/logo.png
     - assets/img/logo1.png
     - assets/img/imagem.jpg
+    - assets/img/logo_facebook.png
+    - assets/img/logo_google.jpg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

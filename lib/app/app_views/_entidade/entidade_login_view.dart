@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinonline/app/app_controller/_entidade/entidade_login_controller.dart';
-import 'package:pinonline/app/app_views/_entidade/entidade_welcome_view.dart';
 import 'package:pinonline/app/app_views/_size/size.dart';
 import 'package:pinonline/app/app_views/_welcome/welcome_alternative_view.dart';
 import 'package:pinonline/app/app_views/app_routes/routes.dart';
 
 // ignore: must_be_immutable
 class EntidadeLoginView extends StatelessWidget {
+  
+  EntidadeLoginController get controller => EntidadeLoginController.controller;
+  
   @override
   Widget build(BuildContext context) {
-    var controller = EntidadeLoginController.controller;
+    
     var _alturaTotal = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
@@ -100,9 +102,8 @@ class EntidadeLoginView extends StatelessWidget {
                                           MaterialStateProperty.all(
                                               Colors.green)),
                                   child: Text("Iniciar Sessão"),
-                                  onPressed: (){
-                                      Get.to(EntidadeWelcomeView());
-                                  }),
+                                  onPressed: controller.startLogin,
+                                  ),
                             ),
                             SizedBox(height: 10),
                             SizedBox(
@@ -125,7 +126,7 @@ class EntidadeLoginView extends StatelessWidget {
                               height: 25,
                             ),
                             Container(
-                              //alignment: Alignment.center,
+                          
                               width: larguraPor(70, context),
                               padding: EdgeInsets.symmetric(horizontal: 15),
                               height: 40,
@@ -136,9 +137,16 @@ class EntidadeLoginView extends StatelessWidget {
                               ),
                               child: Row(
                                 children: [
-                                  IconButton(
-                                    icon: Icon(Icons.settings),
-                                    onPressed: () {},
+                                  SizedBox(
+                                    height: 36,
+                                    width: 36,
+                                    child: Image.asset(
+                                      "assets/img/logo_google.jpg",
+                                      
+                                      height: double.infinity,
+                                      width: double.infinity,
+                                      fit: BoxFit.fill,
+                                    ),
                                   ),
                                   Spacer(),
                                   Text("Login with Google",
@@ -153,7 +161,7 @@ class EntidadeLoginView extends StatelessWidget {
                               height: 10,
                             ),
                             Container(
-                              //alignment: Alignment.center,
+                              
                               width: larguraPor(70, context),
                               padding: EdgeInsets.symmetric(horizontal: 15),
                               height: 40,
@@ -164,9 +172,15 @@ class EntidadeLoginView extends StatelessWidget {
                               ),
                               child: Row(
                                 children: [
-                                  IconButton(
-                                    icon: Icon(Icons.settings),
-                                    onPressed: () {},
+                                  SizedBox(
+                                    height: 36,
+                                    width: 36,
+                                    child: Image.asset(
+                                      "assets/img/logo_facebook.png",
+                                      height: double.infinity,
+                                      width: double.infinity,
+                                      fit: BoxFit.fill,
+                                    ),
                                   ),
                                   Spacer(),
                                   Text("Login with Facebook",
