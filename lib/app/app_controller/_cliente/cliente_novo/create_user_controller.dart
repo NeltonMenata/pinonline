@@ -38,7 +38,11 @@ class CreateUserController extends GetxController {
     update();
     print("Imagem: " + this.image.toString());
   }
-
+  // Função que salva um novo usuário no sistema
+  //habilita a variavel isSave para "true" 
+  //Cria uma variavel final do tipo ParseObject("<nome_da_classe_no_back4app>")
+  //Cria uma variavel final do tipo QueryBuilder(ParseObject("<nome_da_classe_no_back4app>")) - Consulta no Banco de Dados
+  //whereEqualTo() função que recebe dois argumentos posicionais, o nome da coluna no back4app e o conteudo da coluna;
   Future<void> saveUser(BuildContext context) async {
     if (formRegisto.currentState!.validate()) {
       try {
@@ -56,7 +60,7 @@ class CreateUserController extends GetxController {
             ..set("nome", controller.nome.text)
             ..set("morada", controller.morada.text)
             ..set("contacto", controller.telefone.text)
-            ..set("email", controller.email.text)
+            ..set("email", controller.email.text.toLowerCase())
             ..set("descricao", controller.desc.text)
             ..set("senha", controller.senha.text);
 

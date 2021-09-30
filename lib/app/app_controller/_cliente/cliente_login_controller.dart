@@ -10,6 +10,7 @@ class ClienteLoginController extends GetxController {
 // Variaveis que pegam o email e a senha no momento do login!
   var email = TextEditingController();
   var senha = TextEditingController();
+  var mostraSenha = false;
 
 // Lista com a finalidade de retorna apenas 1 usuário!
   final List<ClienteModel> cliente = [];
@@ -51,6 +52,12 @@ class ClienteLoginController extends GetxController {
     return cliente.length == 1 ? "1" : "0";
 
     
+  }
+
+  //Troca a visualização do campo de senha
+  toggleMostraSenha() {
+    this.mostraSenha = !this.mostraSenha;
+    update();
   }
 
 // Função que faz login do Usuário e chama a Tela

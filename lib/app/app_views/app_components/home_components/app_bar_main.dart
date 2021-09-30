@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 //import '/app/app_views/categoria_view/canalizador_view.dart';
 // ignore: unused_import
-import '../../teste_widgets.dart';
 import '/app/app_controller/home_controller.dart';
 //import '/app/app_views/teste_widgets.dart';
 

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
-import '../app_provider/provider_data.dart';
-import '../app_controller/delete_controller.dart';
-// ignore: unused_import
-import '../app_models/categorias_model.dart';
-import '../app_views/app_routes/routes.dart';
-import '../app_controller/home_controller.dart';
-import 'app_components/home_components/app_bar_main.dart';
-import 'app_components/home_components/app_bottom_bar.dart';
-import 'app_components/home_components/drawer_component.dart';
+import 'package:pinonline/app/app_controller/delete_controller.dart';
+import 'package:pinonline/app/app_controller/home_controller.dart';
+import 'package:pinonline/app/app_models/categorias_model.dart';
+import 'package:pinonline/app/app_provider/provider_data.dart';
+import 'package:pinonline/app/app_views/app_components/home_components/app_bar_main.dart';
+import 'package:pinonline/app/app_views/app_components/home_components/app_bottom_bar.dart';
+import 'package:pinonline/app/app_views/app_components/home_components/drawer_component.dart';
+import 'package:pinonline/app/app_views/app_routes/routes.dart';
 
 // ignore: must_be_immutable
 class HomeView extends StatelessWidget {
@@ -229,60 +228,3 @@ class HomeView extends StatelessWidget {
 }
 
 
-/*
-
-ListView.separated(
-                      separatorBuilder: (context, index) => Divider(),
-                      itemCount: _mainController.totalCategoria,
-                      itemBuilder: (context, index) => Card(
-                        elevation: 3,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              height: 100,
-                              width: 200,
-                              child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                        height: 90,
-                                        decoration: BoxDecoration(
-                                          color: Colors.red,
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(15),
-                                          child: Image.asset(
-                                            "assets/img/imagem.jpg", 
-                                            //pega as imagens através da url 
-                                            //_mainCategoria.elementAt(index).url,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      _mainCategoria.elementAt(index).nome,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.blue[54]),
-                                    )
-                                  ]),
-                            ),
-                            Expanded(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10)),
-                                height: 95,
-                                child: Text(_mainCategoria.elementAt(index).desc),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-
-*/

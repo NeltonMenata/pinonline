@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinonline/app/app_controller/_entidade/entidade_novo/create_entidade_controller.dart';
@@ -36,7 +37,7 @@ class _CreateEntidadeViewState extends State<CreateEntidadeView> {
                     Container(
                       padding: EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                          color: Colors.grey,
+                      
                           borderRadius: BorderRadius.circular(70)),
                       child: GestureDetector(
                         onTap: () {
@@ -44,48 +45,46 @@ class _CreateEntidadeViewState extends State<CreateEntidadeView> {
                         },
                         child: GetBuilder<CreateEntidadeController>(
                           init: CreateEntidadeController(),
-                          builder: (_) => CircleAvatar(
-                            radius: 60,
-
-                            // ignore: unnecessary_null_comparison
-                            child: _controller.imageSelected
-                                ? ClipRRect(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(100)),
-                                    child: Stack(
-                                      children: [
-                                        Center(
-                                          child: CircularProgressIndicator()
-                                        ),
-                                        Image.file(
-                                          _controller.image!,
-                                          width: double.infinity,
-                                          height: double.infinity,
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                : Center(
-                                    child: Stack(children: [
-                                      Center(
-                                        child: Text(
-                                          "Selecione a Imagem",
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16.0,
+                          builder: (_) => DottedBorder(
+                            color: Colors.grey,
+                                strokeWidth: 2,
+                                dashPattern: [10, 10],
+                                borderType: BorderType.RRect,
+                                radius: Radius.circular(100),
+                                padding: EdgeInsets.all(6),
+                            child: CircleAvatar(
+                              radius: 60,
+                          backgroundColor: Colors.grey.shade300,
+                              // ignore: unnecessary_null_comparison
+                              child: _controller.imageSelected
+                                  ? ClipRRect(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(100)),
+                                      child: Stack(
+                                        children: [
+                                          Center(
+                                            child: CircularProgressIndicator()
                                           ),
+                                          Image.file(
+                                            _controller.image!,
+                                            width: double.infinity,
+                                            height: double.infinity,
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : Center(
+                                      child: Text(
+                                        "Inserir Logo",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.grey.shade500,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16.0,
                                         ),
                                       ),
-                                      Align(
-                                        alignment: Alignment.bottomRight,
-                                        child: CircleAvatar(
-                                          backgroundColor: Colors.green,
-                                          child: Icon(Icons.camera_alt_rounded),
-                                        ),
-                                      ),
-                                    ]),
-                                  ),
+                                    ),
+                            ),
                           ),
                         ),
                       ),
@@ -145,26 +144,29 @@ class _CreateEntidadeViewState extends State<CreateEntidadeView> {
                       ),
                       Text("Senha",
                           style: TextStyle(fontWeight: FontWeight.bold)),
-                      TextFormField(
-                        controller: _controller.senha,
-                        obscuringCharacter: "*",
-                        obscureText:
-                            _controller.mostraSenha,
-                        validator: (v) {
-                          if (!containLetter(v)) {
-                            return "Senha deve conter letra!";
-                          } else if (!containNumber(v)) {
-                            return "Senha deve conter número!";
-                          } else if (v!.length <= 5) {
-                            return "Senha não pode ter menos de 5 caracteres";
-                          }
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'Senha',
-                          border: OutlineInputBorder(),
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.panorama_fish_eye_outlined),
-                            onPressed: _controller.toggleMostraSenha,
+                      GetBuilder<CreateEntidadeController>(
+                        init: CreateEntidadeController(),
+                        builder:(_)=> TextFormField(
+                          controller: _controller.senha,
+                          obscuringCharacter: "*",
+                          obscureText:
+                              !_controller.mostraSenha,
+                          validator: (v) {
+                            if (!containLetter(v)) {
+                              return "Senha deve conter letra!";
+                            } else if (!containNumber(v)) {
+                              return "Senha deve conter número!";
+                            } else if (v!.length <= 5) {
+                              return "Senha não pode ter menos de 5 caracteres";
+                            }
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'Senha',
+                            border: OutlineInputBorder(),
+                            suffixIcon: IconButton(
+                              icon: Icon(Icons.panorama_fish_eye_outlined),
+                              onPressed: _controller.toggleMostraSenha,
+                            ),
                           ),
                         ),
                       ),

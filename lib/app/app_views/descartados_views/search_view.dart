@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../app_controller/home_controller.dart';
-import 'app_components/home_components/app_bar_main.dart';
-import 'app_components/home_components/app_bottom_bar.dart';
-import 'app_routes/routes.dart';
+import 'package:pinonline/app/app_controller/home_controller.dart';
+import 'package:pinonline/app/app_views/app_components/home_components/app_bar_main.dart';
+import 'package:pinonline/app/app_views/app_components/home_components/app_bottom_bar.dart';
+import 'package:pinonline/app/app_views/app_routes/routes.dart';
 
 // ignore: must_be_immutable
 class SearchView extends StatelessWidget {

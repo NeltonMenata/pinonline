@@ -2,10 +2,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinonline/app/app_controller/home_controller.dart';
+import 'package:pinonline/app/app_views/app_components/home_components/app_bottom_bar.dart';
+import 'package:pinonline/app/app_views/app_components/save_components/save_form.dart';
 import '/app/app_controller/save_controller.dart';
 import '/app/app_models/categorias_model.dart';
-import 'app_components/home_components/app_bottom_bar.dart';
-import 'app_components/save_components/save_form.dart';
 
 class SaveCategorieView extends StatelessWidget {
   SaveController get _upsaveController => SaveController.controller;

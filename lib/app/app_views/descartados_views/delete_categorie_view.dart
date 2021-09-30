@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pinonline/app/app_controller/delete_controller.dart';
+import 'package:pinonline/app/app_models/categorias_model.dart';
+import 'package:pinonline/app/app_views/app_components/home_components/app_bottom_bar.dart';
 import '/app/app_controller/home_controller.dart';
-import '../app_models/categorias_model.dart';
-import '../app_controller/delete_controller.dart';
-import 'app_components/home_components/app_bottom_bar.dart';
 
 class DeleteCategorieView extends StatelessWidget {
   List<Categoria> get _dmainCategoria =>

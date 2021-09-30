@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+import 'package:pinonline/app/app_controller/entidade_categoria_controller.dart';
 import 'package:pinonline/app/app_models/entidade_model.dart';
 import 'package:pinonline/app/app_provider/provider_data.dart';
-import '../app_controller/entidade_categoria_controller.dart';
-import 'app_components/home_components/app_bottom_bar.dart';
-import 'app_routes/routes.dart';
+import 'package:pinonline/app/app_views/app_components/home_components/app_bottom_bar.dart';
+import 'package:pinonline/app/app_views/app_routes/routes.dart';
+
 
 // ignore: must_be_immutable
 class EntidadeCategoriaView extends StatelessWidget {

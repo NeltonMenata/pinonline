@@ -73,17 +73,21 @@ class ClienteLoginView extends StatelessWidget {
                                   style:
                                       TextStyle(fontWeight: FontWeight.bold)),
                             ),
-                            TextFormField(
-                              controller: controller.senha,
-                              obscuringCharacter: "*",
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                  suffixIcon: IconButton(
-                                    icon: Icon(Icons.panorama_fish_eye_rounded),
-                                    onPressed: () {},
-                                  ),
-                                  hintText: 'Senha',
-                                  border: OutlineInputBorder()),
+                            GetBuilder<ClienteLoginController>(
+                              init: ClienteLoginController(),
+                              builder: (_) => TextFormField(
+                                controller: controller.senha,
+                                obscuringCharacter: "*",
+                                obscureText: !controller.mostraSenha,
+                                decoration: InputDecoration(
+                                    suffixIcon: IconButton(
+                                      icon:
+                                          Icon(Icons.panorama_fish_eye_rounded),
+                                      onPressed: controller.toggleMostraSenha,
+                                    ),
+                                    hintText: 'Senha',
+                                    border: OutlineInputBorder()),
+                              ),
                             ),
                             SizedBox(
                               height: 15,
@@ -116,7 +120,8 @@ class ClienteLoginView extends StatelessWidget {
                               onPressed: () {
                                 Get.toNamed(Routes.CREATEUSER);
                               },
-                              child: Text("Não tem conta? Clique aqui para criar uma."),
+                              child: Text(
+                                  "Não tem conta? Clique aqui para criar uma."),
                             ),
                             SizedBox(
                               height: larguraPor(0.8, context),
