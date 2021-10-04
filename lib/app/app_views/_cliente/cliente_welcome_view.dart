@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinonline/app/app_controller/_cliente/cliente_login_controller.dart';
 import 'package:pinonline/app/app_views/_cliente/cliente_dashboard/cliente_dashboard_view.dart';
+import 'package:pinonline/app/app_views/_cliente/cliente_financeiro_view.dart';
 import 'package:pinonline/app/app_views/_cliente/cliente_login_view.dart';
 import 'package:pinonline/app/app_views/_size/size.dart';
 import 'package:pinonline/app/app_views/app_components/home_components/app_bottom_bar.dart';
@@ -95,7 +96,7 @@ class ClienteWelcomeView extends StatelessWidget {
                                           MaterialStateProperty.all(
                                               Colors.black87)),
                                   onPressed: () {
-                                    
+                                    Get.to(ClienteFinanceiroView());
                                   },
                                   child: Text("Financeiros")),
                             ),

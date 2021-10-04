@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+import 'package:pinonline/app/app_controller/_cliente/cliente_obra_nova_controller.dart';
 import 'package:pinonline/app/app_models/cliente_model.dart';
 import 'package:pinonline/app/app_views/_cliente/cliente_welcome_view.dart';
 
@@ -78,4 +79,10 @@ class ClienteLoginController extends GetxController {
 void clearLogin(){
   cliente.clear();
 }
+  @override
+  void onClose() {
+    
+    ClienteObraNovaController.controller.isDocSelect.value = false;
+    super.onClose();
+  }
 }

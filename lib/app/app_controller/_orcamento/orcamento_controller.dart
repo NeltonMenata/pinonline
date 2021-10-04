@@ -26,7 +26,6 @@ class OrcamentoController extends GetxController {
       entidade: entidade[_index],
     ));
     
-    print(entidade[_index].nome);
-    print("Item actual na Tela: $_index");
+    
   }
 }

@@ -32,8 +32,10 @@ dependencies:
   dio:
   parse_server_sdk_flutter: 
   sqflite:
+  hive:
   image_picker:
   dotted_border: ^2.0.0+1
+  file_picker: 
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +55,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/img/logo.png
+    - assets/img/logo_save.png
     - assets/img/logo_profissional.png
     - assets/img/linha_btn.png
     - assets/img/linha_pesquisar.png

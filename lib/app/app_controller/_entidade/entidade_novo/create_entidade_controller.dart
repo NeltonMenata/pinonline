@@ -22,8 +22,71 @@ class CreateEntidadeController extends GetxController {
   var cidade = TextEditingController();
   var desc = TextEditingController();
   var formRegisto = GlobalKey<FormState>();
+  var formRegisto2 = GlobalKey<FormState>();
 
-  toggleMostraSenha() {
+  // VARIAVEIS DE DADOS TEMPORARIOS ################
+  var showCategoria = false;
+  var selectCategoria = [false,false,false,false,false,false,false];
+
+  var listaFun = ["1 a 5", "6 a 10", "11 a 20", "+ de 20"];
+    var listaObra = ["5", "10", "15", "20", "+ de 25"];
+    var listaZona = [
+      "Viana do Castelo",
+      "Braga",
+      "Vila Real",
+      "Bragança",
+      "Porto",
+      "Aveiro",
+      "Viseu",
+      "Guarda",
+      "Coimbra",
+      "Castelo Branco",
+      "Leiria",
+      "Lisboa",
+      "Santarém",
+      "Portalegre",
+      "Setúbal",
+      "Évora",
+      "Beja",
+      "Faro",
+      "Açores ",
+      "Madeira"
+    ];
+    var listaCategoria = [
+      "Programador",
+      "WebDesignar",
+      "Construção",
+      "Serviços",
+      "Remodelações",
+      "Técnico de Frio",
+      "Carpinteiro"
+    ];
+
+  var funValue = "1 a 5";
+  var obraValue = "5";
+  var zonaValue = "Viana do Castelo";
+  void toggleZona(String value){
+    zonaValue = value;
+    update();
+  }
+  void toggleObra(String value){
+    obraValue = value;
+    update();
+  }
+  void toggleFun(String value){
+    funValue = value;
+    update();
+  }
+  // VARIAVEIS DE DADOS TEMPORARIOS ################ FIM DA LISTA
+  void toggleCategoria(){
+    showCategoria = !showCategoria;
+    update();
+  }
+  toggleSelectCategoria(int index){
+    this.selectCategoria[index] = !selectCategoria[index]; 
+    update();
+  }
+  void toggleMostraSenha() {
     this.mostraSenha = !this.mostraSenha;
     update();
   }
