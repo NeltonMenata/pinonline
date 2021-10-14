@@ -128,7 +128,7 @@ class RegistoEntidadeView extends StatelessWidget {
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.green)),
                           onPressed: () => Get.to(RegistoEntidadeView2()),
-                          child: Text("Salvar Dados")),
+                          child: Text("Continuar")),
                       ElevatedButton(
                           style: ButtonStyle(
                               backgroundColor:

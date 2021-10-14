@@ -178,7 +178,7 @@ class _CreateUserViewState extends State<CreateUserView> {
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.green)),
                           onPressed: () => _controller.saveUserName(),
-                          child: Text("Salvar Usuário"))
+                          child: Text("Continuar"))
                     ],
                   ),
                 ),

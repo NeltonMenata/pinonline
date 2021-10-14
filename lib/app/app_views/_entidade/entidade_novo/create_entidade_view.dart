@@ -182,7 +182,7 @@ class _CreateEntidadeViewState extends State<CreateEntidadeView> {
                                   MaterialStateProperty.all(Colors.green)),
                           onPressed: () => _controller
                               .saveEntidadeName(),
-                          child: Text("Salvar Usuário"))
+                          child: Text("Continuar"))
                     ],
                   ),
                 ),

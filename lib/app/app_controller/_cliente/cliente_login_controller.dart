@@ -46,9 +46,10 @@ class ClienteLoginController extends GetxController {
           morada: response.result[0]["morada"],
           img: response.result[0]["img"]["url"],
           senha: response.result[0]["senha"],
-          objectId: response.result[0]["objectId"],
+          objectId: response.results![0]["objectId"],
         )
       );
+      print("Imprimindo resultado do Login: ${response.result[0]}");
     }
     return cliente.length == 1 ? "1" : "0";
 

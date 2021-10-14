@@ -207,6 +207,12 @@ class ClienteLoginView extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.green[500],
+          onPressed: () {},
+          tooltip: "Particular",
+          child: Icon(Icons.person,size: 50,)),
     );
   }
 }

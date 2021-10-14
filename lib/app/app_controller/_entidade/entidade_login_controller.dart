@@ -33,6 +33,7 @@ class EntidadeLoginController extends GetxController {
         desc: response.result[0]["descricao"].toString(),
         morada: response.result[0]["morada"].toString(),
         img: response.result[0]["img"]["url"].toString(),
+        admin: response.result[0]["admin"],
         senha: response.result[0]["senha"].toString(),
         objectId: response.result[0]["objectId"].toString(),
       ));

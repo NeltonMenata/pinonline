@@ -225,6 +225,7 @@ class WelcomeAlternativeView extends StatelessWidget {
           ),
         ),
       ),
+      
     );
   }
 }

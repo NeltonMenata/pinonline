@@ -8,6 +8,9 @@ class EntidadeModel {
   final String desc;
   final String img;
   final String objectId;
+  bool isSelected = false;
+  bool? admin = false;
+  
 
   EntidadeModel(
       {required this.nome,
@@ -18,7 +21,8 @@ class EntidadeModel {
       required this.email,
       required this.desc,
       required this.img,
-      required this.objectId});
+      required this.objectId,
+      this.admin});
 
   static List<EntidadeModel> allEntidades() {
     return [

@@ -8,6 +8,7 @@ import 'package:pinonline/app/app_views/_size/size.dart';
 import 'package:pinonline/app/app_views/app_components/home_components/app_bottom_bar.dart';
 
 import 'cliente_obra_nova_view.dart';
+import 'leilao/teste/leilao_cliente_view.dart';
 
 class ClienteWelcomeView extends StatelessWidget {
   @override
@@ -159,6 +160,46 @@ class ClienteWelcomeView extends StatelessWidget {
                             ),
                           ],
                         ),
+                        SizedBox(height: 15,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Container(
+                              width: larguraPor(35, context),
+                              height: larguraPor(35, context),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Colors.grey,
+                              ),
+                              child: TextButton(
+                                  style: ButtonStyle(
+                                      foregroundColor:
+                                          MaterialStateProperty.all(
+                                              Colors.black87)),
+                                  onPressed: () {
+                                    Get.to(ClienteDashBoardView());
+                                  },
+                                  child: Text("Tutorial")),
+                            ),
+                            Container(
+                              width: larguraPor(35, context),
+                              height: larguraPor(35, context),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Colors.grey,
+                              ),
+                              child: TextButton(
+                                  style: ButtonStyle(
+                                      foregroundColor:
+                                          MaterialStateProperty.all(
+                                              Colors.black87)),
+                                  onPressed: () {
+                                    Get.to(LeilaoClienteView());
+                                  },
+                                  child: Text("Leilão")),
+                            ),
+                          ],
+                        ),
                         Spacer(),
                       ],
                     ),
@@ -182,7 +223,7 @@ class ClienteWelcomeView extends StatelessWidget {
 }
 
 /*
-
+LeilaoClienteView()
 Container(
                 height: alturaPor(10, context),
                 width: double.infinity,

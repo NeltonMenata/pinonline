@@ -52,8 +52,9 @@ class CreateUserController extends GetxController {
         queryCliente.whereEqualTo(
             "email", CreateUserController.controller.email.text);
         final response = await queryCliente.query();
+        
         if (response.result != null) {
-          print(response.result);
+          
           Get.snackbar("Conta Nova", "Usuário já existe, faça o login!");
         } else {
           clienteNovo

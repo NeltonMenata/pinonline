@@ -7,12 +7,10 @@ import 'package:pinonline/app/app_views/app_routes/routes.dart';
 
 // ignore: must_be_immutable
 class EntidadeLoginView extends StatelessWidget {
-  
   EntidadeLoginController get controller => EntidadeLoginController.controller;
-  
+
   @override
   Widget build(BuildContext context) {
-    
     var _alturaTotal = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
@@ -78,13 +76,14 @@ class EntidadeLoginView extends StatelessWidget {
                             ),
                             GetBuilder<EntidadeLoginController>(
                               init: EntidadeLoginController(),
-                              builder: (_) =>TextFormField(
+                              builder: (_) => TextFormField(
                                 controller: controller.senha,
                                 obscuringCharacter: "*",
                                 obscureText: !controller.mostraSenha,
                                 decoration: InputDecoration(
                                     suffixIcon: IconButton(
-                                      icon: Icon(Icons.panorama_fish_eye_rounded),
+                                      icon:
+                                          Icon(Icons.panorama_fish_eye_rounded),
                                       onPressed: controller.toggleMostraSenha,
                                     ),
                                     hintText: 'Senha',
@@ -100,13 +99,12 @@ class EntidadeLoginView extends StatelessWidget {
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
-                                  style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              Colors.green)),
-                                  child: Text("Iniciar Sessão"),
-                                  onPressed: controller.startLogin,
-                                  ),
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                        Colors.green)),
+                                child: Text("Iniciar Sessão"),
+                                onPressed: controller.startLogin,
+                              ),
                             ),
                             SizedBox(height: 10),
                             SizedBox(
@@ -123,13 +121,13 @@ class EntidadeLoginView extends StatelessWidget {
                               onPressed: () {
                                 Get.toNamed(Routes.CREATEENTIDADE);
                               },
-                              child: Text("Não tem conta? Clique aqui para criar uma."),
+                              child: Text(
+                                  "Não tem conta? Clique aqui para criar uma."),
                             ),
                             SizedBox(
                               height: 25,
                             ),
                             Container(
-                          
                               width: larguraPor(70, context),
                               padding: EdgeInsets.symmetric(horizontal: 15),
                               height: 40,
@@ -145,7 +143,6 @@ class EntidadeLoginView extends StatelessWidget {
                                     width: 36,
                                     child: Image.asset(
                                       "assets/img/logo_google.jpg",
-                                      
                                       height: double.infinity,
                                       width: double.infinity,
                                       fit: BoxFit.fill,
@@ -164,7 +161,6 @@ class EntidadeLoginView extends StatelessWidget {
                               height: 10,
                             ),
                             Container(
-                              
                               width: larguraPor(70, context),
                               padding: EdgeInsets.symmetric(horizontal: 15),
                               height: 40,
@@ -210,6 +206,18 @@ class EntidadeLoginView extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.green[500],
+          onPressed: () {},
+          tooltip: "Profissional",
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset("assets/img/logo_profissional.png",
+                height: double.infinity,
+                width: double.infinity,
+                fit: BoxFit.cover),
+          )),
     );
   }
 }
