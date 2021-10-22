@@ -6,7 +6,7 @@ import 'package:pinonline/app/app_views/_entidade/entidade_login_view.dart';
 import 'package:pinonline/app/app_views/_entidade/leilao/leilao_entidade_view.dart';
 import 'package:pinonline/app/app_views/_size/size.dart';
 
-import 'leilao/leilao_admin_view.dart';
+import 'admin/admin_view.dart';
 
 class EntidadeWelcomeView extends StatelessWidget {
   EntidadeLoginController get controller => EntidadeLoginController.controller;
@@ -34,7 +34,7 @@ class EntidadeWelcomeView extends StatelessWidget {
                             children: [
                               IconButton(
                                   onPressed: () {
-                                    Get.to(LeilaoAdminView());
+                                    Get.to(AdminVew());
                                   },
                                   icon: Icon(Icons.admin_panel_settings_outlined)),
                               Text("Admin")

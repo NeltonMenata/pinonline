@@ -9,6 +9,7 @@ import 'package:pinonline/app/app_views/app_components/home_components/app_botto
 
 import 'cliente_obra_nova_view.dart';
 import 'leilao/teste/leilao_cliente_view.dart';
+import 'leilao/teste/leilao_response_cliente_view.dart';
 
 class ClienteWelcomeView extends StatelessWidget {
   @override
@@ -177,9 +178,9 @@ class ClienteWelcomeView extends StatelessWidget {
                                           MaterialStateProperty.all(
                                               Colors.black87)),
                                   onPressed: () {
-                                    Get.to(ClienteDashBoardView());
+                                    Get.to(LeilaoResponseClienteView());
                                   },
-                                  child: Text("Tutorial")),
+                                  child: Text("Leilões Respondidos")),
                             ),
                             Container(
                               width: larguraPor(35, context),

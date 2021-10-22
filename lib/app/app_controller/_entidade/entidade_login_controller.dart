@@ -50,7 +50,7 @@ class EntidadeLoginController extends GetxController {
 // Função que faz login do Usuário e chama a Tela
 // de Bem-Vindo se o usuário for encontrado no sistema!
   void startLogin() async {
-    if ("1" == await controller.entidadeLogin(email.text, senha.text)) {
+    if ("1" == await controller.entidadeLogin(email.text.toLowerCase(), senha.text)) {
       Get.to(EntidadeWelcomeView());
       email.text = "";
       senha.text = "";

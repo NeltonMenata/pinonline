@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:get/get.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
-import 'package:pinonline/app/app_models/entidade_model.dart';
 import 'package:pinonline/app/app_views/_entidade/leilao/leilao_admin_view.dart';
+import 'package:pinonline/app/app_views/_size/size.dart';
 
 // ignore: must_be_immutable
 class LeilaoAdminSelectView extends StatelessWidget {
@@ -10,7 +11,7 @@ class LeilaoAdminSelectView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String _objectId = Get.arguments.toString();
+    var cliente = Get.arguments as ParseObject;
     return WillPopScope(
       onWillPop: () async {
         controller.entidade!.clear();
@@ -18,22 +19,12 @@ class LeilaoAdminSelectView extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
+          title: Text("Dados do Cliente"),
           actions: [
-            TextButton.icon(
-                onPressed: () {},
-                icon: GetBuilder<LeilaoAdminController>(
-                    init: LeilaoAdminController(),
-                    builder: (_) => Checkbox(
-                        value: controller.isSelected,
-                        onChanged: (v) {
-                          controller.toggleSelectionAll();
-                          print(controller.isSelected);
-                        })),
-                label: Text("Select All")),
             IconButton(
                 onPressed: () async {
                   controller.isSend.value = true;
-                  await controller.enviaPropostaLeilao(_objectId);
+                  //await controller.enviaPropostaLeilao(_objectId);
                   controller.isSend.value = false;
                 },
                 icon: Icon(Icons.send_outlined))
@@ -45,56 +36,70 @@ class LeilaoAdminSelectView extends StatelessWidget {
             Expanded(
               child: GetBuilder<LeilaoAdminController>(
                 init: LeilaoAdminController(),
-                builder: (_) => FutureBuilder<List<ParseObject>>(
-                  future: controller.entidadeLeilao(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      snapshot.data!.forEach((element) {
-                        controller.entidade!.add(EntidadeModel(
-                            objectId: element.objectId!,
-                            senha: element.get("senha"),
-                            nome: element.get("nome"),
-                            desc: element.get("descricao"),
-                            img: element.get("img")["url"],
-                            contacto: element.get("contacto"),
-                            admin: element.get("admin"),
-                            categoria: element.get("categoria").toString(),
-                            email: element.get("email"),
-                            morada: element.get("morada")));
-                      });
-                      return ListView.builder(
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                              title: Text(
-                                controller.entidade![index].nome,
-                              ),
+                builder: (_) => Container(
+                  child: Column(
+                    children: [
+                      Container(
+                        height: alturaPor(40, context),
+                        child: ListView(
+                          children: [
+                            ListTile(
+                              title: Text("Nome:"),
                               subtitle: Text(
-                                controller.entidade![index].email.toString(),
+                                cliente.get("cliente").get("nome"),
                               ),
-                              onTap: () {},
-                              trailing: Text(_objectId),
-                              leading: GetBuilder<LeilaoAdminController>(
-                                builder: (_) {
-                                  return Checkbox(
-                                      value: controller
-                                          .entidade![index].isSelected,
-                                      onChanged: (v) {
-                                        controller.toggleSelectEntidade(
-                                            v!, index);
-                                        print(controller
-                                            .entidade![index].isSelected);
-                                      });
-                                },
-                              ));
-                        },
-                      );
-                    } else if (snapshot.hasError) {
-                      return Text(snapshot.error.toString());
-                    } else {
-                      return Center(child: CircularProgressIndicator());
-                    }
-                  },
+                            ),
+                            ListTile(
+                              title: Text("Email:"),
+                              subtitle: Text(
+                                cliente["cliente"]["email"].toString(),
+                              ),
+                            ),
+                            ListTile(
+                              title: Text("Telefone:"),
+                              subtitle: Text(
+                                cliente["cliente"]["telefone"].toString(),
+                              ),
+                            ),
+                            ListTile(
+                              title: Text("Morada:"),
+                              subtitle: Text(
+                                cliente.get("cliente").get("morada").toString(),
+                              ),
+                            ),
+                            ListTile(
+                              title: Text("Cidade:"),
+                              subtitle: Text(
+                                cliente.get("cliente").get("cidade").toString(),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: alturaPor(40, context),
+                        child: FutureBuilder(
+                            future:
+                                controller.loadPdf(cliente["documento"]["url"]),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                return PDFView(
+                                  filePath: snapshot.data as String,
+                                );
+                              } else if (snapshot.hasError) {
+                                return Center(
+                                  child: Text(
+                                      "Erro ao carregar: ${snapshot.error}"),
+                                );
+                              } else {
+                                return Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                            }),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:pinonline/app/app_controller/_cliente/cliente_login_controller.dart';
+import 'package:pinonline/app/app_models/cliente_model.dart';
 import 'package:pinonline/app/app_views/_size/size.dart';
 import 'package:pinonline/app/app_views/app_components/home_components/app_bottom_bar.dart';
 
@@ -12,7 +13,7 @@ import 'package:pinonline/app/app_views/app_components/home_components/app_botto
 class LeilaoClienteView extends StatelessWidget {
   ControllerLeilao get _controller => ControllerLeilao.controller;
 
-  get cliente => ClienteLoginController.controller.cliente[0];
+  ClienteModel get cliente => ClienteLoginController.controller.cliente[0];
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -222,12 +223,21 @@ class LeilaoClienteView extends StatelessWidget {
                             backgroundColor:
                                 MaterialStateProperty.all(Colors.green[500]),
                           ),
-                          onPressed: _controller.saveLeilao,
+                          onPressed: ()=>_controller.saveLeilao(context),
                           child: Text("Enviar Leilão")),
                     ],
                   ),
                 ),
               ],
+            ),
+          ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
+          floatingActionButton: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Obx(
+              ()=> Visibility(
+                visible: _controller.isSave.value,
+                child: CircularProgressIndicator()),
             ),
           ),
           bottomNavigationBar: bottomAppBar(),
@@ -246,6 +256,7 @@ class ControllerLeilao extends GetxController {
   TextEditingController valorMax = TextEditingController();
   var isDocSelect = false.obs;
   File? doc;
+  var isSave = false.obs;
 
   Future<void> selectFile() async {
     FilePickerResult? result = await FilePicker.platform
@@ -257,12 +268,14 @@ class ControllerLeilao extends GetxController {
     isDocSelect.value = true;
   }
 
-  void saveLeilao() async {
+  void saveLeilao(BuildContext context) async {
     if (doc == null || isDocSelect.value != true) {
       Get.snackbar("Documento", "Seleciona um documento do tipo PDF");
       return;
     }
+    isSave.value = true;
     try {
+      
       ParseFileBase parseFile;
       parseFile = ParseFile(doc);
       await parseFile.save();
@@ -273,11 +286,50 @@ class ControllerLeilao extends GetxController {
         ..set("valorMax", int.parse(controller.valorMax.text.toString()))
         ..set("documento", parseFile);
       await leilao.save();
-      print("Leilão salvo com sucesso: ${leilao.objectId}");
-      print("Leilão salvo com sucesso: ${cliente.objectId}");
-      print("Leilão salvo com sucesso: ${cliente.nome}");
+      showDialog(
+          context: context,
+          builder: (_) {
+            return AlertDialog(
+              title: Text("Leilão Enviado"),
+              content: Text("O seu leilão foi enviado com sucesso"),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Get.back();
+                      Get.back();
+                    },
+                    child: Text("Ok"))
+              ],
+            );
+          });
+          isSave.value = false;
     } catch (e) {
       print("Erro ao salvar o leilao: $e");
+    }
+  }
+
+  Future<List<ParseObject>> clienteLeilaoResponse(String objectIdCliente) async {
+    try{
+      List<ParseObject> propostaleilaoResponse = [];
+      final queryLeilao = QueryBuilder(ParseObject("Leilao"))..whereEqualTo("cliente",ParseObject("Cliente")..objectId = objectIdCliente);
+      final response = await queryLeilao.query();
+      List<String> objectIdLeilao = [];
+      response.results!.forEach((element){
+        objectIdLeilao.add(element["objectId"].toString());
+      });      
+
+      objectIdLeilao.forEach((element) async {
+        final queryPropostaLeilao = QueryBuilder(ParseObject("PropostaLeilao"))..includeObject(["leilao, entidade"])..whereEqualTo("leilao", ParseObject("Leilao")..objectId = element);
+
+        final response = await queryPropostaLeilao.query();
+        propostaleilaoResponse.add(response.results![0]);
+      }); 
+      
+      return propostaleilaoResponse;
+      
+    }catch(e){
+      Get.snackbar("Erro", "Mensagem do erro: $e");
+      return [];
     }
   }
 }
