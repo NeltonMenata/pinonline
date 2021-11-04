@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinonline/app/app_views/_entidade/leilao/leilao_admin_view.dart';
 import 'package:pinonline/app/app_views/_entidade/leilao/leilao_response_entidade_view.dart';
+import 'package:pinonline/app/app_views/_entidade/pagamento/pagamento_cliente_view.dart';
 
 class AdminVew extends StatelessWidget {
 
@@ -31,6 +32,17 @@ class AdminVew extends StatelessWidget {
                 title: Text("Listar respostas de Leilões de Profissionais"),
                 onTap: () {
                   Get.to(LeilaoResponseEntidadeView());
+                },
+              ),
+              ListTile(
+                leading: CircleAvatar(
+                    child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(Icons.money),
+                )),
+                title: Text("Listar Pagamentos de Obras/Leilões dos Cliente"),
+                onTap: () {
+                  Get.to(PagamentoClienteView());
                 },
               )
             ],
