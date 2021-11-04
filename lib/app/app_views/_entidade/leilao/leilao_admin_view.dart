@@ -51,7 +51,9 @@ class LeilaoAdminView extends StatelessWidget {
                             },
                             icon: Icon(Icons.send_rounded),
                             label: Text("Ver mais:")),
-                        onTap: () async {},
+                        onTap: () async {
+                          
+                        },
                       ),
                       Text(
                           "Localização da Obra: ${snapshot.data![index]["localizacao"]}"),

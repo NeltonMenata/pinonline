@@ -11,7 +11,7 @@ class LeilaoAdminSelectView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cliente = Get.arguments as ParseObject;
+    var leilao = Get.arguments as ParseObject;
     return WillPopScope(
       onWillPop: () async {
         controller.entidade!.clear();
@@ -22,10 +22,10 @@ class LeilaoAdminSelectView extends StatelessWidget {
           title: Text("Dados do Cliente"),
           actions: [
             IconButton(
-                onPressed: () async {
-                  controller.isSend.value = true;
-                  //await controller.enviaPropostaLeilao(_objectId);
-                  controller.isSend.value = false;
+                onPressed: (){
+                  controller.sendProgressIndicator(true);
+                  controller.enviaPropostaLeilao(leilao.objectId!);
+                  controller.sendProgressIndicator(false);
                 },
                 icon: Icon(Icons.send_outlined))
           ],
@@ -46,31 +46,31 @@ class LeilaoAdminSelectView extends StatelessWidget {
                             ListTile(
                               title: Text("Nome:"),
                               subtitle: Text(
-                                cliente.get("cliente").get("nome"),
+                                leilao.get("cliente").get("nome"),
                               ),
                             ),
                             ListTile(
                               title: Text("Email:"),
                               subtitle: Text(
-                                cliente["cliente"]["email"].toString(),
+                                leilao["cliente"]["email"].toString(),
                               ),
                             ),
                             ListTile(
                               title: Text("Telefone:"),
                               subtitle: Text(
-                                cliente["cliente"]["telefone"].toString(),
+                                leilao["cliente"]["telefone"].toString(),
                               ),
                             ),
                             ListTile(
-                              title: Text("Morada:"),
+                              title: Text("Descrição do Leilão:"),
                               subtitle: Text(
-                                cliente.get("cliente").get("morada").toString(),
+                                leilao.get("descricao").toString(),
                               ),
                             ),
                             ListTile(
-                              title: Text("Cidade:"),
+                              title: Text("Valor do Leilão:"),
                               subtitle: Text(
-                                cliente.get("cliente").get("cidade").toString(),
+                                leilao.get("valorMax").toString(),
                               ),
                             ),
                           ],
@@ -80,7 +80,7 @@ class LeilaoAdminSelectView extends StatelessWidget {
                         height: alturaPor(40, context),
                         child: FutureBuilder(
                             future:
-                                controller.loadPdf(cliente["documento"]["url"]),
+                                controller.loadPdf(leilao["documento"]["url"]),
                             builder: (context, snapshot) {
                               if (snapshot.hasData) {
                                 return PDFView(
@@ -103,11 +103,12 @@ class LeilaoAdminSelectView extends StatelessWidget {
                 ),
               ),
             ),
-            Obx(
-              () => Container(
+            GetBuilder<LeilaoAdminController>(
+              init: LeilaoAdminController(),
+              builder:(_) => Container(
                 height: 50,
                 child: Center(
-                    child: controller.isSend.value
+                    child: controller.isSend
                         ? CircularProgressIndicator()
                         : Container()),
               ),

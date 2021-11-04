@@ -6,7 +6,7 @@ import 'package:pinonline/app/app_views/_entidade/leilao/leilao_response_entidad
 import 'leilao_admin_controller.dart';
 
 class LeilaoAdminResponseView extends StatelessWidget {
- LeilaoAdminController get controller => LeilaoAdminController.controller;
+ LeilaoAdminController get _controller => LeilaoAdminController.controller;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +14,7 @@ class LeilaoAdminResponseView extends StatelessWidget {
           AppBar(actions: [], title: Text("Leilões Solicitados por Cliente")),
       body: Center(
           child: FutureBuilder<List<ParseObject>>(
-        future: controller.listaLeilao(),
+        future: _controller.listaLeilao(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(

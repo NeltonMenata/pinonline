@@ -9,11 +9,11 @@ import 'package:pinonline/app/app_views/_size/size.dart';
 import 'leilao_entidade_select_view.dart';
 
 class LeilaoEntidadeView extends StatelessWidget {
-  EntidadeModel get entidade => EntidadeLoginController.controller.entidade[0];
-  LeilaoAdminController get controller => LeilaoAdminController.controller;
+  EntidadeModel get _entidade => EntidadeLoginController.controller.entidade[0];
+  LeilaoAdminController get _controller => LeilaoAdminController.controller;
   @override
   Widget build(BuildContext context) {
-    String _objectIdEntidade = entidade.objectId;
+    String _objectIdEntidade = _entidade.objectId;
     return Scaffold(
       appBar: AppBar(title: Text("Leilões Disponíveis")),
       body: Center(
@@ -23,7 +23,7 @@ class LeilaoEntidadeView extends StatelessWidget {
               height: alturaPor(90, context),
               child: FutureBuilder<List<ParseObject>>(
                 future:
-                    controller.entidadeListaPropostaLeilao(_objectIdEntidade),
+                    _controller.entidadeListaPropostaLeilao(_objectIdEntidade),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     

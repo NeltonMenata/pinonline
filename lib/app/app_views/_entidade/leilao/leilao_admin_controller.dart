@@ -1,4 +1,3 @@
-
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -18,10 +17,15 @@ class LeilaoAdminController extends GetxController {
   bool isSelected = false;
 
   // Variavel que verifica se está enviando proposta
-  var isSend = false.obs;
+  var isSend = false;
 
   toggleSelectEntidade(bool value, int index) {
     entidade![index].isSelected = value;
+    update();
+  }
+
+  void sendProgressIndicator(bool value) {
+    isSend = value;
     update();
   }
 
@@ -37,31 +41,27 @@ class LeilaoAdminController extends GetxController {
 //
   Future<void> enviaPropostaLeilao(String objectIdLeilao) async {
     try {
-      entidade!.forEach((element) async {
-        if (element.isSelected) {
-          final query = QueryBuilder(ParseObject("PropostaLeilao"))
-            ..whereEqualTo(
-                "entidade",
-                (ParseObject("Entidade")..objectId = element.objectId)
-                    .toPointer())
-            ..whereEqualTo("leilao",
-                (ParseObject("Leilao")..objectId = objectIdLeilao).toPointer());
-          final response = await query.query();
-
-          if (response.results != null) {
-            Get.snackbar("Proposta Leilão",
-                "O usuário ${element.nome} já recebeu essa proposta de leilão");
-            return;
-          }
-          final propostaLeilao = ParseObject("PropostaLeilao")
-            ..set("entidade",
-                ParseObject("Entidade")..objectId = element.objectId)
-            ..set("leilao", ParseObject("Leilao")..objectId = objectIdLeilao)
-            ..set("propostaAceite", false);
-          await propostaLeilao.save();
-          print("Enviado ${element.nome}");
-        }
+      final entidades = QueryBuilder(ParseObject("Entidade"));
+      final response = await entidades.query();
+      response.results!.forEach((element) {
+        entidade!.add(EntidadeModel(
+            nome: element["nome"],
+            senha: element["senha"],
+            categoria: element["categoria"].toString(),
+            contacto: element["contacto"].toString(),
+            email: element["email"],
+            morada: element["morada"].toString(),
+            desc: element["descricao"].toString(),
+            img: element["img"]["url"],
+            objectId: element["objectId"],
+            admin: element["admin"],
+            isSelected: element["isSelected"]));
       });
+
+      entidade!.forEach((element) {
+        _funtionEntidade(element, objectIdLeilao);
+      });
+      this.sendProgressIndicator(false);
     } catch (e) {
       Get.snackbar("Erro", "Mensagem: $e");
     }
@@ -103,14 +103,50 @@ class LeilaoAdminController extends GetxController {
     }
   }
 
+  Future<void> _funtionEntidade(
+      EntidadeModel element, String objectIdLeilao) async {
+    final query = QueryBuilder(ParseObject("PropostaLeilao"))
+      ..whereEqualTo("entidade",
+          (ParseObject("Entidade")..objectId = element.objectId).toPointer())
+      ..whereEqualTo("leilao",
+          (ParseObject("Leilao")..objectId = objectIdLeilao).toPointer());
+    final response = await query.query();
+
+    if (response.results != null) {
+      Get.snackbar("Proposta Leilão",
+          "O usuário ${element.nome} já recebeu essa proposta de leilão");
+      return;
+    }
+
+    final propostaLeilao = ParseObject("PropostaLeilao")
+      ..set("entidade", ParseObject("Entidade")..objectId = element.objectId)
+      ..set("leilao", ParseObject("Leilao")..objectId = objectIdLeilao)
+      ..set("propostaAceite", false);
+    await propostaLeilao.save();
+    Get.snackbar(
+        "Proposta de Leilão", "A proposta leilão foi enviada com sucesso");
+  }
+
   // Função que set com o valor true a variavel propostaAceite no back4app na class PropostaLeilao
   // Habilitando assim este Profissional para fornecer o serviço
-  Future<void> aceitaPropostaLeilao(String objectId) async {
+  Future<void> aceitaPropostaLeilao(
+      String objectIdProposta, String objectIdLeilao) async {
     try {
+      final qLeilaoIsDone = QueryBuilder(ParseObject("PropostaLeilao"))
+        ..whereEqualTo(
+            "leilao", ParseObject("Leilao")..objectId = objectIdLeilao)
+        ..whereEqualTo("propostaAceite", true);
+      final response = await qLeilaoIsDone.query();
+      if(response.results != null && response.success){
+        Get.snackbar("Proposta de Leilao", "Este Leilão já foi atribuído a outro Profissional", backgroundColor: Colors.red.withOpacity(0.5));
+        return;
+      }
+
       final aceitaProposta = ParseObject("PropostaLeilao")
         ..set("propostaAceite", true)
-        ..objectId = objectId;
+        ..objectId = objectIdProposta;
       await aceitaProposta.save();
+      Get.snackbar("Proposta Leilão", "Proposta foi atribuida ao Profissional com sucesso", backgroundColor: Colors.green.withOpacity(0.5));
     } catch (e) {
       Get.snackbar("Erro", "Mensagem: $e");
     }
@@ -152,8 +188,8 @@ class LeilaoAdminController extends GetxController {
     }
   }
 
-  Future<void> respostaEntidadeLeilao(double valorProposta,
-      String objectIdLeilao, BuildContext context) async {
+  Future<void> respostaEntidadeLeilao(
+      double valorProposta, String objectIdLeilao, BuildContext context) async {
     showDialog(
         context: context,
         builder: (_) {
@@ -180,7 +216,6 @@ class LeilaoAdminController extends GetxController {
                     Get.snackbar("Proposta de Leilão",
                         "Valor de propsta de Leilão enviado com sucesso",
                         backgroundColor: Colors.green);
-                    
                   } catch (e) {
                     Get.snackbar("Erro", "Mensagem: $e");
                     Get.back();
@@ -194,14 +229,15 @@ class LeilaoAdminController extends GetxController {
   }
 
   // Função que retorna lista de todas as propostas respondidas pelo profissional
-  Future<List<ParseObject>> adminLeilaoResponseEntidade() async {
+  Future<List<ParseObject>> adminLeilaoResponseEntidade(
+      /*String objectIdLeilao*/) async {
     try {
       final query = QueryBuilder(ParseObject("PropostaLeilao"))
         ..includeObject(["leilao", "leilao.cliente", "entidade"])
+        // ..whereEqualTo("leilao", ParseObject("Leilao")..objectId = objectIdLeilao)
         ..whereEqualTo("entidadeDone", true);
       final response = await query.query();
       if (response.results != null && response.success) {
-        print(response.results!);
         return response.results! as List<ParseObject>;
       }
       return [];
@@ -234,14 +270,7 @@ class LeilaoAdminController extends GetxController {
     file.openWrite();
     await file.writeAsBytes(response.data);
 
-/*
-    await file.writeAsString(response.bodyString!, flush: true);
-    print(file.path);
-*/
     intPDF++;
-
-    print(
-        "Carregando os dados numero: $intPDF, \nTamanho: ${await file.length()}");
     return file.path;
   }
 

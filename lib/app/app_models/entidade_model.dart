@@ -8,7 +8,7 @@ class EntidadeModel {
   final String desc;
   final String img;
   final String objectId;
-  bool isSelected = false;
+  bool? isSelected = false;
   bool? admin = false;
   
 
@@ -22,7 +22,9 @@ class EntidadeModel {
       required this.desc,
       required this.img,
       required this.objectId,
-      this.admin});
+      this.admin,
+      this.isSelected
+      });
 
   static List<EntidadeModel> allEntidades() {
     return [
