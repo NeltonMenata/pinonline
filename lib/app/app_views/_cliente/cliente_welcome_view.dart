@@ -6,10 +6,10 @@ import 'package:pinonline/app/app_views/_cliente/cliente_financeiro_view.dart';
 import 'package:pinonline/app/app_views/_cliente/cliente_login_view.dart';
 import 'package:pinonline/app/app_views/_size/size.dart';
 import 'package:pinonline/app/app_views/app_components/home_components/app_bottom_bar.dart';
-
 import 'cliente_obra_nova_view.dart';
 import 'leilao/teste/leilao_cliente_view.dart';
 import 'leilao/teste/leilao_response_cliente_view.dart';
+import 'pagamento/pagamento_view.dart';
 
 class ClienteWelcomeView extends StatelessWidget {
   @override
@@ -138,9 +138,9 @@ class ClienteWelcomeView extends StatelessWidget {
                                           MaterialStateProperty.all(
                                               Colors.black87)),
                                   onPressed: () {
-                                    Get.to(ClienteDashBoardView());
+                                    Get.to(PagamentoView());
                                   },
-                                  child: Text("HelpDesk")),
+                                  child: Text("Pagamento")),
                             ),
                             Container(
                               width: larguraPor(35, context),
@@ -155,7 +155,7 @@ class ClienteWelcomeView extends StatelessWidget {
                                           MaterialStateProperty.all(
                                               Colors.black87)),
                                   onPressed: () {
-                                    Get.to(ClienteObraNovaView());
+                                    Get.to(ClienteDashBoardView());
                                   },
                                   child: Text("Avaliações")),
                             ),

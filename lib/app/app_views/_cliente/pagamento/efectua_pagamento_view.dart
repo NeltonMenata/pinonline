@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:pinonline/app/app_controller/_cliente/cliente_login_controller.dart';
 import 'package:pinonline/app/app_models/cliente_model.dart';
 import 'package:pinonline/app/app_views/_cliente/pagamento/pagamento_controller.dart';
@@ -9,7 +10,7 @@ class EfectuaPagamento extends StatelessWidget {
   ClienteModel get _cliente => ClienteLoginController.controller.cliente[0];
   @override
   Widget build(BuildContext context) {
-    var objectIdLeilao = Get.arguments.toString();
+    var leilao = Get.arguments as ParseObject;
     return Scaffold(
       appBar: AppBar(
         title: Text("Efectuar Pagamento"),
@@ -21,7 +22,9 @@ class EfectuaPagamento extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(padding: EdgeInsets.all(8), child: Text("Obra: ")),
-            Padding(padding: EdgeInsets.all(8), child: Text("Descrição: ")),
+            Padding(
+                padding: EdgeInsets.all(8),
+                child: Text("Descrição: ${leilao["descricao"]}")),
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: GestureDetector(
@@ -40,13 +43,15 @@ class EfectuaPagamento extends StatelessWidget {
                     ),
                     child: Obx(
                       () => Center(
-                        child: _controller.isDone.value
-                            ? Image.file(
-                                _controller.file!,
-                              )
-                            : Text("Seleciona a imagem de comprovativo: ",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 16)),
+                        child:
+                            _controller.isDone.value && _controller.file != null
+                                ? Image.file(
+                                    _controller.file!,
+                                  )
+                                : Text("Seleciona a imagem de comprovativo: ",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16)),
                       ),
                     ),
                   ),
@@ -56,6 +61,7 @@ class EfectuaPagamento extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8),
               child: TextField(
+                  controller: _controller.desc,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: "Descrição do Pagamento")),
@@ -63,6 +69,7 @@ class EfectuaPagamento extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8),
               child: TextField(
+                  controller: _controller.valor,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                       //border: OutlineInputBorder(),
@@ -80,10 +87,10 @@ class EfectuaPagamento extends StatelessWidget {
                   ),
                 ),
                 child: TextButton(
-                  onPressed: () {
-                    _controller.sendPagamento(
+                  onPressed: () async {
+                    await _controller.sendPagamento(
                         objectIdCliente: _cliente.objectId,
-                        objectIdLeilao: objectIdLeilao);
+                        objectIdLeilao: leilao["objectId"]);
                   },
                   child: Text("Enviar"),
                 ),
@@ -91,9 +98,12 @@ class EfectuaPagamento extends StatelessWidget {
             ),
             Expanded(
               child: Center(
-                  child: Visibility(
-                      visible: _controller.isSend.value,
-                      child: CircularProgressIndicator())),
+                  child: GetBuilder<PagamentoController>(
+                    init: PagamentoController(),
+                    builder: (_)=>Visibility(
+                        visible: _controller.isSend,
+                        child: CircularProgressIndicator()),
+                  )),
             )
           ],
         ),

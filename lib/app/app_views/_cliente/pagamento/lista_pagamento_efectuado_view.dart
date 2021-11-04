@@ -23,38 +23,39 @@ ClienteModel get _cliente => ClienteLoginController.controller.cliente[0];
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            FutureBuilder<List<ParseObject>>(
-              future: _controller.listaLeilao(_cliente.objectId),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.separated(
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(
-                              "Descrição do Leilão: ${snapshot.data![index]["descricao"]}"),
-                          subtitle: Text(
-                              "Valor do Leilão: ${snapshot.data![index]["valorMax"]}"),
-                          onTap: () {
-                            Get.to(PagamentoEfectuado(),
-                                arguments: snapshot.data![index]["objectId"]
-                                    .toString());
-                          },
-                        );
-                      },
-                      separatorBuilder: (context, index) {
-                        return Divider();
-                      },
-                      itemCount: snapshot.data!.length);
-                } else if (snapshot.hasError) {
-                  return Center(
-                    child: Text("Erro: ${snapshot.error}"),
-                  );
-                } else {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
+            Expanded(
+              child: FutureBuilder<List<ParseObject>>(
+                future: _controller.listaLeilao(_cliente.objectId),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.separated(
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Text(
+                                "Descrição do Leilão: ${snapshot.data![index]["descricao"]}"),
+                            subtitle: Text(
+                                "Valor do Leilão: ${snapshot.data![index]["valorMax"]}"),
+                            onTap: () {
+                              Get.to(PagamentoEfectuado(),
+                                  arguments: snapshot.data![index]);
+                            },
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return Divider();
+                        },
+                        itemCount: snapshot.data!.length);
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text("Erro: ${snapshot.error}"),
+                    );
+                  } else {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              ),
             )
           ],
         ),
